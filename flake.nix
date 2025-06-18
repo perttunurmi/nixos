@@ -40,18 +40,14 @@
 
             home-manager.nixosModules.home-manager
             {
-              home-manager.backupFileExtension = "bak";
-
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
 
-              home-manager.extraSpecialArgs = inputs // specialArgs;
+
               home-manager.users.${username} = import ./users/${username}/home.nix;
+              home-manager.extraSpecialArgs = inputs // specialArgs;
             }
-
-            # This module works the same as the `specialArgs` parameter we used above
-            # choose one of the two methods to use
-            # { _module.args = { inherit inputs; };}
           ];
         };
     };
