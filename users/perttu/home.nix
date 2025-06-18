@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../../home/core.nix
+
+    ../../home/shell
+  ];
+
   home.username = "perttu";
   home.homeDirectory = "/home/perttu";
   home.stateVersion = "25.05";
