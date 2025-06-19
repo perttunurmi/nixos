@@ -6,7 +6,6 @@
     (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
 
     ../../modules/system.nix
-    ../../home/shell
   ];
 
   programs.nix-ld.enable = true;
@@ -101,16 +100,15 @@
     };
   };
 
-  openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
-  ];
-
-
   services.openssh = {
     enable = false;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
+
+  users.users.perttu.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
+  ];
 
   system.stateVersion = "25.05";
 }

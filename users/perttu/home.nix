@@ -1,5 +1,8 @@
 { pkgs, config, ... }: {
 
+  programs.bash.enable = true;
+  xdg.enable = true;
+
   imports = [
     ../../home/core.nix
 
@@ -7,8 +10,6 @@
     ../../home/programs
     ../../home/rclone
   ];
-
-  xdg.enable = true;
 
   programs.git = {
     userName = "Perttu Nurmi";
