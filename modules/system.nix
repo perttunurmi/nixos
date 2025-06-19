@@ -1,13 +1,9 @@
-{ pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ... }: {
   # ============================= User related =============================
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.perttu = {
     isNormalUser = true;
-    home = /home/perttu;
     description = "Perttu Nurmi";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
@@ -94,22 +90,6 @@
 
   programs.dconf.enable = true;
 
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no"; # disable root login
-      PasswordAuthentication = true; # TODO: disable
-    };
-    openFirewall = true;
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -129,6 +109,7 @@
     enable = true;
   };
   security.polkit.enable = true;
+  security.rtkit.enable = true;
 
   services = {
     dbus.packages = [ pkgs.gcr ];
