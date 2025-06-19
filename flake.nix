@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration of Perttu Nurmi";
+  description = "NixOS configuration for Perttu Nurmi";
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
@@ -18,6 +18,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
+
   outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, ... }: {
     nixosConfigurations = {
       T480s =
@@ -28,11 +29,9 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
-
           modules = [
             ./hosts/T480s
             ./users/${username}/nixos.nix
-
             # make home-manager as a module of nixos
             # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
             home-manager.nixosModules.home-manager
@@ -40,7 +39,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
-
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
             }
@@ -54,10 +52,8 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
-
           modules = [
             ./hosts/WSL
-
             # make home-manager as a module of nixos
             # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
             home-manager.nixosModules.home-manager
@@ -65,7 +61,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
-
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
             }

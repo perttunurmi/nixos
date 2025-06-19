@@ -56,17 +56,15 @@ in
 
 
   home.packages = with pkgs; [
-    starship
-    ripgrep
-    neovim
-    zoxide
-    tmux
-    stow
-    git
-    bat
-    eza
-    fzf
-    fd
-    gh
+   starship
+   ripgrep
+   zoxide
+   neovim
+   tmux
+   stow
+   eza
+   bat
+   fzf
+   fd
   ];
 }
