@@ -14,15 +14,17 @@
     userEmail = "perttu.nurmi@gmail.com";
     extraConfig = {
       init.defaultBranch = "master";
-      credential.helper = "${
-        pkgs.git.override { withLibsecret = true; }
-      }/bin/git-credential-libsecret";
+    };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper = {
+      enable = true;
     };
   };
 
   home.packages = with pkgs; [
-   gh
-
    lua-language-server
    zig
    clang
