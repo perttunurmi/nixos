@@ -7,8 +7,9 @@ in
 {
   imports = [
     ./common.nix
-    ./terminals.nix
     ./starship.nix
+    ./xdg.nix
+    ./git.nix
   ];
 
   # add environment variables
@@ -55,6 +56,7 @@ in
 
 
   home.packages = with pkgs; [
+    starship
     ripgrep
     neovim
     zoxide
