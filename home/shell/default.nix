@@ -9,7 +9,6 @@ in
     ./common.nix
     ./starship.nix
     ./xdg.nix
-    ./git.nix
   ];
 
   # add environment variables
