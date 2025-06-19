@@ -6,7 +6,9 @@ let
 in
 {
   imports = [
+    ./common.nix
     ./terminals.nix
+    ./starship.nix
   ];
 
   # add environment variables

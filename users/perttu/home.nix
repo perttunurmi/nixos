@@ -3,6 +3,8 @@
     ../../home/core.nix
 
     ../../home/shell
+    ../../home/programs
+    ../../home/rclone
   ];
 
   programs.git = {
