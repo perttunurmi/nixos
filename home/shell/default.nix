@@ -1,20 +1,68 @@
-{ config, ... }: {
-  programs.bash = {
-    enable = true;
+{ config, pkgs, ... }:
+let
+  d = config.xdg.dataHome;
+  c = config.xdg.configHome;
+  cache = config.xdg.cacheHome;
+in
+{
+  imports = [
+    ./terminals.nix
+  ];
 
-    shellAliases = {
-      ls = "eza --color=always --group-directories-first";
-      ll = "eza -l --color=always --group-directories-first";
-      la = "eza -a --color=always --group-directories-first";
-      lla = "eza -alhF --color=always --group-directories-first";
-      "reload-rclone" = "systemctl --user restart rCloneMounts.service";
-    };
+  # add environment variables
+  home.sessionVariables = {
+    # clean up ~
+    LESSHISTFILE = cache + "/less/history";
+    LESSKEY = c + "/less/lesskey";
+    WINEPREFIX = d + "/wine";
 
-    initExtra = ''
-      stty werase undef
-      bind '\C-w:unix-filename-rubout'
+    # set default applications
+    EDITOR = "vim";
+    BROWSER = "firefox";
+    TERMINAL = "alacritty";
 
-      PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
-    '';
+    # enable scrolling in git diff
+    DELTA_PAGER = "less -R";
+
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
   };
+
+  home.shellAliases = {
+    ls = "eza --color=always --group-directories-first";
+    ll = "eza -l --color=always --group-directories-first";
+    la = "eza -a --color=always --group-directories-first";
+    lla = "eza -alhF --color=always --group-directories-first";
+    "reload-rclone" = "systemctl --user restart rCloneMounts.service";
+  };
+
+  programs.bash.initExtra = ''
+    stty werase undef
+    bind '\C-w:unix-filename-rubout'
+
+    PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
+  '';
+
+  home.file.".inputrc".text = ''
+    set completion-ignore-case On
+  '';
+
+  home.file.".config/bat/config".text = ''
+    --style="numbers,changes,grid"
+    --paging=auto
+  '';
+
+
+  home.packages = with pkgs; [
+    ripgrep
+    neovim
+    zoxide
+    tmux
+    stow
+    git
+    bat
+    eza
+    fzf
+    fd
+    gh
+  ];
 }

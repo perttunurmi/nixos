@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration";
+  description = "NixOS configuration of Perttu Nurmi";
 
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
@@ -15,17 +15,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    # home-manager, used for managing user configuration
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      # The `follows` keyword in inputs is used for inheritance.
-      # Here, `inputs.nixpkgs` of home-manager is kept consistent with
-      # the `inputs.nixpkgs` of the current flake,
-      # to avoid problems caused by different versions of nixpkgs.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs@{ self, nixpkgs, home-manager }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       T480s =
         let
@@ -37,8 +30,8 @@
           system = "x86_64-linux";
 
           modules = [
-            ./hosts/T480s/configuration.nix
-            ./modules/system.nix
+            ./hosts/T480s
+            ./users/${username}/nixos.nix
 
             # make home-manager as a module of nixos
             # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
@@ -48,9 +41,8 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
 
+              home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
-
-              # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             }
           ];
         };
