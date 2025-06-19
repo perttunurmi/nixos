@@ -27,6 +27,7 @@
   home.packages = with pkgs; [
    lua-language-server
    zig
+   just
    clang
    nodejs
    go
