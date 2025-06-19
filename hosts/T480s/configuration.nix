@@ -12,11 +12,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.backupFileExtension = "bak";
-  home-manager.users.perttu = import ./home.nix;
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

@@ -13,11 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = inputs@{ self, nixpkgs, home-manager }: {
     nixosConfigurations.T480s = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./hosts/T480s/configuration.nix
 
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
@@ -27,8 +27,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "bak";
 
-          # TODO replace ryan with your own username
-          home-manager.users.perttu = import ./home.nix;
+          home-manager.users.perttu = import ./users/perttu/home.nix;
 
           # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
         }
