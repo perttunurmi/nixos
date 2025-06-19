@@ -25,31 +25,23 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      T480s =
-        let
-          username = "perttu";
-          specialArgs = { inherit username; inherit inputs; };
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
+      T480s = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
-          modules = [
-            ./hosts/T480s
-            ./users/${username}/nixos.nix
+        modules = [
+          ./configuration.nix
+          ./system.nix
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bak";
 
-
-              home-manager.users.${username} = import ./users/${username}/home.nix;
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-            }
-          ];
-        };
+            home-manager.users.perttu = import ./home.nix;
+          }
+        ];
+      };
     };
   };
 }

@@ -1,10 +1,8 @@
-{username, ...}: {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home = {
-    inherit username;
-    homeDirectory = "/home/${username}";
+{ config, pkgs, ... }: {
 
+  home = {
+    username = "perttu";
+    homeDirectory = "/home/perttu";
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
@@ -17,5 +15,10 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
+
+  programs.git = {
+    userName = "Perttu Nurmi";
+    userEmail = "perttu.nurmi@gmail.com";
+  };
 }
