@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+  # i3 related options
   environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
   services.displayManager.defaultSession = "none+i3";
   services.xserver = {
@@ -12,6 +13,7 @@
     #   lightdm.enable = false;
     #   gdm.enable = true;
     # };
+
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
@@ -31,30 +33,8 @@
         xorg.xbacklight # control screen brightness
         xorg.xdpyinfo # get screen information
         sysstat # get system information
-
-        # move
-        google-chrome
-        alacritty
-        vscode.fhs
-        vscode
-        chromium
-        firefox
-        lua-language-server
-        nodejs
-        docker
-        clang
-        cargo
-        unzip
-        wget
-        vim
-        zig
-        gcc
-        go
       ];
     };
-
-    xkb.layout = "us";
-    xkb.variant = "altgr-intl";
   };
 
   # thunar file manager(part of xfce) related options
