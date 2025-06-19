@@ -1,21 +1,27 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config
-, pkgs
-, ...
-}: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+
+{ config, pkgs, ... }:
+{
+  imports =
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "bak";
+  home-manager.users.perttu = import ./home.nix;
 
   # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
+  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "T480s"; # Define your hostname.
@@ -27,15 +33,128 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.defaultGateway = "192.168.5.201";
 
-  # Nvidia GPU
-  # services.xserver.videoDrivers = ["nvidia"];
-  # hardware.opengl.enable = true;
-  # hardware.nvidia = {
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #   modesetting.enable = true;
+  # Set your time zone.
+  time.timeZone = "Europe/Helsinki";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "fi_FI.UTF-8";
+    LC_IDENTIFICATION = "fi_FI.UTF-8";
+    LC_MEASUREMENT = "fi_FI.UTF-8";
+    LC_MONETARY = "fi_FI.UTF-8";
+    LC_NAME = "fi_FI.UTF-8";
+    LC_NUMERIC = "fi_FI.UTF-8";
+    LC_PAPER = "fi_FI.UTF-8";
+    LC_TELEPHONE = "fi_FI.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the Cinnamon Desktop Environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "altgr-intl";
+  };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.perttu = {
+    isNormalUser = true;
+    description = "Perttu Nurmi";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [
+      google-chrome
+      alacritty
+      vscode.fhs
+      vscode
+      chromium
+      firefox
+    ];
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    lua-language-server
+    docker
+    unzip
+    wget
+    git
+    vim
+    zig
+    gcc
+    clang
+    nodejs
+    cargo
+    go
+  ];
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
   # };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = true;
+      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+      UseDns = true;
+      X11Forwarding = false;
+      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+    };
+  };
+
+
+  # Open ports in the firewall.
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedUDPPorts = [ 22 ];
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerd-fonts.iosevka
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -45,73 +164,4 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  # environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
-  # services.displayManager.defaultSession = "none+i3";
-  services.xserver = {
-    enable = true;
-
-    desktopManager = {
-      xterm.enable = false;
-      cinnamon.enable = true;
-    };
-
-    displayManager = {
-      lightdm.enable = false;
-      gdm.enable = true;
-    };
-
-    libinput.enable = true;
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        rofi # application launcher, the same as dmenu
-        dunst # notification daemon
-        i3blocks # status bar
-        i3lock # default i3 screen locker
-        xautolock # lock screen after some time
-        i3status # provide information to i3bar
-        i3-gaps # i3 with gaps
-        picom # transparency and shadows
-        feh # set wallpaper
-        acpi # battery information
-        arandr # screen layout manager
-        dex # autostart applications
-        xbindkeys # bind keys to commands
-        xorg.xbacklight # control screen brightness
-        xorg.xdpyinfo # get screen information
-        sysstat # get system information
-
-        # move
-        google-chrome
-        alacritty
-        vscode.fhs
-        vscode
-        chromium
-        firefox
-        lua-language-server
-        nodejs
-        docker
-        clang
-        cargo
-        unzip
-        wget
-        vim
-        zig
-        gcc
-        go
-      ];
-    };
-
-    xkb.layout = "us";
-    xkb.variant = "altgr-intl";
-  };
-
-  # thunar file manager(part of xfce) related options
-  # programs.thunar.plugins = with pkgs.xfce; [
-  #   thunar-archive-plugin
-  #   thunar-volman
-  # ];
-  # services.gvfs.enable = true; # Mount, trash, and other functionalities
-  # services.tumbler.enable = true; # Thumbnail support for images
 }
