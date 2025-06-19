@@ -70,7 +70,7 @@
   };
 
   services.openssh = {
-    enable = enable;
+    enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
