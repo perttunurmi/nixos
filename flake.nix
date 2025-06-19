@@ -14,25 +14,34 @@
     };
   };
   outputs = inputs@{ self, nixpkgs, home-manager }: {
-    nixosConfigurations.T480s = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/T480s/configuration.nix
-        ./modules/system.nix
+    nixosConfigurations = {
+      T480s =
+        let
+          username = "perttu";
+          specialArgs = { inherit username; };
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-        # make home-manager as a module of nixos
-        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "bak";
+          modules = [
+            ./hosts/T480s/configuration.nix
+            ./modules/system.nix
 
-          home-manager.users.perttu = import ./users/perttu/home.nix;
+            # make home-manager as a module of nixos
+            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
 
-          # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-        }
-      ];
+              home-manager.users.${username} = import ./users/${username}/home.nix;
+
+              # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+            }
+          ];
+        };
     };
   };
 }

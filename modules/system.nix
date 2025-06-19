@@ -1,17 +1,17 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, username, ... }: {
   # ============================= User related =============================
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.perttu = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Perttu Nurmi";
+    description = username;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
-  nix.settings.trusted-users = [ "perttu" ];
+  nix.settings.trusted-users = [ username ];
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
