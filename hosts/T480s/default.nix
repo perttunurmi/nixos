@@ -8,11 +8,9 @@
       # Include the results of the hardware scan.
       ../../modules/system.nix
       ../../modules/i3.nix
-
+      
       ./hardware-configuration.nix
     ];
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
