@@ -101,6 +101,16 @@
     lm_sensors
     docker
     scrot
+
+    # move?
+    lua-language-server
+    unzip
+    zig
+    gcc
+    clang
+    nodejs
+    cargo
+    go
   ];
 
   # Enable sound with pipewire.
