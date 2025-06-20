@@ -8,6 +8,9 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
+  security.polkit.enable = true;
+  security.rtkit.enable = true;
+
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
@@ -93,6 +96,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pkgs.libsecret
     gnumake
     unzip
     vim
@@ -111,8 +115,6 @@
   services.power-profiles-daemon = {
     enable = true;
   };
-  security.polkit.enable = true;
-  security.rtkit.enable = true;
 
   services = {
     dbus.packages = [ pkgs.gcr ];
