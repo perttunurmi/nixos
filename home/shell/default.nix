@@ -46,6 +46,7 @@ in
     lla = "eza -alhF --color=always --group-directories-first";
     "reload-rclone" = "systemctl --user restart rCloneMounts.service";
     g = "git";
+    rm = "trash -v";
   };
 
   programs.bash.initExtra = ''
@@ -66,6 +67,7 @@ in
 
 
   home.packages = with pkgs; [
+   trash-cli
    starship
    ripgrep
    zoxide

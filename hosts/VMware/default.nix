@@ -20,6 +20,9 @@
   networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
+  services.xserver.videoDrivers = [ "vmware" ];
+  virtualisation.vmware.guest.enable = true;
+  
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -46,6 +49,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    open-vm-tools
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
