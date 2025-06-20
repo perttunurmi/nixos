@@ -11,6 +11,9 @@
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
@@ -134,5 +137,12 @@
     };
 
     udev.packages = with pkgs; [ gnome-settings-daemon ];
+  };
+
+  console = {
+    earlySetup = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
+    keyMap = "us";
   };
 }

@@ -32,6 +32,7 @@
         xorg.xbacklight # control screen brightness
         xorg.xdpyinfo # get screen information
         sysstat # get system information
+        networkmanagerapplet
         flameshot
         copyq
       ];
@@ -43,20 +44,30 @@
   programs.seahorse.enable = true; # enable the graphical frontend
 
   systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
+    };
   };
-};
+
+
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
+
+  services.blueman.enable = true;
 
   # thunar file manager(part of xfce) related options
   programs.thunar.enable = true;
