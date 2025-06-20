@@ -47,7 +47,7 @@ in
       music = "${config.home.homeDirectory}/media/music";
       download = "${config.home.homeDirectory}/downloads";
       documents = "${config.home.homeDirectory}/documents";
-      publicShare = "${config.home.homeDirectory}/publicshare";
+      publicShare = "${config.home.homeDirectory}/public";
       desktop = "${config.home.homeDirectory}/desktop";
 
       extraConfig = {

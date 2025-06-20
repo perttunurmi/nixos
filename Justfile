@@ -4,6 +4,12 @@ deploy-T480s:
 debug-T480s:
     nixos-rebuild switch --flake .#T480s --use-remote-sudo --show-trace --verbose
 
+deploy-VMware:
+    nixos-rebuild switch --flake .#VMware --use-remote-sudo
+
+debug-VMware:
+    nixos-rebuild switch --flake .#VMware --use-remote-sudo --show-trace --verbose
+
 deploy-WSL:
     nixos-rebuild switch --flake .#WSL --use-remote-sudo --impure
 

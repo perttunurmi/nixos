@@ -8,10 +8,10 @@
       xterm.enable = false;
     };
 
-    # displayManager = {
-    #   lightdm.enable = false;
-    #   gdm.enable = true;
-    # };
+    displayManager = {
+      lightdm.enable = false;
+      gdm.enable = true;
+    };
 
     windowManager.i3 = {
       enable = true;
@@ -32,11 +32,34 @@
         xorg.xbacklight # control screen brightness
         xorg.xdpyinfo # get screen information
         sysstat # get system information
+        flameshot
+        copyq
       ];
     };
   };
 
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  programs.seahorse.enable = true; # enable the graphical frontend
+
+  systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+};
+
   # thunar file manager(part of xfce) related options
+  programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman

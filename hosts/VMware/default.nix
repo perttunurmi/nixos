@@ -5,7 +5,6 @@
 { config, pkgs, ... }: {
   imports =
     [
-      # Include the results of the hardware scan.
       ../../modules/system.nix
       ../../modules/desktop.nix
       ../../modules/i3.nix
@@ -14,11 +13,11 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "T480s"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -32,8 +31,8 @@
   services.xserver.enable = true;
 
   # Enable the Cinnamon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.cinnamon.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
