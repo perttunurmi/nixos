@@ -20,6 +20,7 @@ in
 
     # set default applications
     EDITOR = "vim";
+    VISUAL = "nvim";
     BROWSER = "firefox";
     TERMINAL = "alacritty";
 
