@@ -3,6 +3,8 @@
     chromium
     discord
     firefox
+    android-tools
+    scrcpy
   ];
 
   systemd.tmpfiles.rules =

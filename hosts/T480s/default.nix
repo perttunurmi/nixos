@@ -9,9 +9,11 @@
       ../../modules/system.nix
       ../../modules/desktop.nix
       ../../modules/i3.nix
-      
+
       ./hardware-configuration.nix
     ];
+
+  services.fwupd.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
