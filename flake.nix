@@ -17,6 +17,7 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, ... }: {
@@ -48,13 +49,13 @@
       VMware =
         let
           username = "perttu";
-          specialArgs = { inherit username; inherit inputs; };
+          specialArgs = { inherit username; inherit zen-browser; };
         in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
-              ./hosts/VMware
+            ./hosts/VMware
             ./users/${username}/nixos.nix
             # make home-manager as a module of nixos
             # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`

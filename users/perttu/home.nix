@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, zen-browser, ... }@inputs: {
   imports = [
     ../../home/core.nix
 
@@ -27,6 +27,7 @@
   };
 
   home.packages = with pkgs; [
+   inputs.zen-browser.packages.x86_64-linux.default
    lua-language-server
    zig
    just
