@@ -14,6 +14,7 @@
     enable = true;
     defaultUser = "perttu";
     docker-desktop.enable = true;
+    wslConf.network.hostname = "WSL";
   };
 
   # vscode server for wsl and ssh
