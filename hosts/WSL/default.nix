@@ -8,8 +8,6 @@
     ../../modules/system.nix
   ];
 
-  programs.nix-ld.enable = true;
-
   wsl = {
     enable = true;
     defaultUser = "perttu";

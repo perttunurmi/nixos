@@ -8,6 +8,8 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
+  programs.nix-ld.enable = true;
+
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
