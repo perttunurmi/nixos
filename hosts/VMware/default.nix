@@ -17,7 +17,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "VMware"; # Define your hostname.
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   services.xserver.videoDrivers = [ "vmware" ];
