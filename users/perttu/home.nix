@@ -7,6 +7,8 @@
     ../../home/rclone
   ];
 
+  home.file.".background-image".source = ./.wallpaper.jpg; 
+
   programs.git = {
     enable = true;
     lfs.enable = true;
