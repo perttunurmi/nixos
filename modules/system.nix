@@ -1,11 +1,22 @@
-{ config, pkgs, lib, username, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
+{
   # ============================= User related =============================
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
   };
 
   programs.nix-ld = {
@@ -27,7 +38,7 @@
       util-linux
       xz
       systemd
-      
+
       # My own additions
       xorg.libXcomposite
       xorg.libXtst
@@ -50,7 +61,7 @@
 
       # Inspired by steam
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/st/steam/package.nix#L36-L85
-      networkmanager      
+      networkmanager
       vulkan-loader
       libgbm
       libdrm
@@ -59,7 +70,7 @@
       pciutils
       zenity
       # glibc_multi.bin # Seems to cause issue in ARM
-      
+
       # # Without these it silently fails
       xorg.libXinerama
       xorg.libXcursor
@@ -79,7 +90,7 @@
       ffmpeg
       # Only libraries are needed from those two
       libudev0-shim
-      
+
       # needed to run unity
       gtk3
       icu
@@ -91,7 +102,7 @@
       # it will segfault when opening files if you don’t do:
       # export XDG_DATA_DIRS=/nix/store/0nfsywbk0qml4faa7sk3sdfmbd85b7ra-gsettings-desktop-schemas-43.0/share/gsettings-schemas/gsettings-desktop-schemas-43.0:/nix/store/rkscn1raa3x850zq7jp9q3j5ghcf6zi2-gtk+3-3.24.35/share/gsettings-schemas/gtk+3-3.24.35/:$XDG_DATA_DIRS
       # other issue: (Unity:377230): GLib-GIO-CRITICAL **: 21:09:04.706: g_dbus_proxy_call_sync_internal: assertion 'G_IS_DBUS_PROXY (proxy)' failed
-      
+
       # Verified games requirements
       xorg.libXt
       xorg.libXmu
@@ -102,7 +113,7 @@
       glew110
       libidn
       tbb
-      
+
       # Other things from runtime
       flac
       freeglut
@@ -164,7 +175,10 @@
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
     # enable flakes globally
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     substituters = [
       "https://cache.nixos.org"
@@ -229,9 +243,18 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Color Emoji" ];
-      sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
+      serif = [
+        "Noto Serif"
+        "Noto Color Emoji"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "JetBrainsMono Nerd Font"
+        "Noto Color Emoji"
+      ];
       emoji = [ "Noto Color Emoji" ];
     };
   };

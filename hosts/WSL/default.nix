@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 # sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable && sudo nix-channel --update
 {
   imports = [
@@ -39,26 +44,30 @@
     };
   };
 
-  environment.systemPackages = with pkgs;
-    [
+  environment.systemPackages = with pkgs; [
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        bbenoist.nix
-        ms-python.python
-        ms-azuretools.vscode-docker
-        ms-vscode-remote.remote-ssh
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "remote-ssh-edit";
-          publisher = "ms-vscode-remote";
-          version = "0.47.2";
-          sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-        }
-      ];
+      vscodeExtensions =
+        with vscode-extensions;
+        [
+          bbenoist.nix
+          ms-python.python
+          ms-azuretools.vscode-docker
+          ms-vscode-remote.remote-ssh
+        ]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "remote-ssh-edit";
+            publisher = "ms-vscode-remote";
+            version = "0.47.2";
+            sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
+          }
+        ];
     })
-    ];
+  ];
 
-  programs.java = { enable = true; };
+  programs.java = {
+    enable = true;
+  };
 
   environment = {
     variables = {
@@ -75,7 +84,7 @@
   };
 
   users.users.perttu.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
   ];
 
   system.stateVersion = "25.05";

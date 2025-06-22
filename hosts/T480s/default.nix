@@ -2,16 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ../../modules/system.nix
-      ../../modules/desktop.nix
-      ../../modules/i3.nix
+{ config, pkgs, ... }:
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ../../modules/system.nix
+    ../../modules/desktop.nix
+    ../../modules/i3.nix
 
-      ./hardware-configuration.nix
-    ];
+    ./hardware-configuration.nix
+  ];
 
   services.fwupd.enable = true;
 
@@ -74,7 +74,6 @@
     };
     openFirewall = true;
   };
-
 
   # Open ports in the firewall.
   networking.firewall.enable = true;

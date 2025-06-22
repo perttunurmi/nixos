@@ -2,15 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
-  imports =
-    [
-      ../../modules/system.nix
-      ../../modules/desktop.nix
-      ../../modules/i3.nix
-      
-      ./hardware-configuration.nix
-    ];
+{ config, pkgs, ... }:
+{
+  imports = [
+    ../../modules/system.nix
+    ../../modules/desktop.nix
+    ../../modules/i3.nix
+
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -22,7 +22,7 @@
 
   services.xserver.videoDrivers = [ "vmware" ];
   virtualisation.vmware.guest.enable = true;
-  
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -75,7 +75,6 @@
     };
     openFirewall = true;
   };
-
 
   # Open ports in the firewall.
   networking.firewall.enable = true;

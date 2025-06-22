@@ -66,18 +66,17 @@ in
     --paging=auto
   '';
 
-
   home.packages = with pkgs; [
-   trash-cli
-   starship
-   ripgrep
-   zoxide
-   neovim
-   tmux
-   stow
-   eza
-   bat
-   fzf
-   fd
+    trash-cli
+    starship
+    ripgrep
+    zoxide
+    neovim
+    tmux
+    stow
+    eza
+    bat
+    fzf
+    fd
   ];
 }
