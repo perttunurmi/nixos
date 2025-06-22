@@ -104,13 +104,13 @@
     pkgs.libsecret
     gnumake
     unzip
+    htop
     vim
     wget
     curl
     git
     sysstat
     lm_sensors
-    docker
     scrot
     gcc
   ];
