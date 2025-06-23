@@ -51,6 +51,9 @@
   environment.systemPackages = with pkgs; [
   ];
 
+  hardware.nvidia.open = false;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
