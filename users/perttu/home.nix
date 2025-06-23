@@ -29,6 +29,7 @@
 
   home.packages = with pkgs; [
     inputs.zen-browser.packages.x86_64-linux.default
+    obsidian
     lua-language-server
     cargo
     btop
