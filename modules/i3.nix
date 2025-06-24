@@ -7,6 +7,11 @@
 
     desktopManager = {
       xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
     };
 
     displayManager = {
