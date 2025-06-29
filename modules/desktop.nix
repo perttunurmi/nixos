@@ -6,7 +6,6 @@
 }:
 {
   users.users.${username}.packages = with pkgs; [
-    brightnessctl
     chromium
     discord
     firefox
