@@ -32,19 +32,8 @@ in
 
   programs.bash.enable = true;
   programs.zsh.enable = true;
-  programs.zoxide = {
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    options = [
-      "--cmd cd"
-    ];
-  };
 
   home.shellAliases = {
-    ls = "eza --color=always --group-directories-first";
-    ll = "eza -l --color=always --group-directories-first";
-    la = "eza -a --color=always --group-directories-first";
-    lla = "eza -alhF --color=always --group-directories-first";
     "reload-rclone" = "systemctl --user restart rCloneMounts.service";
     g = "git";
     rm = "trash -v";

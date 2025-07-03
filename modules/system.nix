@@ -265,6 +265,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pkgs.libsecret
+    clang-tools
+    clang
     gnumake
     unzip
     htop

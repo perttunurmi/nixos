@@ -31,13 +31,16 @@
     inputs.zen-browser.packages.x86_64-linux.default
     obsidian
     lua-language-server
+    luajitPackages.luarocks_bootstrap
+    luajitPackages.tiktoken_core
+    tree-sitter
     cargo
+    lynx
     btop
     zig
     just
-    clang
-    nodejs
     go
+    nodejs_24
     jdt-language-server
     vscode-js-debug
     rust-analyzer
