@@ -1,14 +1,12 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
   font = iosevka;
-in
-{
+in {
   programs.alacritty = {
     enable = true;
     settings = {
-      window.opacity = 1;
+      window.opacity = 0.95;
       window.dynamic_padding = true;
       window.padding = {
         x = 5;
@@ -22,7 +20,6 @@ in
         italic.family = font;
         size = 11;
       };
-
     };
   };
 }

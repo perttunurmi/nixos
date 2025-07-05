@@ -4,8 +4,7 @@
   lib,
   username,
   ...
-}:
-{
+}: {
   # ============================= User related =============================
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -163,7 +162,6 @@
       libxcrypt-legacy
       libGLU
     ];
-
   };
 
   security.polkit.enable = true;
@@ -175,7 +173,7 @@
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
-  nix.settings.trusted-users = [ username ];
+  nix.settings.trusted-users = [username];
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
@@ -260,7 +258,7 @@
         "JetBrainsMono Nerd Font"
         "Noto Color Emoji"
       ];
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -271,6 +269,7 @@
   environment.systemPackages = with pkgs; [
     pkgs.libsecret
     clang-tools
+    docker
     clang
     gnumake
     unzip
@@ -292,7 +291,7 @@
   };
 
   services = {
-    dbus.packages = [ pkgs.gcr ];
+    dbus.packages = [pkgs.gcr];
 
     geoclue2.enable = true;
 
@@ -308,13 +307,13 @@
       #media-session.enable = true;
     };
 
-    udev.packages = with pkgs; [ gnome-settings-daemon ];
+    udev.packages = with pkgs; [gnome-settings-daemon];
   };
 
   console = {
     earlySetup = true;
     font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-    packages = with pkgs; [ terminus_font ];
+    packages = with pkgs; [terminus_font];
     keyMap = "us";
   };
 }
