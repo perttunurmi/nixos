@@ -23,6 +23,7 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        preload
         rofi # application launcher, the same as dmenu
         dunst # notification daemon
         i3blocks # status bar

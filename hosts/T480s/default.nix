@@ -10,6 +10,7 @@
     ../../modules/desktop.nix
     ../../modules/i3.nix
 
+    ./throttled.nix
     ./hardware-configuration.nix
   ];
 
@@ -66,7 +67,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = true;
+    enable = false;
     ports = [ 22 ];
     settings = {
       PasswordAuthentication = true;
