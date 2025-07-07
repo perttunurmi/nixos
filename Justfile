@@ -31,7 +31,8 @@ debug-WSL:
     nixos-rebuild switch --flake .#WSL --impure --use-remote-sudo --show-trace --verbose
 
 generate-hardware-config host:
-    nixos-generate-config --show-hardware-config > hardware-configuration.nix
+    mkdir -p ./hosts/$(host)/
+    nixos-generate-config --show-hardware-config > ./hosts/$(host)/hardware-configuration.nix
 
 format:
     nix fmt

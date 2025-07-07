@@ -3,6 +3,7 @@
   imports = [
     ../../home/core.nix
 
+    ../../home/i3
     ../../home/shell
     ../../home/programs
     ../../home/rclone

@@ -10,6 +10,7 @@
     chromium
     discord
     firefox
+    brave
     android-tools
     scrcpy
     steam

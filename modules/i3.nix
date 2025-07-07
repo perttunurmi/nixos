@@ -16,13 +16,14 @@
     };
 
     displayManager = {
-      lightdm.enable = false;
+      # lightdm.enable = true;
       gdm.enable = true;
     };
 
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        redshift
         preload
         rofi # application launcher, the same as dmenu
         dunst # notification daemon

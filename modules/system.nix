@@ -1,9 +1,8 @@
-{
-  config,
-  pkgs,
-  lib,
-  username,
-  ...
+{ config
+, pkgs
+, lib
+, username
+, ...
 }:
 {
   # ============================= User related =============================
@@ -271,6 +270,7 @@
   environment.systemPackages = with pkgs; [
     pkgs.libsecret
     clang-tools
+    docker
     clang
     gnumake
     unzip
