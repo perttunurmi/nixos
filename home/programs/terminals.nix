@@ -1,10 +1,8 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
   font = iosevka;
-in
-{
+in {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -22,7 +20,6 @@ in
         italic.family = font;
         size = 11;
       };
-
     };
   };
 }

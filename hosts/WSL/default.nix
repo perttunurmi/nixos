@@ -40,14 +40,13 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+      unstable = import <nixos-unstable> {inherit (config.nixpkgs) config;};
     };
   };
 
   environment.systemPackages = with pkgs; [
     (vscode-with-extensions.override {
-      vscodeExtensions =
-        with vscode-extensions;
+      vscodeExtensions = with vscode-extensions;
         [
           bbenoist.nix
           ms-python.python

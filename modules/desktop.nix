@@ -3,9 +3,7 @@
   config,
   username,
   ...
-}:
-{
-
+}: {
   users.users.${username}.packages = with pkgs; [
     chromium
     discord
@@ -34,5 +32,4 @@
   };
 
   programs.gamemode.enable = true;
-
 }

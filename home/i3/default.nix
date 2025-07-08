@@ -1,6 +1,7 @@
-{ pkgs
-, config
-, ...
+{
+  pkgs,
+  config,
+  ...
 }: {
   # home.file.".config/i3/wallpaper.jpg".source = ../../wallpaper.jpg;
   home.file.".config/i3/config".source = ./config;
@@ -12,7 +13,6 @@
   #   recursive = true;
   #   executable = true; # make all scripts executable
   # };
-
 
   # set cursor size and dpi for 4k monitor
   xresources.properties = {

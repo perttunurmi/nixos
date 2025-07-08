@@ -1,7 +1,10 @@
-{ pkgs, zen-browser, ... }@inputs:
 {
+  pkgs,
+  zen-browser,
+  ...
+} @ inputs: {
   imports = [
-    ../../home/core.nix
+    ../../home/default.nix
 
     ../../home/i3
     ../../home/shell
@@ -52,5 +55,4 @@
     lua
     python3Full
   ];
-
 }

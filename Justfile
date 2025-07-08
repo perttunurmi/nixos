@@ -15,7 +15,8 @@ generate-hardware-config host="$(hostname)":
     nixos-generate-config --show-hardware-config > ./hosts/{{ host }}/hardware-configuration.nix
 
 format:
-    nix fmt
+    @printf "formatting files using alejandra"
+    alejandra .
 
 update:
     @printf "updating channels...\n"

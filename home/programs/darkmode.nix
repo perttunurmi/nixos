@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     dconf
   ];
@@ -26,5 +25,4 @@
       package = pkgs.libsForQt5.breeze-qt5;
     };
   };
-
 }

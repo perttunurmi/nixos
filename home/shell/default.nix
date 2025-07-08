@@ -1,15 +1,19 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   d = config.xdg.dataHome;
   c = config.xdg.configHome;
   cache = config.xdg.cacheHome;
-in
-{
+in {
   imports = [
     ./common.nix
     ./starship.nix
     ./xdg.nix
   ];
+
+  home.file.".tmux.conf".source = ./tmux.conf;
 
   # add environment variables
   home.sessionVariables = {
@@ -26,25 +30,36 @@ in
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
-
     MANPAGER = "nvim +Man!";
   };
 
-  programs.bash.enable = true;
-  programs.zsh.enable = true;
-
   home.shellAliases = {
-    "reload-rclone" = "systemctl --user restart rCloneMounts.service";
+    rclone-reload = "systemctl --user restart rCloneMounts.service";
     g = "git";
     rm = "trash -v";
+    v = "xsel -ob";
+    c = "xsel -ib";
+    zi = "cdi";
   };
 
-  programs.bash.initExtra = ''
-    stty werase undef
-    bind '\C-w:unix-filename-rubout'
+  programs = {
+    bash.enable = true;
+    zsh.enable = true;
+    fzf.enable = true;
+    zoxide = {
+      enable = true;
+      options = [
+        "--cmd cd"
+      ];
+    };
 
-    PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
-  '';
+    bash.initExtra = ''
+      stty werase undef
+      bind '\C-w:unix-filename-rubout'
+
+      PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
+    '';
+  };
 
   home.file.".inputrc".text = ''
     set completion-ignore-case On

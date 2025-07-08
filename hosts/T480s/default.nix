@@ -1,9 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ../../modules/system.nix
@@ -22,7 +24,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot = {
-
     plymouth = {
       enable = true;
       theme = "bgrt";
@@ -49,7 +50,6 @@
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
     loader.timeout = 0;
-
   };
 
   networking.hostName = "T480s"; # Define your hostname.
@@ -82,8 +82,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (vscode-with-extensions.override {
-      vscodeExtensions =
-        with vscode-extensions;
+      vscodeExtensions = with vscode-extensions;
         [
           bbenoist.nix
           ms-python.python
@@ -118,7 +117,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
     settings = {
       PasswordAuthentication = true;
       AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
@@ -131,8 +130,8 @@
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedUDPPorts = [22];
 
   virtualisation.docker = {
     enable = true;
