@@ -1,4 +1,7 @@
-{ config, lib, ... }:
 {
-  users.users.perttu.openssh.authorizedKeys.keys = [ ];
+  config,
+  lib,
+  ...
+}: {
+  users.users.perttu.openssh.authorizedKeys.keys = [];
 }

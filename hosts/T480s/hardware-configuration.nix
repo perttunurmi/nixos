@@ -8,19 +8,34 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ata_generic" "uhci_hcd" "ehci_pci" "ata_piix" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ata_generic" "uhci_hcd" "ehci_pci" "ata_piix" "sd_mod" "sr_mod" "xhci_pci" "nvme" "usbhid" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/952f400c-f742-46ae-8935-cd2597772833";
+    { device = "/dev/disk/by-uuid/2048a7ca-7971-41f9-a07a-b2b8bd816e42";
       fsType = "ext4";
     };
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/377A-5F3A";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  fileSystems."/home/perttu/dropbox" =
+    { device = "dropbox:";
+      fsType = "fuse.rclone";
+    };
+
+  fileSystems."/home/perttu/google" =
+    { device = "google:";
+      fsType = "fuse.rclone";
+    };
+
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/dc8308de-97ac-4d9f-8e50-4faf576f0fb4"; }
-    ];
+    [ { device = "/dev/disk/by-uuid/1ce49921-3e6c-4516-9c9a-f764d77190ba"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

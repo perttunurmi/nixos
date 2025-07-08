@@ -1,9 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/system.nix
     ../../modules/desktop.nix
@@ -20,7 +22,7 @@
   networking.hostName = "VMware"; # Define your hostname.
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
-  services.xserver.videoDrivers = [ "vmware" ];
+  services.xserver.videoDrivers = ["vmware"];
   virtualisation.vmware.guest.enable = true;
 
   # Configure network proxy if necessary
@@ -65,7 +67,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
     settings = {
       PasswordAuthentication = true;
       AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
@@ -78,8 +80,8 @@
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedUDPPorts = [22];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

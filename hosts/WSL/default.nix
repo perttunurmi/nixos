@@ -40,14 +40,13 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+      unstable = import <nixos-unstable> {inherit (config.nixpkgs) config;};
     };
   };
 
   environment.systemPackages = with pkgs; [
     (vscode-with-extensions.override {
-      vscodeExtensions =
-        with vscode-extensions;
+      vscodeExtensions = with vscode-extensions;
         [
           bbenoist.nix
           ms-python.python
@@ -85,6 +84,7 @@
 
   users.users.perttu.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdudMkx0ecdlaBbKMBC7Tf8+bd4Kvu7kPpuloONSnVV u0_a322@localhost"
   ];
 
   system.stateVersion = "25.05";

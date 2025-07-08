@@ -1,9 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ../../modules/system.nix
@@ -20,6 +22,35 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot = {
+    plymouth = {
+      enable = true;
+      theme = "bgrt";
+      themePackages = with pkgs; [
+        nixos-bgrt-plymouth
+        # By default we would install all themes
+        # (adi1090x-plymouth-themes.override {
+        #   selected_themes = [ "rings" ];
+        # })
+      ];
+    };
+
+    # Enable "Silent boot"
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
 
   networking.hostName = "T480s"; # Define your hostname.
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
@@ -50,6 +81,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions;
+        [
+          bbenoist.nix
+          ms-python.python
+          ms-azuretools.vscode-docker
+          ms-vscode-remote.remote-ssh
+          ms-toolsai.jupyter
+        ]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "remote-ssh-edit";
+            publisher = "ms-vscode-remote";
+            version = "0.47.2";
+            sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
+          }
+        ];
+    })
   ];
 
   hardware.nvidia.open = false;
@@ -67,8 +116,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = false;
-    ports = [ 22 ];
+    enable = true;
+    ports = [22];
     settings = {
       PasswordAuthentication = true;
       AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
@@ -81,8 +130,18 @@
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedUDPPorts = [22];
+
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

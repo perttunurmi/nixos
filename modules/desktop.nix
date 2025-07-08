@@ -3,13 +3,12 @@
   config,
   username,
   ...
-}:
-{
-
+}: {
   users.users.${username}.packages = with pkgs; [
     chromium
     discord
     firefox
+    brave
     android-tools
     scrcpy
     steam
@@ -33,5 +32,4 @@
   };
 
   programs.gamemode.enable = true;
-
 }
