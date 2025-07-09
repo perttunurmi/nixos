@@ -1,8 +1,11 @@
 {config, ...}: let
-  browser = ["firefox.desktop"];
+  browser = ["zen-browser.desktop"];
 
   # XDG MIME types
   associations = {
+    "image/jpeg" = "feh.desktop";
+    "image/png" = "feh.desktop";
+
     "application/x-extension-htm" = browser;
     "application/x-extension-html" = browser;
     "application/x-extension-shtml" = browser;
@@ -19,7 +22,7 @@
 
     "audio/*" = ["mpv.desktop"];
     "video/*" = ["mpv.desktop"];
-    "image/*" = ["imv.desktop"];
+    "image/*" = ["feh.desktop"];
     "application/json" = browser;
     "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
     "x-scheme-handler/discord" = ["discord.desktop"];
@@ -31,14 +34,14 @@ in {
     enable = true;
     cacheHome = config.home.homeDirectory + "/.local/cache";
 
-    mimeApps = {
-      enable = true;
-      defaultApplications = associations;
-    };
+    # mimeApps = {
+    #   enable = true;
+    #   defaultApplications = associations;
+    # };
 
     userDirs = {
       enable = true;
-      createDirectories = false;
+      createDirectories = true;
       templates = "${config.home.homeDirectory}/media/templates";
       pictures = "${config.home.homeDirectory}/media/pictures";
       videos = "${config.home.homeDirectory}/media/videos";

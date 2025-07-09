@@ -1,8 +1,8 @@
-{
+{...}: {
   imports = [
-    ./media.nix
     ./browser.nix
+    ./themes.nix
+    ./media.nix
     ./terminals.nix
-    ./darkmode.nix
   ];
 }

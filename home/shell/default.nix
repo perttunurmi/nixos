@@ -1,19 +1,15 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   d = config.xdg.dataHome;
   c = config.xdg.configHome;
   cache = config.xdg.cacheHome;
 in {
   imports = [
-    ./common.nix
     ./starship.nix
     ./xdg.nix
+    ./neovim.nix
+    ./rclone.nix
+    ./xorg.nix
   ];
-
-  home.file.".tmux.conf".source = ./tmux.conf;
 
   # add environment variables
   home.sessionVariables = {
@@ -22,8 +18,12 @@ in {
     LESSKEY = c + "/less/lesskey";
     WINEPREFIX = d + "/wine";
 
+    GOPATH = c + "/go";
+
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
+
     # set default applications
-    EDITOR = "vim";
+    EDITOR = "nvim";
     VISUAL = "nvim";
     BROWSER = "firefox";
     TERMINAL = "alacritty";
@@ -34,7 +34,6 @@ in {
   };
 
   home.shellAliases = {
-    rclone-reload = "systemctl --user restart rCloneMounts.service";
     g = "git";
     rm = "trash -v";
     v = "xsel -ob";
@@ -58,11 +57,19 @@ in {
       bind '\C-w:unix-filename-rubout'
 
       PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
+
+      # if uwsm check may-start && uwsm select; then
+      #     exec uwsm start default
+      # fi
     '';
   };
 
   home.file.".inputrc".text = ''
-    set completion-ignore-case On
+    set completion-ignore-case on
+    set show-all-if-ambiguous on
+    $if Bash
+      Space: magic-space
+    $endif
   '';
 
   home.file.".config/bat/config".text = ''
@@ -70,17 +77,18 @@ in {
     --paging=auto
   '';
 
-  home.packages = with pkgs; [
-    trash-cli
-    starship
-    ripgrep
-    zoxide
-    neovim
-    tmux
-    stow
-    eza
-    bat
-    fzf
-    fd
-  ];
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "gruvbox_material_dark";
+      theme_background = false;
+      vim_keys = true;
+    };
+  };
 }

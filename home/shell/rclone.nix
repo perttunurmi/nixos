@@ -7,6 +7,10 @@
     rclone
   ];
 
+  home.shellAliases = {
+    rclone-reload = "systemctl --user restart rCloneMounts.service";
+  };
+
   systemd.user.services.rCloneMounts = {
     Unit = {
       Description = "Mount all rClone configurations";
@@ -30,7 +34,7 @@
         for remote in $remotes;
         do
         name=$(/usr/bin/env echo "$remote" | /usr/bin/env sed "s/://g")
-        ${pkgs.rclone}/bin/rclone --config=${home}/.config/rclone/rclone.conf --vfs-cache-mode writes --ignore-checksum mount "$remote" "$name" &
+        ${pkgs.rclone}/bin/rclone --config=${home}/.config/rclone/rclone.conf --vfs-cache-mode full --ignore-checksum mount "$remote" "$name" &
         done
       ''}";
 
