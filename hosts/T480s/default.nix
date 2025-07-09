@@ -11,6 +11,7 @@
     ../../modules/system.nix
     ../../modules/desktop.nix
     ../../modules/i3.nix
+    ../../modules/gamemode.nix
 
     ./throttled.nix
     ./hardware-configuration.nix
@@ -19,13 +20,29 @@
   services.fwupd.enable = true;
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = false;
+
+    efi = {
+      canTouchEfiVariables = false;
+      efiSysMountPoint = "/boot";
+    };
+
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      useOSProber = false;
+      forceInstall = true;
+    };
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot = {
     plymouth = {
-      enable = true;
+      enable = false;
       theme = "bgrt";
       themePackages = with pkgs; [
         nixos-bgrt-plymouth
@@ -37,15 +54,15 @@
     };
 
     # Enable "Silent boot"
-    consoleLogLevel = 3;
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "udev.log_priority=3"
-      "rd.systemd.show_status=auto"
-    ];
+    # consoleLogLevel = 3;
+    # initrd.verbose = false;
+    # kernelParams = [
+    #   "quiet"
+    #   "splash"
+    #   "boot.shell_on_fail"
+    #   "udev.log_priority=3"
+    #   "rd.systemd.show_status=auto"
+    # ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
@@ -80,26 +97,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
-        [
-          bbenoist.nix
-          ms-python.python
-          ms-azuretools.vscode-docker
-          ms-vscode-remote.remote-ssh
-          ms-toolsai.jupyter
-        ]
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "remote-ssh-edit";
-            publisher = "ms-vscode-remote";
-            version = "0.47.2";
-            sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-          }
-        ];
-    })
-  ];
+  environment.systemPackages = with pkgs; [];
 
   hardware.nvidia.open = false;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;

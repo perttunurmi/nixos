@@ -1,8 +1,4 @@
-{
-  pkgs,
-  zen-browser,
-  ...
-} @ inputs: {
+{pkgs, ...} @ inputs: {
   imports = [
     ../../home/default.nix
 
@@ -32,27 +28,25 @@
   };
 
   home.packages = with pkgs; [
-    inputs.zen-browser.packages.x86_64-linux.default
-    obsidian
+    # lua
     lua-language-server
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
+    lua
+
     tree-sitter
     cargo
     lynx
-    btop
     zig
     just
     go
     nodejs_24
-    jdt-language-server
-    vscode-js-debug
+    python3Full
     rust-analyzer
-    texliveFull
-    vscode.fhs
+
+    # java
+    jdt-language-server
     lombok
     maven
-    lua
-    python3Full
   ];
 }

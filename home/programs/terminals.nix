@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{...}: let
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
   font = iosevka;

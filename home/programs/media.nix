@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}:
+{pkgs, ...}:
 # media - control and enjoy audio/video
 {
   # imports = [
@@ -13,8 +9,10 @@
     pavucontrol
     playerctl
     pulsemixer
+
     # images
-    imv
+    feh
+    qimgv
   ];
 
   programs = {

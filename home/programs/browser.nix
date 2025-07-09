@@ -1,7 +1,7 @@
 {
-  pkgs,
-  config,
   username,
+  inputs,
+  pkgs,
   ...
 }: {
   programs = {
@@ -18,4 +18,8 @@
       profiles.${username} = {};
     };
   };
+
+  home.packages = with pkgs; [
+    inputs.zen-browser.packages.x86_64-linux.default
+  ];
 }

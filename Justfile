@@ -1,10 +1,10 @@
 deploy host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --upgrade
+    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
 
 deploy-impure host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --upgrade --impure
+    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --impure
 
 debug host="$(hostname)":
     @printf "rebulding {{ host }} with debug\n"
@@ -32,11 +32,11 @@ repl:
 
 clean:
     @printf "deleting history older than 7 days...\n"
-    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 1m
 
 gc:
     @printf "collecting garbage...\n"
-    sudo nix-collect-garbage --delete-old
+    sudo nix-collect-garbage --delete-older-than period 1m
 
 update-rebuild-clean host="$(hostname)":
     sudo just update

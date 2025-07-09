@@ -22,9 +22,8 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
-        xsel
-        redshift
-        preload
+        xsel # copy and paste to clipboard from the terminal
+        redshift # automatic night light
         rofi # application launcher, the same as dmenu
         dunst # notification daemon
         i3blocks # status bar
@@ -41,9 +40,9 @@
         brightnessctl # control screen brightness
         xorg.xdpyinfo # get screen information
         sysstat # get system information
-        networkmanagerapplet
-        flameshot
-        copyq
+        networkmanagerapplet # networkmanager tray
+        copyq # clipboard manager
+        gpick # colorpicker
       ];
     };
   };
