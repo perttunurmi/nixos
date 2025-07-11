@@ -7,6 +7,10 @@
     rclone
   ];
 
+  home.shellAliases = {
+    rclone-reload = "systemctl --user restart rCloneMounts.service";
+  };
+
   systemd.user.services.rCloneMounts = {
     Unit = {
       Description = "Mount all rClone configurations";

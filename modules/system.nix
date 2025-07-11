@@ -4,6 +4,9 @@
   username,
   ...
 }: {
+  imports = [
+    ./keyd.nix
+  ];
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
@@ -12,6 +15,16 @@
       "networkmanager"
       "wheel"
       "docker"
+      "audio"
+      "video"
+      "plugdev"
+      "input"
+      "lp"
+      "scanner"
+      "libvirt"
+      "kvm"
+      "wireshark"
+      "adbusers"
     ];
   };
 
@@ -192,6 +205,8 @@
     options = lib.mkDefault "--delete-older-than 7d";
   };
 
+  nix.settings.auto-optimise-store = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -216,10 +231,12 @@
     texliveFull
     libsecret
     clang-tools
+    pciutils
     docker
     clang
     gnumake
     unzip
+    tmux
     htop
     btop
     vim
@@ -228,14 +245,16 @@
     git
     sysstat
     lm_sensors
+    dart-sass
+    hugo
     scrot
     gcc
   ];
 
-  # console = {
-  #   earlySetup = true;
-  #   font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-  #   packages = with pkgs; [terminus_font];
-  #   keyMap = "us";
-  # };
+  console = {
+    earlySetup = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    packages = with pkgs; [terminus_font];
+    keyMap = "us";
+  };
 }

@@ -32,23 +32,28 @@
     nixpkgs,
     home-manager,
     zen-browser,
+    nix-snapd,
+    nixpkgs-unstable,
     ...
   }: {
-    nixosConfigurations = {
-      T480s = let
-        username = "perttu";
-        specialArgs = {
-          inherit username;
-          inherit inputs;
-        };
+    nixosConfigurations = let
+      mkHost = {
+        hostPath,
+        username,
+        extraSpecialArgs ? {},
+      }: let
+        specialArgs =
+          {
+            inherit username;
+          }
+          // extraSpecialArgs;
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
-          system = "x86_64-linux";
           modules = [
-            ./hosts/T480s
-            # make home-manager as a module of nixos
-            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+            nix-snapd.nixosModules.default
+            {services.snap.enable = true;}
+            hostPath
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -59,81 +64,27 @@
             }
           ];
         };
-
-      VMware = let
+    in {
+      T480s = mkHost {
+        hostPath = ./hosts/T480s;
         username = "perttu";
-        specialArgs = {
-          inherit username;
-          inherit zen-browser;
-        };
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/VMware
-            # make home-manager as a module of nixos
-            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
-            }
-          ];
-        };
-
-      Fujitsu = let
+        extraSpecialArgs = {inherit inputs;};
+      };
+      VMware = mkHost {
+        hostPath = ./hosts/VMware;
         username = "perttu";
-        specialArgs = {
-          inherit username;
-          inherit inputs;
-        };
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/Fujitsu
-            # make home-manager as a module of nixos
-            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
-            }
-          ];
-        };
-
-      WSL = let
+        extraSpecialArgs = {inherit inputs;};
+      };
+      Fujitsu = mkHost {
+        hostPath = ./hosts/Fujitsu;
         username = "perttu";
-        specialArgs = {
-          inherit username;
-          inherit inputs;
-        };
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/Fujitsu
-            # make home-manager as a module of nixos
-            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
-            }
-          ];
-        };
+        extraSpecialArgs = {inherit inputs;};
+      };
+      WSL = mkHost {
+        hostPath = ./hosts/WSL;
+        username = "perttu";
+        extraSpecialArgs = {inherit inputs;};
+      };
     };
   };
 }

@@ -3,9 +3,9 @@
     ../../home/default.nix
 
     ../../home/i3
-    ../../home/shell
     ../../home/programs
     ../../home/rclone
+    ../../home/shell
   ];
 
   home.file.".background-image".source = ./.wallpaper.jpg;

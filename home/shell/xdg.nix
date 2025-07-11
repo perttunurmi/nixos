@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   browser = ["firefox.desktop"];
 
   # XDG MIME types
@@ -19,7 +23,7 @@
 
     "audio/*" = ["mpv.desktop"];
     "video/*" = ["mpv.desktop"];
-    "image/*" = ["imv.desktop"];
+    "image/*" = ["feh.desktop"];
     "application/json" = browser;
     "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
     "x-scheme-handler/discord" = ["discord.desktop"];

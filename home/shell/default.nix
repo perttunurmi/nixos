@@ -22,8 +22,10 @@ in {
     LESSKEY = c + "/less/lesskey";
     WINEPREFIX = d + "/wine";
 
+    GOPATH = c + "/go";
+
     # set default applications
-    EDITOR = "vim";
+    EDITOR = "nvim";
     VISUAL = "nvim";
     BROWSER = "firefox";
     TERMINAL = "alacritty";
@@ -34,7 +36,6 @@ in {
   };
 
   home.shellAliases = {
-    rclone-reload = "systemctl --user restart rCloneMounts.service";
     g = "git";
     rm = "trash -v";
     v = "xsel -ob";
@@ -62,12 +63,20 @@ in {
   };
 
   home.file.".inputrc".text = ''
-    set completion-ignore-case On
+    set completion-ignore-case on
+    set show-all-if-ambiguous on
+    $if Bash
+      Space: magic-space
+    $endif
   '';
 
   home.file.".config/bat/config".text = ''
     --style="numbers,changes,grid"
     --paging=auto
+  '';
+
+  home.file.".profile".text = ''
+    export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
   '';
 
   home.packages = with pkgs; [

@@ -22,6 +22,7 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        file-roller # gnome archive manager
         xsel # copy and paste to clipboard from the terminal
         redshift # automatic night light
         rofi # application launcher, the same as dmenu
@@ -87,4 +88,15 @@
   ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
+
+  programs.kdeconnect.enable = true;
+  networking.firewall = rec {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
 }

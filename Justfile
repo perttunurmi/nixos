@@ -8,7 +8,7 @@ deploy-impure host="$(hostname)":
 
 debug host="$(hostname)":
     @printf "rebulding {{ host }} with debug\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --verbose
+    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
 
 generate-hardware-config host="$(hostname)":
     mkdir -p ./hosts/{{ host }}/
@@ -32,14 +32,17 @@ repl:
 
 clean:
     @printf "deleting history older than 7 days...\n"
-    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 1m
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --delete-older-than 30d
 
 gc:
     @printf "collecting garbage...\n"
-    sudo nix-collect-garbage --delete-older-than period 1m
+    sudo nix-collect-garbage --delete-older-than 30d
 
 update-rebuild-clean host="$(hostname)":
     sudo just update
     sudo just deploy {{ host }}
     just gc
     just clean
+
+list-all-packages:
+    nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq

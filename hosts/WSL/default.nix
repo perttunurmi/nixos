@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -18,6 +17,8 @@
     defaultUser = "perttu";
     docker-desktop.enable = true;
     wslConf.network.hostname = "WSL";
+    wslConf.automount.root = "/mnt";
+    startMenuLaunchers = true;
   };
 
   # vscode server for wsl and ssh

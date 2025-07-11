@@ -3,7 +3,39 @@
   username,
   ...
 }: {
+  services.flatpak.enable = true;
+  xdg = {
+    portal = {
+      enable = true;
+
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+
+      config = {
+        common = {
+          default = [
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [
+            "gnome-keyring"
+          ];
+        };
+      };
+    };
+  };
+
+  systemd.services.flatpak-repo = {
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.flatpak];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
   users.users.${username}.packages = with pkgs; [
+    gnome-software
+    flatpak
     preload
     obsidian
     vscode.fhs
@@ -105,6 +137,7 @@
   };
 
   services = {
+    dbus.enable = true;
     dbus.packages = [pkgs.gcr];
 
     geoclue2.enable = true;
