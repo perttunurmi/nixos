@@ -11,6 +11,7 @@
     ../../modules/system.nix
     ../../modules/desktop.nix
     ../../modules/i3.nix
+    ../../modules/hyprland.nix
     ../../modules/gamemode.nix
 
     ./throttled.nix
@@ -94,6 +95,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    thinkfan
     powertop
   ];
 
@@ -121,7 +123,7 @@
 
   powerManagement.enable = true;
   services.thermald.enable = true;
-  powerManagement.powertop.enable = false;
+  powerManagement.powertop.enable = true;
 
   services.logind.lidSwitch = "lock";
   services.logind.lidSwitchExternalPower = "lock";

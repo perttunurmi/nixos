@@ -164,8 +164,8 @@ default_border pixel 2
 hide_edge_borders smart
 focus_follows_mouse yes
 
-gaps inner 5
-gaps outer 10
+gaps inner 2
+gaps outer 5
 
 new_window pixel 2
 new_float pixel 2

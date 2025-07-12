@@ -3,6 +3,8 @@
   username,
   ...
 }: {
+  services.xserver.enable = true;
+
   services.flatpak.enable = true;
   xdg = {
     portal = {
@@ -92,6 +94,12 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
+      liberation_ttf
+      fira-code
+      fira-code-symbols
+      mplus-outline-fonts.githubRelease
+      dina-font
+      proggyfonts
 
       # nerdfonts
       # https://github.com/NixOS/nixpkgs/blob/nixos-unstable-small/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
@@ -99,6 +107,7 @@
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
+      nerd-fonts.droid-sans-mono
     ];
 
     # use fonts specified by user rather than default ones
@@ -137,6 +146,11 @@
   };
 
   services = {
+    xserver.displayManager = {
+      # lightdm.enable = true;
+      gdm.enable = true;
+    };
+
     dbus.enable = true;
     dbus.packages = [pkgs.gcr];
 
@@ -154,6 +168,52 @@
       #media-session.enable = true;
     };
 
+    # https://wiki.nixos.org/wiki/MTP
+    gvfs.enable = true; # Mount, trash, and other functionalities
+
+    blueman.enable = true;
+
     udev.packages = with pkgs; [gnome-settings-daemon];
+  };
+
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = [
+      "network.target"
+      "sound.target"
+    ];
+    wantedBy = ["default.target"];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
+
+  programs.kdeconnect.enable = true;
+  networking.firewall = rec {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  programs.seahorse.enable = true; # enable the graphical frontend
+
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
   };
 }

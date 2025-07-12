@@ -3,8 +3,6 @@
   # services.displayManager.defaultSession = "none+i3";
   services.displayManager.defaultSession = "xfce+i3";
   services.xserver = {
-    enable = true;
-
     desktopManager = {
       xterm.enable = false;
       xfce = {
@@ -14,10 +12,6 @@
       };
     };
 
-    displayManager = {
-      # lightdm.enable = true;
-      gdm.enable = true;
-    };
 
     windowManager.i3 = {
       enable = true;
@@ -48,55 +42,11 @@
     };
   };
 
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  programs.seahorse.enable = true; # enable the graphical frontend
-
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
-
-  systemd.user.services.mpris-proxy = {
-    description = "Mpris proxy";
-    after = [
-      "network.target"
-      "sound.target"
-    ];
-    wantedBy = ["default.target"];
-    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
-  };
-
-  services.blueman.enable = true;
-
   # thunar file manager(part of xfce) related options
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman
   ];
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
-
-  programs.kdeconnect.enable = true;
-  networking.firewall = rec {
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
-    allowedUDPPortRanges = allowedTCPPortRanges;
-  };
 }

@@ -48,5 +48,8 @@
     jdt-language-server
     lombok
     maven
+
+    ghostscript
+    mermaid-cli
   ];
 }

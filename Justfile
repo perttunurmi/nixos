@@ -2,6 +2,10 @@ deploy host="$(hostname)":
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
 
+test host="$(hostname)":
+    @printf "rebulding {{ host }}\n"
+    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
+
 deploy-impure host="$(hostname)":
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --impure
