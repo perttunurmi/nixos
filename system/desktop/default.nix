@@ -3,6 +3,23 @@
   username,
   ...
 }: {
+  imports = [
+    ../../system/configuration.nix
+
+    ../services/keyd.nix
+    ./fonts.nix
+    ./gamemode.nix
+    ./i3.nix
+    ./hyprland.nix
+
+    ../services/xserver.nix
+    ../services/keyd.nix
+    ../services/ssh.nix
+    ../services/docker.nix
+  ];
+
+  programs.java.enable = true;
+
   services.xserver.enable = true;
 
   services.flatpak.enable = true;
@@ -68,8 +85,8 @@
   ];
 
   systemd.tmpfiles.rules = [
-    "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
-    "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../users/${username}/.face}" # you can replace the ${....} with absolute path to face icon
+    # "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
+    # "L+ /var/lib/AccountsService/icons/${username}  - - - - ${face}" # you can replace the ${....} with absolute path to face icon
   ];
 
   security.polkit.enable = true;
@@ -84,54 +101,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  fonts = {
-    packages = with pkgs; [
-      # icon fonts
-      material-design-icons
-
-      # normal fonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      mplus-outline-fonts.githubRelease
-      dina-font
-      proggyfonts
-
-      # nerdfonts
-      # https://github.com/NixOS/nixpkgs/blob/nixos-unstable-small/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
-      nerd-fonts.symbols-only # symbols icon only
-      nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.iosevka
-      nerd-fonts.droid-sans-mono
-    ];
-
-    # use fonts specified by user rather than default ones
-    enableDefaultPackages = false;
-
-    # user defined fonts
-    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
-    # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = [
-        "Noto Serif"
-        "Noto Color Emoji"
-      ];
-      sansSerif = [
-        "Noto Sans"
-        "Noto Color Emoji"
-      ];
-      monospace = [
-        "JetBrainsMono Nerd Font"
-        "Noto Color Emoji"
-      ];
-      emoji = ["Noto Color Emoji"];
-    };
-  };
 
   # Dconf is a low-level configuration system used in the GNOME
   # desktop environment to manage user settings,

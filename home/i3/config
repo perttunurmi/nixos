@@ -172,7 +172,7 @@ new_float pixel 2
 floating_minimum_size 400 x 300
 floating_maximum_size -1 x -1
 
-exec --no-startup-id picom --backend glx --vsync --daemon
+exec --no-startup-id picom --backend xrender --vsync --daemon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk -t 6500:1500

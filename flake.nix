@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration for Perttu Nurmi";
+  description = "NixOS configuration";
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
@@ -60,7 +60,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
+              home-manager.users.${username} = import ./home/home.nix;
             }
           ];
         };
@@ -77,11 +77,6 @@
       };
       Fujitsu = mkHost {
         hostPath = ./hosts/Fujitsu;
-        username = "perttu";
-        extraSpecialArgs = {inherit inputs;};
-      };
-      WSL = mkHost {
-        hostPath = ./hosts/WSL;
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };
