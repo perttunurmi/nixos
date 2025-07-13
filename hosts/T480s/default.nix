@@ -1,10 +1,17 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./throttled.nix
+    ./thinkfan.nix
 
-    ../../system/configuration.nix
+    ../../modules/hardware/nvidia.nix
+
+    ../../modules/desktop/default.nix
   ];
 
   boot.loader = {
@@ -63,7 +70,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   environment.systemPackages = with pkgs; [
-    thinkfan
     powertop
   ];
 

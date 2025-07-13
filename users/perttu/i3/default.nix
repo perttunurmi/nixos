@@ -14,9 +14,8 @@
   #   executable = true; # make all scripts executable
   # };
 
-  # set cursor size and dpi for 4k monitor
   xresources.properties = {
     # "Xcursor.size" = 16;
-    # "Xft.dpi" = 100;
+    "Xft.dpi" = 100;
   };
 }

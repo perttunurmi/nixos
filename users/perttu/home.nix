@@ -1,11 +1,17 @@
 {
   username,
   pkgs,
-  lib,
   ...
 }: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
+
+  imports = [
+    ./i3
+    ./programs
+    ./rclone
+    ./shell
+  ];
 
   # users.users.perttu.openssh.authorizedKeys.keys = [
   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
@@ -14,7 +20,7 @@
 
   home = {
     inherit username;
-    homeDirectory = lib.mkDefault "/home/${username}";
+    homeDirectory = "/home/${username}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

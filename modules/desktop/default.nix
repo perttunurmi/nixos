@@ -4,13 +4,21 @@
   ...
 }: {
   imports = [
-    ./system.nix
-    ./keyd.nix
+    ../../system/configuration.nix
 
-    ./i3.nix
-
+    ../services/keyd.nix
+    ./fonts.nix
     ./gamemode.nix
+    ./i3.nix
+    ./hyprland.nix
+
+    ../services/xserver.nix
+    ../services/keyd.nix
+    ../services/ssh.nix
+    ../services/docker.nix
   ];
+
+  programs.java.enable = true;
 
   services.xserver.enable = true;
 
@@ -78,7 +86,7 @@
 
   systemd.tmpfiles.rules = [
     "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
-    "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../users/${username}/.face}" # you can replace the ${....} with absolute path to face icon
+    "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../../users/${username}/.face}" # you can replace the ${....} with absolute path to face icon
   ];
 
   security.polkit.enable = true;

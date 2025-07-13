@@ -1,7 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.hyprland.enable = true; # enable Hyprland
+  services.displayManager.defaultSession = lib.mkForce "hyprland";
 
   environment.systemPackages = with pkgs; [
+    waybar
     hyprcursor
     ghostty
     swww
