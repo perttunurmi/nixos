@@ -1,12 +1,34 @@
-{pkgs, ...}: {
-  imports = [
-    ../../home/default.nix
+{
+  username,
+  pkgs,
+  lib,
+  ...
+}: {
+  # Home Manager needs a bit of information about you and the
+  # paths it should manage.
 
-    ../../home/i3
-    ../../home/programs
-    ../../home/rclone
-    ../../home/shell
-  ];
+  # users.users.perttu.openssh.authorizedKeys.keys = [
+  #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
+  #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdudMkx0ecdlaBbKMBC7Tf8+bd4Kvu7kPpuloONSnVV u0_a322@localhost"
+  # ];
+
+  home = {
+    inherit username;
+    homeDirectory = lib.mkDefault "/home/${username}";
+
+    # This value determines the Home Manager release that your
+    # configuration is compatible with. This helps avoid breakage
+    # when a new Home Manager release introduces backwards
+    # incompatible changes.
+    #
+    # You can update Home Manager without changing this value. See
+    # the Home Manager release notes for a list of state version
+    # changes in each release.
+    stateVersion = "25.05";
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
   home.file.".background-image".source = ./.wallpaper.jpg;
 

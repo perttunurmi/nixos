@@ -2,9 +2,7 @@
   config,
   pkgs,
   ...
-}:
-# sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable && sudo nix-channel --update
-{
+}: {
   imports = [
     <nixos-wsl/modules>
     (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
@@ -23,20 +21,6 @@
 
   # vscode server for wsl and ssh
   services.vscode-server.enable = true;
-
-  networking.firewall = {
-    enable = false;
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = false;
-
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -76,17 +60,6 @@
       VISUAL = "nvim";
     };
   };
-
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-  };
-
-  users.users.perttu.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdudMkx0ecdlaBbKMBC7Tf8+bd4Kvu7kPpuloONSnVV u0_a322@localhost"
-  ];
 
   system.stateVersion = "25.05";
 }

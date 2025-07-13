@@ -1,7 +1,7 @@
 {
-  pkgs,
-  lib,
   username,
+  lib,
+  pkgs,
   ...
 }: {
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -25,9 +25,48 @@
     ];
   };
 
+  # Time and locales
+  time.timeZone = "Europe/Helsinki";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "fi_FI.UTF-8";
+    LC_IDENTIFICATION = "fi_FI.UTF-8";
+    LC_MEASUREMENT = "fi_FI.UTF-8";
+    LC_MONETARY = "fi_FI.UTF-8";
+    LC_NAME = "fi_FI.UTF-8";
+    LC_NUMERIC = "fi_FI.UTF-8";
+    LC_PAPER = "fi_FI.UTF-8";
+    LC_TELEPHONE = "fi_FI.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  networking.firewall.enable = lib.mkDefault true;
+  networking.networkmanager.enable = lib.mkDefault true;
+  networking.wireless.enable = lib.mkDefault false; # Enables wireless support via wpa_supplicant.
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+  };
+
+  services.fwupd.enable = lib.mkDefault true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = true;
+
+  console = {
+    earlySetup = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    packages = with pkgs; [terminus_font];
+    keyMap = "us";
   };
 
   # enable linker
@@ -203,55 +242,4 @@
   };
 
   nix.settings.auto-optimise-store = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Time and locales
-  time.timeZone = "Europe/Helsinki";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fi_FI.UTF-8";
-    LC_IDENTIFICATION = "fi_FI.UTF-8";
-    LC_MEASUREMENT = "fi_FI.UTF-8";
-    LC_MONETARY = "fi_FI.UTF-8";
-    LC_NAME = "fi_FI.UTF-8";
-    LC_NUMERIC = "fi_FI.UTF-8";
-    LC_PAPER = "fi_FI.UTF-8";
-    LC_TELEPHONE = "fi_FI.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    texliveFull
-    libsecret
-    clang-tools
-    pciutils
-    docker
-    clang
-    gnumake
-    unzip
-    tmux
-    htop
-    btop
-    vim
-    wget
-    curl
-    git
-    sysstat
-    lm_sensors
-    dart-sass
-    hugo
-    scrot
-    gcc
-  ];
-
-  console = {
-    earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-    packages = with pkgs; [terminus_font];
-    keyMap = "us";
-  };
 }

@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration for Perttu Nurmi";
+  description = "NixOS configuration";
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
