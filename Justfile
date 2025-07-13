@@ -59,3 +59,6 @@ commit:
     just format
     git add .
     git commit
+
+check:
+    nix flake check
