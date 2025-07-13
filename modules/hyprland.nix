@@ -1,10 +1,8 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.hyprland.enable = true; # enable Hyprland
 
   environment.systemPackages = with pkgs; [
+    hyprcursor
     ghostty
     swww
   ];

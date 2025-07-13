@@ -3,6 +3,16 @@
   username,
   ...
 }: {
+  imports = [
+    ./system.nix
+    ./keyd.nix
+
+    ./i3.nix
+    ./qtile.nix
+
+    ./gamemode.nix
+  ];
+
   services.xserver.enable = true;
 
   services.flatpak.enable = true;

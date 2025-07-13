@@ -13,7 +13,7 @@ in {
     ./xdg.nix
   ];
 
-  home.file.".tmux.conf".source = ./tmux.conf;
+  home.file.".config/tmux/tmux.conf".source = ./tmux.conf;
 
   # add environment variables
   home.sessionVariables = {

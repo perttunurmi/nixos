@@ -1,4 +1,4 @@
-{pkgs, ...} @ inputs: {
+{pkgs, ...}: {
   imports = [
     ../../home/default.nix
 

@@ -1,16 +1,20 @@
 deploy host="$(hostname)":
+    git add .
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
 
 test host="$(hostname)":
+    git add .
     @printf "rebulding {{ host }}\n"
     nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
 
 deploy-impure host="$(hostname)":
+    git add .
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --impure
 
 debug host="$(hostname)":
+    git add .
     @printf "rebulding {{ host }} with debug\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
 
@@ -50,3 +54,8 @@ update-rebuild-clean host="$(hostname)":
 
 list-all-packages:
     nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq
+
+commit:
+    just format
+    git add .
+    git commit
