@@ -6,10 +6,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    ../../system/desktop/default.nix
   ];
 
   services.xserver.desktopManager.cinnamon.enable = true;
-  services.xserver.displayManager.enable = true;
   services.displayManager.defaultSession = lib.mkForce "cinnamon";
 
   services.fwupd.enable = true;

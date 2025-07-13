@@ -4,7 +4,7 @@
   ...
 }: {
   programs.hyprland.enable = true; # enable Hyprland
-  services.displayManager.defaultSession = lib.mkForce "hyprland";
+  # services.displayManager.defaultSession = lib.mkForce "hyprland";
 
   environment.systemPackages = with pkgs; [
     waybar

@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
+
+    ../../system/desktop/default.nix
   ];
 
   boot.loader.grub.enable = true;

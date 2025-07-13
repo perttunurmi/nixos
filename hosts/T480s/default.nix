@@ -1,17 +1,13 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./throttled.nix
     ./thinkfan.nix
 
-    ../../modules/hardware/nvidia.nix
+    ../../system/hardware/nvidia.nix
 
-    ../../modules/desktop/default.nix
+    ../../system/desktop/default.nix
   ];
 
   boot.loader = {
@@ -60,6 +56,7 @@
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
+
     loader.timeout = 1;
   };
 

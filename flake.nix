@@ -80,11 +80,6 @@
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };
-      WSL = mkHost {
-        hostPath = ./hosts/WSL;
-        username = "perttu";
-        extraSpecialArgs = {inherit inputs;};
-      };
     };
   };
 }
