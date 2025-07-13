@@ -16,7 +16,6 @@
       proggyfonts
 
       ubuntu_font_family
-      liberation_ttf
       # Persian Font
       vazir-fonts
 
