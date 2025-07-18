@@ -10,6 +10,7 @@
     ./fonts.nix
     ./gamemode.nix
     ./i3.nix
+    ./qtile.nix
     ./hyprland.nix
 
     ../services/xserver.nix
@@ -19,8 +20,6 @@
   ];
 
   programs.java.enable = true;
-
-  services.xserver.enable = true;
 
   services.flatpak.enable = true;
   xdg = {
@@ -85,8 +84,8 @@
   ];
 
   systemd.tmpfiles.rules = [
-    # "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
-    # "L+ /var/lib/AccountsService/icons/${username}  - - - - ${face}" # you can replace the ${....} with absolute path to face icon
+    "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
+    "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../../users/perttu/face}" # you can replace the ${....} with absolute path to face icon
   ];
 
   security.polkit.enable = true;
@@ -115,6 +114,8 @@
   };
 
   services = {
+    xserver.enable = true;
+
     xserver.displayManager = {
       # lightdm.enable = true;
       gdm.enable = true;

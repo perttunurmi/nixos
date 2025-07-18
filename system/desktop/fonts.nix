@@ -26,6 +26,7 @@
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
       nerd-fonts.droid-sans-mono
+      nerd-fonts.zed-mono
     ];
 
     # use fonts specified by user rather than default ones

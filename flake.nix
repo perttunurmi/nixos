@@ -25,6 +25,8 @@
     # snapd
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {
@@ -77,6 +79,11 @@
       };
       Fujitsu = mkHost {
         hostPath = ./hosts/Fujitsu;
+        username = "perttu";
+        extraSpecialArgs = {inherit inputs;};
+      };
+      NixOS = mkHost {
+        hostPath = ./hosts/NixOS;
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };

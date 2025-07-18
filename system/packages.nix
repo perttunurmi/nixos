@@ -5,6 +5,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    sqlite
     texliveFull
     libsecret
     clang-tools
@@ -17,6 +18,7 @@
     htop
     btop
     vim
+    neovim
     wget
     curl
     git
