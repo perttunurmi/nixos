@@ -1,22 +1,11 @@
-{
-  username,
-  pkgs,
-  ...
-}: {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
+{username, ...}: {
 
   imports = [
-    ./i3
-    ./programs
-    ./rclone
+    ./file.nix
+    ./packages.nix
     ./shell
+    ./programs
   ];
-
-  # users.users.perttu.openssh.authorizedKeys.keys = [
-  #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
-  #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdudMkx0ecdlaBbKMBC7Tf8+bd4Kvu7kPpuloONSnVV u0_a322@localhost"
-  # ];
 
   home = {
     inherit username;
@@ -27,8 +16,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # home.file.".background-image".source = ./.wallpaper.jpg;
-
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -36,6 +23,12 @@
     userEmail = "perttu.nurmi@gmail.com";
     extraConfig = {
       init.defaultBranch = "master";
+    };
+
+    signing = {
+      format = "ssh";
+      signByDefault = true;
+      key = "/home/${username}/.ssh/id_ed25519.pub";
     };
   };
 
@@ -45,30 +38,4 @@
       enable = true;
     };
   };
-
-  home.packages = with pkgs; [
-    # lua
-    lua-language-server
-    luajitPackages.luarocks_bootstrap
-    luajitPackages.tiktoken_core
-    lua
-
-    tree-sitter
-    cargo
-    lynx
-    zig
-    just
-    go
-    nodejs_24
-    python3Full
-    rust-analyzer
-
-    # java
-    jdt-language-server
-    lombok
-    maven
-
-    ghostscript
-    mermaid-cli
-  ];
 }
