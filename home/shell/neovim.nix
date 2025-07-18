@@ -31,7 +31,6 @@
     p.scss
     p.tsx
     p.typst
-    p.norg
     p.regex
   ]);
 
