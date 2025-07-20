@@ -40,7 +40,7 @@ repl:
 
 clean old="30":
     @printf "deleting history older than {{ old }} days...\n"
-    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than {{old}}d 
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{old}}d
 
 gc old="30":
     @printf "collecting garbage...\n"
