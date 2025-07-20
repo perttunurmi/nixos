@@ -38,13 +38,13 @@ history:
 repl:
     nix repl -f flake:nixpkgs
 
-clean:
-    @printf "deleting history older than 7 days...\n"
-    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --delete-older-than 30d
+clean old="30":
+    @printf "deleting history older than {{ old }} days...\n"
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{old}}d
 
-gc:
+gc old="30":
     @printf "collecting garbage...\n"
-    sudo nix-collect-garbage --delete-older-than 30d
+    sudo nix-collect-garbage --delete-older-than {{ old }}d
 
 update-rebuild-clean host="$(hostname)":
     sudo just update

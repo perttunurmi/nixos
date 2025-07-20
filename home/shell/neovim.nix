@@ -27,7 +27,6 @@
     p.yaml
     p.latex
     p.html
-    p.norg
     p.scss
     p.tsx
     p.typst
@@ -54,18 +53,26 @@ in {
     ripgrep
     fd
     black
+    isort
     gh
     git
     cargo
     nodejs_24
+    html-tidy
+    actionlint
+    yamllint
+    gitlint
+    google-java-format
 
     # lsp
+    typescript-language-server
     lua-language-server
     vscode-langservers-extracted
     jdt-language-server
     rust-analyzer
     bash-language-server
     pyright
+    pylint
     yaml-language-server
     nixd
     just-lsp

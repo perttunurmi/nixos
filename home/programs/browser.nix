@@ -15,12 +15,13 @@
 
     firefox = {
       enable = true;
-      profiles.${username} = {};
+      # profiles.${username} = {};
     };
   };
 
   home.packages = with pkgs; [
     inputs.zen-browser.packages.x86_64-linux.default
     google-chrome
+    qutebrowser
   ];
 }

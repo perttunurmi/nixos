@@ -25,8 +25,16 @@
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
+      nerd-fonts.iosevka-term
+      nerd-fonts.iosevka-term-slab
       nerd-fonts.droid-sans-mono
       nerd-fonts.zed-mono
+      nerd-fonts.hack
+      nerd-fonts.profont
+      nerd-fonts.mononoki
+      nerd-fonts.commit-mono
+      nerd-fonts.ubuntu-mono
+      nerd-fonts.adwaita-mono
     ];
 
     # use fonts specified by user rather than default ones

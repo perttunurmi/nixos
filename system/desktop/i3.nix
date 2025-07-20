@@ -36,6 +36,7 @@
         networkmanagerapplet # networkmanager tray
         copyq # clipboard manager
         gpick # colorpicker
+        flameshot # screenshot tool
       ];
     };
   };

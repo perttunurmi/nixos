@@ -10,9 +10,9 @@
       };
 
       git_status = {
-        deleted = "✗ ";
-        modified = "✶ ";
-        staged = "✓ ";
+        deleted = "✗";
+        modified = "✶";
+        staged = "✓";
         stashed = "≡";
       };
 

@@ -1,7 +1,8 @@
 {lib, ...}: {
+  services.displayManager.gdm.enable = lib.mkDefault true;
+
   services.xserver = {
     enable = lib.mkDefault true;
-    displayManager.gdm.enable = lib.mkDefault true;
 
     xkb = {
       layout = "us";

@@ -116,7 +116,7 @@
   services = {
     xserver.enable = true;
 
-    xserver.displayManager = {
+    displayManager = {
       # lightdm.enable = true;
       gdm.enable = true;
     };
