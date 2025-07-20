@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./browser.nix
     ./darkmode.nix

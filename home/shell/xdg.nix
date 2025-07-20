@@ -38,7 +38,7 @@ in {
 
     userDirs = {
       enable = true;
-      createDirectories = false;
+      createDirectories = true;
       templates = "${config.home.homeDirectory}/media/templates";
       pictures = "${config.home.homeDirectory}/media/pictures";
       videos = "${config.home.homeDirectory}/media/videos";

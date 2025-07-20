@@ -84,9 +84,9 @@ in {
   programs.btop = {
     enable = true;
     settings = {
-        color_theme = "gruvbox_material_dark";
-        theme_background = false;
-        vim_keys = true;
+      color_theme = "gruvbox_material_dark";
+      theme_background = false;
+      vim_keys = true;
     };
   };
 }

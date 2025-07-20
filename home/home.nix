@@ -1,5 +1,4 @@
 {username, ...}: {
-
   imports = [
     ./file.nix
     ./packages.nix
@@ -10,7 +9,7 @@
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
   };
 
   # Let Home Manager install and manage itself.

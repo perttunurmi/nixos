@@ -11,11 +11,11 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # home-manager
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # zen-browser
@@ -35,7 +35,6 @@
     home-manager,
     zen-browser,
     nix-snapd,
-    nixpkgs-unstable,
     ...
   }: {
     nixosConfigurations = let
