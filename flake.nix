@@ -31,6 +31,9 @@
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
@@ -79,12 +82,12 @@
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };
-      Fujitsu = mkHost {
-        hostPath = ./hosts/Fujitsu;
+      NixOS = mkHost {
+        hostPath = ./hosts/NixOS;
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };
-      NixOS = mkHost {
+      nixos = mkHost {
         hostPath = ./hosts/NixOS;
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};

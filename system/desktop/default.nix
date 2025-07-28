@@ -127,6 +127,17 @@
     enable = true;
   };
 
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      /*
+      any engine you want, for example
+      */
+      # anthy
+    ];
+  };
+
   services = {
     xserver.enable = true;
     xserver.displayManager.lightdm.enable = false;
