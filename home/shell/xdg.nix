@@ -3,6 +3,9 @@
 
   # XDG MIME types
   associations = {
+    "image/jpeg" = "feh.desktop";
+    "image/png" = "feh.desktop";
+
     "application/x-extension-htm" = browser;
     "application/x-extension-html" = browser;
     "application/x-extension-shtml" = browser;
@@ -31,10 +34,10 @@ in {
     enable = true;
     cacheHome = config.home.homeDirectory + "/.local/cache";
 
-    mimeApps = {
-      enable = true;
-      defaultApplications = associations;
-    };
+    # mimeApps = {
+    #   enable = true;
+    #   defaultApplications = associations;
+    # };
 
     userDirs = {
       enable = true;

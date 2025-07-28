@@ -8,10 +8,14 @@
 
     ../services/keyd.nix
     ./fonts.nix
-    ./gamemode.nix
-    ./i3.nix
-    ./qtile.nix
+    # ./gamemode.nix
+    ./gaming/gamemode.nix
+    ./gaming/steam.nix
+    # ./i3.nix
+    # ./qtile.nix
     ./hyprland.nix
+    # ./xfce.nix
+    # ./gnome.nix
 
     ../services/xserver.nix
     ../services/keyd.nix
@@ -28,6 +32,7 @@
 
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
       ];
 
       config = {
@@ -51,7 +56,16 @@
     '';
   };
 
+  hardware.wooting.enable = true;
+
   users.users.${username}.packages = with pkgs; [
+    kdePackages.kdenlive
+    pika-backup
+    emacs
+    theme-vertex
+    wooting-udev-rules
+    wootility
+    jetbrains-toolbox
     gnome-software
     flatpak
     preload
@@ -61,10 +75,10 @@
       vscodeExtensions = with vscode-extensions;
         [
           bbenoist.nix
-          ms-python.python
-          ms-azuretools.vscode-docker
-          ms-vscode-remote.remote-ssh
-          ms-toolsai.jupyter
+          # ms-python.python
+          # ms-azuretools.vscode-docker
+          # ms-vscode-remote.remote-ssh
+          # ms-toolsai.jupyter
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
@@ -115,14 +129,20 @@
 
   services = {
     xserver.enable = true;
+    xserver.displayManager.lightdm.enable = false;
 
     displayManager = {
-      # lightdm.enable = true;
+      sddm.enable = false;
       gdm.enable = true;
+      ly.enable = false;
+      lemurs.enable = false;
     };
 
-    dbus.enable = true;
-    dbus.packages = [pkgs.gcr];
+    dbus = {
+      enable = true;
+      packages = [pkgs.gcr];
+      implementation = "broker";
+    };
 
     geoclue2.enable = true;
 

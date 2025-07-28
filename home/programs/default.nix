@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./browser.nix
-    ./darkmode.nix
+    ./themes.nix
     ./media.nix
     ./terminals.nix
   ];

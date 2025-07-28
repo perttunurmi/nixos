@@ -33,4 +33,13 @@
     tali # poker game
     totem # video player
   ];
+
+  environment.systemPackages = with pkgs; [
+    adwaita-icon-theme-legacy
+    adwaita-icon-theme
+    adwaita-fonts
+    adwaita-qt6
+    adwaita-qt
+    gdm-settings
+  ];
 }

@@ -22,6 +22,11 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # snapd
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,10 +35,8 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     home-manager,
-    zen-browser,
     nix-snapd,
     ...
   }: {

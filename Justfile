@@ -1,22 +1,22 @@
 deploy host="$(hostname)":
     git add .
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
+    nixos-rebuild switch --flake .#{{ host }} --sudo
 
 test host="$(hostname)":
     git add .
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
+    nixos-rebuild test --flake .#{{ host }} --sudo --impure
 
 deploy-impure host="$(hostname)":
     git add .
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --impure
+    nixos-rebuild switch --flake .#{{ host }} --sudo --impure
 
 debug host="$(hostname)":
     git add .
     @printf "rebulding {{ host }} with debug\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
+    nixos-rebuild switch --flake .#{{ host }} --sudo --show-trace --print-build-logs --verbose
 
 generate-hardware-config host="$(hostname)":
     mkdir -p ./hosts/{{ host }}/

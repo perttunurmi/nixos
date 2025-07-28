@@ -16,6 +16,21 @@
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+
+    # theme = {
+    #   package = pkgs.material-black-colors;
+    #   name = "Material-Black-Colors-Desktop";
+    # };
+
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+    #
+    # font = {
+    #   name = "Sans"; size = 11;
+    # };
   };
 
   qt = {
