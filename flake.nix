@@ -49,6 +49,7 @@
     home-manager,
     nix-snapd,
     lanzaboote,
+    nixos-wsl,
     ...
   }: {
     nixosConfigurations = let
@@ -61,12 +62,20 @@
         specialArgs =
           {
             inherit username;
+            inherit wsl;
           }
           // extraSpecialArgs;
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
+            nixos-wsl.nixosModules.default
+            {
+              wsl.enable = wsl;
+              wsl.defaultUser = "${username}";
+              wsl.docker-desktop.enable = wsl;
+              wsl.startMenuLaunchers = wsl;
+            }
             nix-snapd.nixosModules.default
             {services.snap.enable = true;}
             hostPath
@@ -83,12 +92,17 @@
     in {
       T480s = mkHost {
         hostPath = ./hosts/T480s;
-        username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };
+
       NixOS = mkHost {
         hostPath = ./hosts/NixOS;
-        username = "perttu";
+        extraSpecialArgs = {inherit inputs;};
+      };
+
+      nixos = mkHost {
+        hostPath = ./hosts/WSL;
+        wsl = true;
         extraSpecialArgs = {inherit inputs;};
       };
     };
