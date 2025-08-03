@@ -9,6 +9,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+  networking.firewall.enable = false;
+
   programs.nix-ld.enable = true;
 
   nix = {
