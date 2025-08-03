@@ -259,5 +259,6 @@
 
   # but optimize while I drink my morning coffee
   nix.optimise.automatic = true;
-  nix.optimise.dates = ["09:00"];
+  # Default to 09:00 for personal convenience; override via nix.optimise.dates if needed.
+  nix.optimise.dates = lib.mkDefault ["09:00"];
 }
