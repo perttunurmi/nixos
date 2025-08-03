@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  lib,
   ...
 }: {
   imports = [
@@ -22,6 +23,11 @@
   ];
 
   programs.java.enable = true;
+
+  services.fwupd.enable = lib.mkDefault true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = lib.mkDefault true;
 
   services.flatpak.enable = true;
   xdg = {
@@ -57,6 +63,8 @@
   hardware.wooting.enable = true;
 
   users.users.${username}.packages = with pkgs; [
+    wg-netmanager
+    wireguard-tools
     spotify
     code-cursor-fhs
     testdisk

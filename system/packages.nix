@@ -7,11 +7,8 @@
   environment.systemPackages = with pkgs; [
     lldb
     gdb
-    wg-netmanager
-    wireguard-tools
     tldr
     sqlite
-    texliveFull
     libsecret
     clang-tools
     pciutils
@@ -29,8 +26,6 @@
     git
     sysstat
     lm_sensors
-    dart-sass
-    hugo
     scrot
     gcc
     entr
