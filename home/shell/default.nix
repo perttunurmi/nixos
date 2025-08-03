@@ -20,6 +20,8 @@ in {
 
     GOPATH = c + "/go";
 
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
+
     # set default applications
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -55,6 +57,10 @@ in {
       bind '\C-w:unix-filename-rubout'
 
       PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
+
+      # if uwsm check may-start && uwsm select; then
+      #     exec uwsm start default
+      # fi
     '';
   };
 
@@ -69,10 +75,6 @@ in {
   home.file.".config/bat/config".text = ''
     --style="numbers,changes,grid"
     --paging=auto
-  '';
-
-  home.file.".profile".text = ''
-    export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
   '';
 
   programs.direnv = {

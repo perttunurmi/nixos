@@ -16,6 +16,7 @@
     deadnix
     statix
 
+    prettierd
     imagemagickBig
     trash-cli
     starship

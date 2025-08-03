@@ -1,37 +1,60 @@
+# https://github.com/fufexan/dotfiles/blob/483680e121b73db8ed24173ac9adbcc718cbbc6e/system/programs/gamemode.nix
 {
+  config,
   pkgs,
-  username,
+  nix-gaming,
+  lib,
   ...
-}: {
-  users.users.${username}.packages = with pkgs; [
-    steam
-    mangohud
-    gamescope
+}: let
+  programs = lib.makeBinPath [
+    config.programs.hyprland.package
+    pkgs.coreutils
+    pkgs.power-profiles-daemon
   ];
 
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
+  startscript = pkgs.writeShellScript "gamemode-start" ''
+    export PATH=$PATH:${programs}
+    export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
+    hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:vfr 0'
+    powerprofilesctl set performance
+  '';
 
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = false;
-
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
-
+  endscript = pkgs.writeShellScript "gamemode-end" ''
+    export PATH=$PATH:${programs}
+    export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
+    hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:vfr 1'
+    powerprofilesctl set power-saver
+  '';
+in {
+  # Optimise Linux system performance on demand
+  # https://github.com/FeralInteractive/GameMode
+  # https://wiki.archlinux.org/title/Gamemode
+  #
+  # Usage:
+  #   1. For games/launchers which integrate GameMode support:
+  #      https://github.com/FeralInteractive/GameMode#apps-with-gamemode-integration
+  #      simply running the game will automatically activate GameMode.
+  #   2. For others, launching the game through gamemoderun: `gamemoderun ./game`
+  #   3. For steam: `gamemoderun steam-runtime`
   programs.gamemode = {
-    enable = true;
+    enable = pkgs.stdenv.isx86_64;
     settings = {
-      general.inhibit_screensaver = 0;
-
+      general = {
+        softrealtime = "auto";
+        renice = 15;
+      };
       custom = {
-        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+        start = startscript.outPath;
+        end = endscript.outPath;
       };
     };
   };
+
+  # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
+  services.pipewire.lowLatency.enable = true;
+  programs.steam.platformOptimizations.enable = true;
+  imports = with nix-gaming.nixosModules; [
+    pipewireLowLatency
+    platformOptimizations
+  ];
 }

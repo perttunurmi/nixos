@@ -6,12 +6,14 @@
   imports = [
     ../../system/configuration.nix
 
-    ../services/keyd.nix
     ./fonts.nix
-    ./gamemode.nix
-    ./i3.nix
-    ./qtile.nix
-    ./hyprland.nix
+
+    # ./gamemode.nix
+    ./gaming/gamemode.nix
+    ./gaming/steam.nix
+
+    ./environments/hyprland.nix
+    # ./environments/i3.nix
 
     ../services/xserver.nix
     ../services/keyd.nix
@@ -28,6 +30,7 @@
 
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
       ];
 
       config = {
@@ -51,7 +54,21 @@
     '';
   };
 
+  hardware.wooting.enable = true;
+
   users.users.${username}.packages = with pkgs; [
+    spotify
+    code-cursor-fhs
+    testdisk
+    gparted
+    ntfs3g
+    kdePackages.kdenlive
+    pika-backup
+    emacs
+    theme-vertex
+    wooting-udev-rules
+    wootility
+    jetbrains-toolbox
     gnome-software
     flatpak
     preload
@@ -61,10 +78,10 @@
       vscodeExtensions = with vscode-extensions;
         [
           bbenoist.nix
-          ms-python.python
-          ms-azuretools.vscode-docker
-          ms-vscode-remote.remote-ssh
-          ms-toolsai.jupyter
+          # ms-python.python
+          # ms-azuretools.vscode-docker
+          # ms-vscode-remote.remote-ssh
+          # ms-toolsai.jupyter
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
@@ -113,16 +130,29 @@
     enable = true;
   };
 
+  # i18n.inputMethod = {
+  #   enable = true;
+  #   type = "ibus";
+  #   ibus.engines = with pkgs.ibus-engines; [
+  #     /*
+  #     any engine you want, for example
+  #     */
+  #     # anthy
+  #   ];
+  # };
+
   services = {
     xserver.enable = true;
 
     displayManager = {
-      # lightdm.enable = true;
-      gdm.enable = true;
+      # gdm.enable = true;
     };
 
-    dbus.enable = true;
-    dbus.packages = [pkgs.gcr];
+    dbus = {
+      enable = true;
+      packages = [pkgs.gcr];
+      # implementation = "broker";
+    };
 
     geoclue2.enable = true;
 
@@ -167,23 +197,24 @@
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
+  networking.firewall.allowedTCPPorts = [57621];
+  networking.firewall.allowedUDPPorts = [5353];
+
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   programs.seahorse.enable = true; # enable the graphical frontend
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 }

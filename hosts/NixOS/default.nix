@@ -14,6 +14,12 @@
     ../../system/desktop/default.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  services.xserver.enable = true;
+  services.xserver.videoDrivers = ["amdgpu"];
+  boot.initrd.kernelModules = ["amdgpu"];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

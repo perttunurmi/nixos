@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
-  services.displayManager.defaultSession = "xfce+i3";
+  services.displayManager.defaultSession = lib.mkDefault "xfce+i3";
   services.xserver = {
     desktopManager = {
       xterm.enable = false;

@@ -8,11 +8,13 @@
     ./packages.nix
     ./overlays.nix
   ];
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+
+  # Define a user account. Don't forget to set a password with ‘passwd’!
   users.users.${username} = {
     isNormalUser = true;
     description = username;
     extraGroups = [
+      "${username}"
       "gamemode"
       "networkmanager"
       "wheel"
@@ -63,7 +65,7 @@
   networking.networkmanager.enable = lib.mkDefault true;
   networking.wireless.enable = lib.mkDefault false; # Enables wireless support via wpa_supplicant.
 
-  hardware.graphics = {
+  hardware.graphics = lib.mkDefault {
     enable = true;
     enable32Bit = true;
   };
@@ -71,12 +73,12 @@
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  services.libinput.enable = lib.mkDefault true;
 
   console = {
     earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-    packages = with pkgs; [terminus_font];
+    # font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    # packages = with pkgs; [terminus_font];
     keyMap = "us";
   };
 
@@ -245,12 +247,18 @@
     builders-use-substitutes = true;
   };
 
-  # do garbage collection weekly to keep disk usage low
+  # do garbage collection weekly to keep disk usage "low"
   nix.gc = {
     automatic = lib.mkDefault true;
     dates = lib.mkDefault "weekly";
     options = lib.mkDefault "--delete-older-than 7d";
   };
 
-  nix.settings.auto-optimise-store = true;
+  # please don't optimize on every build
+  nix.settings.auto-optimise-store = false;
+
+  # but optimize while I drink my morning coffee
+  nix.optimise.automatic = true;
+  # Default to 09:00 for personal convenience; override via nix.optimise.dates if needed.
+  nix.optimise.dates = lib.mkDefault ["09:00"];
 }

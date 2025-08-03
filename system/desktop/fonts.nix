@@ -35,6 +35,7 @@
       nerd-fonts.commit-mono
       nerd-fonts.ubuntu-mono
       nerd-fonts.adwaita-mono
+      nerd-fonts.liberation
     ];
 
     # use fonts specified by user rather than default ones
@@ -53,7 +54,7 @@
         "Noto Color Emoji"
       ];
       monospace = [
-        "JetBrainsMono Nerd Font"
+        "Liberation Mono"
         "Noto Color Emoji"
       ];
       emoji = ["Noto Color Emoji"];
