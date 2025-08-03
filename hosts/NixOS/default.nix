@@ -14,6 +14,8 @@
     ../../system/desktop/default.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["amdgpu"];
   boot.initrd.kernelModules = ["amdgpu"];

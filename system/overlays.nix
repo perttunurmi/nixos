@@ -9,6 +9,6 @@
   # This override suppresses the warning to allow installation. Remove this override if you no longer use hardware
   # that requires broadcom-sta, or if a secure alternative driver becomes available.
   nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-57-6.12.41"
+    "broadcom-sta-6.30.223.271-57-6.16"
   ];
 }
