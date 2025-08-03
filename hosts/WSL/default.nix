@@ -1,22 +1,20 @@
 {
   pkgs,
-  username,
+  lib,
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ../../system/configuration.nix
   ];
 
-  wsl = {
-    enable = true;
-    wslConf.automount.root = "/mnt";
-    defaultUser = username;
-    startMenuLaunchers = true;
-  };
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  networking.firewall.enable = false;
+
+  programs.nix-ld.enable = true;
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
@@ -31,7 +29,18 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   environment.systemPackages = with pkgs; [
+    neovim
+    git
+    wget
+    stow
+    just
   ];
 
-  system.stateVersion = "25.05";
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It's perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
