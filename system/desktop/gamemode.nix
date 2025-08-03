@@ -2,8 +2,8 @@
 {
   config,
   pkgs,
-  nix-gaming,
   lib,
+  inputs,
   ...
 }: let
   programs = lib.makeBinPath [
