@@ -1,4 +1,8 @@
-{nix-gaming, ...}: {
+{
+  nix-gaming,
+  inputs,
+  ...
+}: {
   programs.gamemode = {
     enable = true;
     settings = {
