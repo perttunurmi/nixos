@@ -11,6 +11,8 @@
   };
 
   inputs = {
+    systems.url = "github:nix-systems/default-linux";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
@@ -22,17 +24,22 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
 
     # snapd
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
@@ -41,12 +48,14 @@
     nixpkgs,
     home-manager,
     nix-snapd,
+    lanzaboote,
     ...
   }: {
     nixosConfigurations = let
       mkHost = {
         hostPath,
-        username,
+        username ? "perttu",
+        wsl ? false,
         extraSpecialArgs ? {},
       }: let
         specialArgs =
@@ -77,17 +86,7 @@
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};
       };
-      VMware = mkHost {
-        hostPath = ./hosts/VMware;
-        username = "perttu";
-        extraSpecialArgs = {inherit inputs;};
-      };
       NixOS = mkHost {
-        hostPath = ./hosts/NixOS;
-        username = "perttu";
-        extraSpecialArgs = {inherit inputs;};
-      };
-      nixos = mkHost {
         hostPath = ./hosts/NixOS;
         username = "perttu";
         extraSpecialArgs = {inherit inputs;};

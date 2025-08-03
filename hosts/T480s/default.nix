@@ -1,11 +1,10 @@
 {pkgs, ...}: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./throttled.nix
-    ./thinkfan.nix
 
-    ../../system/hardware/nvidia.nix
+    ./hardware/throttled.nix
+    ./hardware/thinkfan.nix
+    ./hardware/nvidia.nix
 
     ../../system/desktop/default.nix
   ];
@@ -57,7 +56,7 @@
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
 
-    loader.timeout = 1;
+    # loader.timeout = 1;
   };
 
   networking.hostName = "T480s"; # Define your hostname.

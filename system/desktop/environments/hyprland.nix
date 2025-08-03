@@ -8,27 +8,23 @@
 
   programs.hyprland = {
     enable = true; # enable Hyprland
-    withUWSM = true; # recommended for most users
+    withUWSM = false; # recommended for most users
     xwayland.enable = true; # Xwayland can be disabled.
   };
 
-  services.displayManager.defaultSession = "hyprland-uwsm";
-  services.avahi.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
+  services.displayManager.gdm.enable = true;
 
-  programs.uwsm.enable = true;
-  programs.uwsm.waylandCompositors = {
-    hyprland = {
-      prettyName = "Hyprland";
-      comment = "Hyprland compositor managed by UWSM";
-      binPath = "/run/current-system/sw/bin/Hyprland";
-    };
-  };
+  services.displayManager.defaultSession = "hyprland";
+  services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [
     (flameshot.override {enableWlrSupport = true;})
     file-roller # gnome archive manager
     avahi
-    uwsm
+    hypridle
+    xdg-desktop-portal-hyprland
+    clipse
     feh
     acpi
     sysstat
@@ -47,7 +43,7 @@
     swww
     wl-clipboard
     libnotify
-    dunst
+    mako
     hyprls
     udiskie
     networkmanagerapplet # networkmanager tray
@@ -70,5 +66,10 @@
   services.tumbler.enable = true; # Thumbnail support for images
 
   # Optional, hint Electron apps to use Wayland:
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+  };
 }

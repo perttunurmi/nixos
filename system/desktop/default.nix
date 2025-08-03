@@ -6,16 +6,14 @@
   imports = [
     ../../system/configuration.nix
 
-    ../services/keyd.nix
     ./fonts.nix
+
     # ./gamemode.nix
     ./gaming/gamemode.nix
     ./gaming/steam.nix
-    # ./i3.nix
-    # ./qtile.nix
-    ./hyprland.nix
-    # ./xfce.nix
-    # ./gnome.nix
+
+    ./environments/hyprland.nix
+    # ./environments/i3.nix
 
     ../services/xserver.nix
     ../services/keyd.nix
@@ -59,6 +57,11 @@
   hardware.wooting.enable = true;
 
   users.users.${username}.packages = with pkgs; [
+    spotify
+    code-cursor-fhs
+    testdisk
+    gparted
+    ntfs3g
     kdePackages.kdenlive
     pika-backup
     emacs
@@ -127,32 +130,28 @@
     enable = true;
   };
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      /*
-      any engine you want, for example
-      */
-      # anthy
-    ];
-  };
+  # i18n.inputMethod = {
+  #   enable = true;
+  #   type = "ibus";
+  #   ibus.engines = with pkgs.ibus-engines; [
+  #     /*
+  #     any engine you want, for example
+  #     */
+  #     # anthy
+  #   ];
+  # };
 
   services = {
     xserver.enable = true;
-    xserver.displayManager.lightdm.enable = false;
 
     displayManager = {
-      sddm.enable = false;
-      gdm.enable = true;
-      ly.enable = false;
-      lemurs.enable = false;
+      # gdm.enable = true;
     };
 
     dbus = {
       enable = true;
       packages = [pkgs.gcr];
-      implementation = "broker";
+      # implementation = "broker";
     };
 
     geoclue2.enable = true;
@@ -198,23 +197,24 @@
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
+  networking.firewall.allowedTCPPorts = [57621];
+  networking.firewall.allowedUDPPorts = [5353];
+
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   programs.seahorse.enable = true; # enable the graphical frontend
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 }

@@ -14,6 +14,7 @@
     isNormalUser = true;
     description = username;
     extraGroups = [
+      "${username}"
       "gamemode"
       "networkmanager"
       "wheel"
