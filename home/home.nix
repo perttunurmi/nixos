@@ -1,9 +1,20 @@
-{username, ...}: {
-  imports = [
-    ./packages.nix
-    ./shell
-    ./programs
-  ];
+{
+  username,
+  wsl,
+  ...
+}: {
+  imports =
+    (
+      if !wsl
+      then [
+        ./programs
+      ]
+      else []
+    )
+    ++ [
+      ./packages.nix
+      ./shell
+    ];
 
   home = {
     inherit username;

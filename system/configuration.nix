@@ -7,6 +7,8 @@
   imports = [
     ./packages.nix
     ./overlays.nix
+
+    ../users/perttu/default.nix
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’!
@@ -29,12 +31,6 @@
       "kvm"
       "wireshark"
       "adbusers"
-    ];
-
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCWzvRxBB4hWnes/OLWl7Mle5VYlnwNsd8zko8IrZ2/ perttu@nixos"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdudMkx0ecdlaBbKMBC7Tf8+bd4Kvu7kPpuloONSnVV u0_a322@localhost"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG68e/3wA1WONkGrFadHB9NH1ka4uFOTJ4CLYkQc1IKN perttu@NixOS"
     ];
   };
 
@@ -69,11 +65,6 @@
     enable = true;
     enable32Bit = true;
   };
-
-  services.fwupd.enable = lib.mkDefault true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = lib.mkDefault true;
 
   console = {
     earlySetup = true;
