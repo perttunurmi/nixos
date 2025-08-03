@@ -10,21 +10,14 @@
   ];
 
   boot.loader = {
-    systemd-boot.enable = false;
+    systemd-boot.enable = true;
 
     efi = {
-      canTouchEfiVariables = false;
-      efiSysMountPoint = "/boot";
+      canTouchEfiVariables = true;
+      # efiSysMountPoint = "/boot";
     };
 
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-      useOSProber = false;
-      forceInstall = true;
-    };
+    grub.enable = false;
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
