@@ -63,6 +63,7 @@
           {
             inherit username;
             inherit wsl;
+            inherit lanzaboote;
           }
           // extraSpecialArgs;
       in
