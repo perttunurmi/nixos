@@ -24,6 +24,8 @@
 
   programs.java.enable = true;
 
+  services.preload.enable = true;
+
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).

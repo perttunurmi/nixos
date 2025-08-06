@@ -5,6 +5,7 @@
     ./hardware/throttled.nix
     ./hardware/thinkfan.nix
     ./hardware/nvidia.nix
+    ./hardware/secureboot.nix
 
     ../../system/desktop/default.nix
   ];

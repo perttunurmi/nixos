@@ -17,7 +17,6 @@
     gnumake
     unzip
     tmux
-    htop
     btop
     vim
     neovim
