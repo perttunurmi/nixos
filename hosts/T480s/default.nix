@@ -10,18 +10,12 @@
     ../../system/desktop/default.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.loader = {
     systemd-boot.enable = true;
-
-    efi = {
-      canTouchEfiVariables = true;
-      # efiSysMountPoint = "/boot";
-    };
-
-    grub.enable = false;
+    efi.canTouchEfiVariables = true;
   };
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot = {
     plymouth = {
