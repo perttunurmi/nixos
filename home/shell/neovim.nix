@@ -44,6 +44,7 @@
 in {
   # Neovim configuration dependencies
   home.packages = with pkgs; [
+    imagemagickBig
     # lua
     lua51Packages.lua
     luajitPackages.luarocks_bootstrap

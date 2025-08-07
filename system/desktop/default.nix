@@ -10,8 +10,8 @@
     ./fonts.nix
 
     # ./gamemode.nix
-    ./gaming/gamemode.nix
-    ./gaming/steam.nix
+    # ./gaming/gamemode.nix
+    # ./gaming/steam.nix
 
     ./environments/hyprland.nix
     ./environments/i3.nix
@@ -20,10 +20,8 @@
     ../services/xserver.nix
     ../services/keyd.nix
     ../services/ssh.nix
-    ../services/docker.nix
+    # ../services/docker.nix
   ];
-
-  programs.java.enable = true;
 
   services.preload.enable = true;
 
@@ -63,19 +61,13 @@
     '';
   };
 
-  hardware.wooting.enable = true;
-
   users.users.${username}.packages = with pkgs; [
     wg-netmanager
     wireguard-tools
     spotify
     testdisk
     gparted
-    ntfs3g
-    kdePackages.kdenlive
     pika-backup
-    emacs
-    jetbrains-toolbox
     gnome-software
     flatpak
     preload
@@ -99,9 +91,7 @@
           }
         ];
     })
-    chromium
     discord
-    firefox
     brave
     android-tools
     scrcpy
@@ -134,8 +124,8 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
 
-  services.power-profiles-daemon = {
-    enable = lib.mkDefault true;
+  services.power-profiles-daemon = lib.mkDefault {
+    enable = true;
   };
 
   # i18n.inputMethod = {

@@ -7,7 +7,7 @@ in {
     ./starship.nix
     ./xdg.nix
     ./neovim.nix
-    ./rclone.nix
+    # ./rclone.nix
     ./xorg.nix
   ];
 
@@ -25,8 +25,6 @@ in {
     # set default applications
     EDITOR = "nvim";
     VISUAL = "nvim";
-    BROWSER = "firefox";
-    TERMINAL = "alacritty";
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
