@@ -14,7 +14,8 @@
     ./gaming/steam.nix
 
     ./environments/hyprland.nix
-    # ./environments/i3.nix
+    ./environments/i3.nix
+    # ./environments/qtile.nix
 
     ../services/xserver.nix
     ../services/keyd.nix
@@ -68,16 +69,12 @@
     wg-netmanager
     wireguard-tools
     spotify
-    code-cursor-fhs
     testdisk
     gparted
     ntfs3g
     kdePackages.kdenlive
     pika-backup
     emacs
-    theme-vertex
-    wooting-udev-rules
-    wootility
     jetbrains-toolbox
     gnome-software
     flatpak
@@ -110,6 +107,7 @@
     scrcpy
   ];
 
+  # face for the user
   systemd.tmpfiles.rules = [
     "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
     "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../../users/perttu/face}" # you can replace the ${....} with absolute path to face icon
@@ -137,7 +135,7 @@
   services.pulseaudio.enable = false;
 
   services.power-profiles-daemon = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 
   # i18n.inputMethod = {
