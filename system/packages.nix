@@ -8,16 +8,13 @@
     lldb
     gdb
     tldr
-    sqlite
     libsecret
     clang-tools
     pciutils
-    docker
     clang
     gnumake
     unzip
     tmux
-    htop
     btop
     vim
     neovim

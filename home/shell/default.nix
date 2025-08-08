@@ -7,7 +7,7 @@ in {
     ./starship.nix
     ./xdg.nix
     ./neovim.nix
-    ./rclone.nix
+    # ./rclone.nix
     ./xorg.nix
   ];
 
@@ -25,8 +25,6 @@ in {
     # set default applications
     EDITOR = "nvim";
     VISUAL = "nvim";
-    BROWSER = "firefox";
-    TERMINAL = "alacritty";
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
@@ -58,11 +56,17 @@ in {
 
       PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
 
+      . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+
       # if uwsm check may-start && uwsm select; then
       #     exec uwsm start default
       # fi
     '';
   };
+
+  home.file.".profile".text = ''
+    # . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+  '';
 
   home.file.".inputrc".text = ''
     set completion-ignore-case on

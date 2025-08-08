@@ -13,11 +13,11 @@
   inputs = {
     systems.url = "github:nix-systems/default-linux";
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # home-manager
-    home-manager.url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # zen-browser
@@ -63,6 +63,7 @@
           {
             inherit username;
             inherit wsl;
+            inherit lanzaboote;
           }
           // extraSpecialArgs;
       in

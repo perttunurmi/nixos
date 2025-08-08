@@ -19,7 +19,7 @@
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
-    stateVersion = "25.11";
+    stateVersion = "25.05";
   };
 
   # Let Home Manager install and manage itself.
