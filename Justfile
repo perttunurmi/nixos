@@ -4,22 +4,22 @@ default:
 deploy host="$(hostname)":
     git add .
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --sudo
+    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
 
 test host="$(hostname)":
     git add .
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild test --flake .#{{ host }} --sudo --impure
+    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
 
 deploy-impure host="$(hostname)":
     git add .
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --sudo --impure
+    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo  --impure
 
 debug host="$(hostname)":
     git add .
     @printf "rebulding {{ host }} with debug\n"
-    nixos-rebuild switch --flake .#{{ host }} --sudo --show-trace --print-build-logs --verbose
+    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
 
 generate-hardware-config host="$(hostname)":
     nixos-generate-config --show-hardware-config > ./hosts/{{ host }}/hardware-configuration.nix

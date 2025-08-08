@@ -61,6 +61,8 @@
   networking.networkmanager.enable = lib.mkDefault true;
   networking.wireless.enable = lib.mkDefault false; # Enables wireless support via wpa_supplicant.
 
+  systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
+
   hardware.graphics = lib.mkDefault {
     enable = true;
     enable32Bit = true;

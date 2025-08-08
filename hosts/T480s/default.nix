@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
 
@@ -13,10 +17,14 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.initrd.luks.devices."luks-3a99b308-6f51-4953-b4e0-68d4dc1e6af4".device = "/dev/disk/by-uuid/3a99b308-6f51-4953-b4e0-68d4dc1e6af4";
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
+
+  boot.bootspec.enable = true;
 
   boot = {
     plymouth = {
@@ -45,7 +53,7 @@
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
 
-    # loader.timeout = 1;
+    loader.timeout = 0;
   };
 
   networking.hostName = "T480s"; # Define your hostname.
@@ -56,6 +64,7 @@
 
   environment.systemPackages = with pkgs; [
     powertop
+    # tpm2-tss
   ];
 
   powerManagement.enable = true;
@@ -73,7 +82,7 @@
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
       CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MAX_PERF_ON_AC = 95;
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 80;
 

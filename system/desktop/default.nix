@@ -14,7 +14,7 @@
     # ./gaming/steam.nix
 
     ./environments/hyprland.nix
-    ./environments/i3.nix
+    # ./environments/i3.nix
     # ./environments/qtile.nix
 
     ../services/xserver.nix

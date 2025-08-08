@@ -56,11 +56,17 @@ in {
 
       PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
 
+      . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+
       # if uwsm check may-start && uwsm select; then
       #     exec uwsm start default
       # fi
     '';
   };
+
+  home.file.".profile".text = ''
+    # . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+  '';
 
   home.file.".inputrc".text = ''
     set completion-ignore-case on
