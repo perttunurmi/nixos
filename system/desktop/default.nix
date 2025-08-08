@@ -10,19 +10,20 @@
     ./fonts.nix
 
     # ./gamemode.nix
-    ./gaming/gamemode.nix
-    ./gaming/steam.nix
+    # ./gaming/gamemode.nix
+    # ./gaming/steam.nix
 
     ./environments/hyprland.nix
     # ./environments/i3.nix
+    # ./environments/qtile.nix
 
     ../services/xserver.nix
     ../services/keyd.nix
     ../services/ssh.nix
-    ../services/docker.nix
+    # ../services/docker.nix
   ];
 
-  programs.java.enable = true;
+  services.preload.enable = true;
 
   services.fwupd.enable = lib.mkDefault true;
 
@@ -60,23 +61,13 @@
     '';
   };
 
-  hardware.wooting.enable = true;
-
   users.users.${username}.packages = with pkgs; [
     wg-netmanager
     wireguard-tools
     spotify
-    code-cursor-fhs
     testdisk
     gparted
-    ntfs3g
-    kdePackages.kdenlive
     pika-backup
-    emacs
-    theme-vertex
-    wooting-udev-rules
-    wootility
-    jetbrains-toolbox
     gnome-software
     flatpak
     preload
@@ -100,14 +91,13 @@
           }
         ];
     })
-    chromium
     discord
-    firefox
     brave
     android-tools
     scrcpy
   ];
 
+  # face for the user
   systemd.tmpfiles.rules = [
     "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
     "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../../users/perttu/face}" # you can replace the ${....} with absolute path to face icon
@@ -134,7 +124,7 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
 
-  services.power-profiles-daemon = {
+  services.power-profiles-daemon = lib.mkDefault {
     enable = true;
   };
 

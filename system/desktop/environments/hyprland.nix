@@ -13,7 +13,7 @@
   };
 
   services.xserver.displayManager.lightdm.enable = false;
-  services.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
 
   services.displayManager.defaultSession = "hyprland";
   services.avahi.enable = true;

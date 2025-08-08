@@ -5,7 +5,7 @@
 in {
   programs = {
     alacritty = {
-      enable = true;
+      enable = false;
       #     settings = {
       #       window.opacity = 0.95;
       #       window.dynamic_padding = true;

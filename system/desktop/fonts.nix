@@ -26,7 +26,6 @@
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
       nerd-fonts.iosevka-term
-      nerd-fonts.iosevka-term-slab
       nerd-fonts.droid-sans-mono
       nerd-fonts.zed-mono
       nerd-fonts.hack

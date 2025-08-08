@@ -44,6 +44,7 @@
 in {
   # Neovim configuration dependencies
   home.packages = with pkgs; [
+    imagemagickBig
     # lua
     lua51Packages.lua
     luajitPackages.luarocks_bootstrap
@@ -86,7 +87,7 @@ in {
     enable = true;
     defaultEditor = true;
 
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     vimdiffAlias = true;
     withNodeJs = true;
 
