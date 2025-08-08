@@ -1,6 +1,6 @@
 {
   pkgs,
-  username,
+  lib,
   ...
 }: {
   imports = [
@@ -64,7 +64,6 @@
 
   environment.systemPackages = with pkgs; [
     powertop
-    # tpm2-tss
   ];
 
   powerManagement.enable = true;
@@ -72,6 +71,7 @@
   powerManagement.powertop.enable = true;
 
   services.power-profiles-daemon.enable = lib.mkForce false;
+
   services.tlp = {
     enable = true;
     settings = {
