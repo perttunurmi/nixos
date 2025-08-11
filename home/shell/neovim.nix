@@ -87,8 +87,9 @@ in {
     enable = true;
     defaultEditor = true;
 
-    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     vimdiffAlias = true;
+    vimAlias = true;
     withNodeJs = true;
 
     plugins = [
