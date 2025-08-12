@@ -8,6 +8,7 @@
     ../../system/configuration.nix
 
     ./fonts.nix
+    ./stylix.nix
 
     # ./gamemode.nix
     # ./gaming/gamemode.nix

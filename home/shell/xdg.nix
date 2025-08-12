@@ -47,7 +47,7 @@ in {
     userDirs = {
       enable = true;
       # createDirectories = if !wsl then true else false;
-      createDirectories = lib.mkIf (!wsl) true;
+      createDirectories = false;
       templates = "${config.home.homeDirectory}/media/templates";
       pictures = "${config.home.homeDirectory}/media/pictures";
       videos = "${config.home.homeDirectory}/media/videos";

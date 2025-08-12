@@ -28,27 +28,27 @@
 
   boot = {
     plymouth = {
-      enable = false;
-      theme = "bgrt";
-      themePackages = with pkgs; [
-        nixos-bgrt-plymouth
+      enable = true;
+      # theme = "bgrt";
+      # themePackages = with pkgs; [
+      #   nixos-bgrt-plymouth
         # By default we would install all themes
         # (adi1090x-plymouth-themes.override {
         #   selected_themes = [ "rings" ];
         # })
-      ];
+      # ];
     };
 
     # Enable "Silent boot"
-    # consoleLogLevel = 3;
-    # initrd.verbose = false;
-    # kernelParams = [
-    #   "quiet"
-    #   "splash"
-    #   "boot.shell_on_fail"
-    #   "udev.log_priority=3"
-    #   "rd.systemd.show_status=auto"
-    # ];
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
@@ -68,7 +68,7 @@
 
   powerManagement.enable = true;
   services.thermald.enable = true;
-  powerManagement.powertop.enable = true;
+  # powerManagement.powertop.enable = true;
 
   services.power-profiles-daemon.enable = lib.mkForce false;
 
