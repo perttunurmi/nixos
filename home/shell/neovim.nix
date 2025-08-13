@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: let
   treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
@@ -87,8 +88,9 @@ in {
     enable = true;
     defaultEditor = true;
 
-    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     vimdiffAlias = true;
+    vimAlias = true;
     withNodeJs = true;
 
     plugins = [
@@ -99,6 +101,7 @@ in {
   home.file."./.config/nvim/lua/treesitter/init.lua".text = ''
     vim.opt.runtimepath:append("${treesitter-parsers}")
   '';
+
 
   # Treesitter is configured as a locally developed module in lazy.nvim
   # we hardcode a symlink here so that we can refer to it in our lazy config

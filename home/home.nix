@@ -16,6 +16,8 @@
       ./shell
     ];
 
+  stylix.targets.neovim.enable = false;
+
   home = {
     inherit username;
     homeDirectory = "/home/${username}";

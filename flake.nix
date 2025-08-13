@@ -16,6 +16,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    stylix.url = "github:nix-community/stylix/release-25.05";
+
     # home-manager
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +52,7 @@
     nix-snapd,
     lanzaboote,
     nixos-wsl,
+    stylix,
     ...
   }: {
     nixosConfigurations = let
@@ -70,6 +73,7 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
+            stylix.nixosModules.stylix
             nixos-wsl.nixosModules.default
             {
               wsl.enable = wsl;
