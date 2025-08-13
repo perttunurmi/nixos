@@ -9,6 +9,7 @@ in {
     ./neovim.nix
     # ./rclone.nix
     ./xorg.nix
+    ./zellij.nix
   ];
 
   # add environment variables
@@ -34,8 +35,6 @@ in {
   home.shellAliases = {
     g = "git";
     rm = "trash -v";
-    v = "xsel -ob";
-    c = "xsel -ib";
     zi = "cdi";
   };
 
@@ -90,7 +89,6 @@ in {
   programs.btop = {
     enable = true;
     settings = {
-      color_theme = "gruvbox_material_dark";
       theme_background = false;
       vim_keys = true;
     };

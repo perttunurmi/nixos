@@ -28,27 +28,28 @@
 
   boot = {
     plymouth = {
-      enable = false;
-      theme = "bgrt";
-      themePackages = with pkgs; [
-        nixos-bgrt-plymouth
-        # By default we would install all themes
-        # (adi1090x-plymouth-themes.override {
-        #   selected_themes = [ "rings" ];
-        # })
-      ];
+      enable = true;
+      # theme = "bgrt";
+      # themePackages = with pkgs; [
+      #   nixos-bgrt-plymouth
+      # By default we would install all themes
+      # (adi1090x-plymouth-themes.override {
+      #   selected_themes = [ "rings" ];
+      # })
+      # ];
     };
 
     # Enable "Silent boot"
-    # consoleLogLevel = 3;
-    # initrd.verbose = false;
-    # kernelParams = [
-    #   "quiet"
-    #   "splash"
-    #   "boot.shell_on_fail"
-    #   "udev.log_priority=3"
-    #   "rd.systemd.show_status=auto"
-    # ];
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+      "mem_sleep_default=deep" # suspend first
+    ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
@@ -68,7 +69,7 @@
 
   powerManagement.enable = true;
   services.thermald.enable = true;
-  powerManagement.powertop.enable = true;
+  # powerManagement.powertop.enable = true;
 
   services.power-profiles-daemon.enable = lib.mkForce false;
 
@@ -92,9 +93,21 @@
     };
   };
 
-  services.logind.lidSwitch = "lock";
-  services.logind.lidSwitchExternalPower = "lock";
-  services.logind.lidSwitchDocked = "ignore";
+  # Suspend first then hibernate when closing the lid
+  services.logind.lidSwitch = "hibernate";
+  # Hibernate on power button pressed
+  services.logind.powerKey = "hibernate";
+  services.logind.powerKeyLongPress = "poweroff";
+
+  # services.logind.lidSwitch = "lock";
+  # services.logind.lidSwitchExternalPower = "lock";
+  # services.logind.lidSwitchDocked = "ignore";
+
+  # Define time delay for hibernation
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+    SuspendState=mem
+  '';
 
   system.stateVersion = "25.05";
 }
