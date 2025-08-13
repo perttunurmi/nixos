@@ -1,14 +1,18 @@
 {
   username,
   wsl,
+  server,
   ...
 }: {
   imports =
     (
       if !wsl
-      then [
-        ./programs
-      ]
+      then
+        if !server
+        then [
+          ./programs
+        ]
+        else []
       else []
     )
     ++ [
@@ -16,7 +20,7 @@
       ./shell
     ];
 
-  stylix.targets.neovim.enable = false;
+  # stylix.targets.neovim.enable = false;
 
   home = {
     inherit username;
