@@ -32,10 +32,10 @@
       # theme = "bgrt";
       # themePackages = with pkgs; [
       #   nixos-bgrt-plymouth
-        # By default we would install all themes
-        # (adi1090x-plymouth-themes.override {
-        #   selected_themes = [ "rings" ];
-        # })
+      # By default we would install all themes
+      # (adi1090x-plymouth-themes.override {
+      #   selected_themes = [ "rings" ];
+      # })
       # ];
     };
 
@@ -48,6 +48,7 @@
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
+      "mem_sleep_default=deep" # suspend first
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -92,9 +93,21 @@
     };
   };
 
-  services.logind.lidSwitch = "lock";
-  services.logind.lidSwitchExternalPower = "lock";
-  services.logind.lidSwitchDocked = "ignore";
+  # Suspend first then hibernate when closing the lid
+  services.logind.lidSwitch = "hibernate";
+  # Hibernate on power button pressed
+  services.logind.powerKey = "hibernate";
+  services.logind.powerKeyLongPress = "poweroff";
+
+  # services.logind.lidSwitch = "lock";
+  # services.logind.lidSwitchExternalPower = "lock";
+  # services.logind.lidSwitchDocked = "ignore";
+
+  # Define time delay for hibernation
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+    SuspendState=mem
+  '';
 
   system.stateVersion = "25.05";
 }

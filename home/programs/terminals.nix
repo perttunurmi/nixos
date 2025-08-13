@@ -1,10 +1,10 @@
-{...}: let
+{lib, ...}: let
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
   font = jetbrains;
 in {
   programs = {
-    alacritty = {
+    alacritty = lib.mkDefault {
       enable = true;
       settings = {
         #       window.opacity = 0.95;
@@ -19,7 +19,7 @@ in {
           normal.family = font;
           bold.family = font;
           italic.family = font;
-          size = 15;
+          size = 16;
         };
       };
     };
