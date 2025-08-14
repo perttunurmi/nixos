@@ -168,7 +168,11 @@
     };
 
     # https://wiki.nixos.org/wiki/MTP
-    gvfs.enable = true; # Mount, trash, and other functionalities
+    # Mount, trash, and other functionalities
+    services.gvfs = {
+      enable = true;
+      package = lib.mkForce pkgs.gnome.gvfs;
+    };
 
     blueman.enable = true;
 

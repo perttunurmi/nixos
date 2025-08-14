@@ -1,14 +1,18 @@
 {
   username,
   wsl,
+  server,
   ...
 }: {
   imports =
     (
-      if !wsl
-      then [
-        ./programs
-      ]
+      if !server
+      then
+        if !wsl
+        then [
+          ./programs
+        ]
+        else []
       else []
     )
     ++ [

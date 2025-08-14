@@ -26,6 +26,8 @@
 
   networking.hostName = "Fujitsu"; # Define your hostname.
 
+  services.nfs.server.enable = true;
+
   boot.kernel.sysctl = {
     # Enable IPv4 packet forwarding (router functionality)
     "net.ipv4.ip_forward" = 1;
