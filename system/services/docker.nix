@@ -1,15 +1,11 @@
 {lib, ...}: {
   virtualisation.docker = {
-    enable = lib.mkDefault true;
-    enableOnBoot = lib.mkDefault true;
+    enable = true;
+    enableOnBoot = true;
 
     # rootless = {
     #   enable = true;
     #   setSocketVariable = true;
     # };
-
-    daemon.settings = {
-      data-root = "/home/docker/data";
-    };
   };
 }
