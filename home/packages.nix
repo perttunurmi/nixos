@@ -17,5 +17,11 @@
     bat
     fzf
     fd
+
+    adwaita-icon-theme
+    materia-theme
+    materia-kde-theme
+    papirus-icon-theme
+    dconf
   ];
 }

@@ -1,8 +1,9 @@
 {...}: {
   imports = [
     ./browser.nix
-    ./themes.nix
+    # ./themes.nix
     ./media.nix
     ./terminals.nix
+    ./hyprland.nix
   ];
 }

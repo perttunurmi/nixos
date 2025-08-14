@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  stylix,
   ...
 }: let
   treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
@@ -43,6 +44,8 @@
     paths = treesitterWithGrammars.dependencies;
   };
 in {
+  stylix.targets.neovim.enable = false;
+
   # Neovim configuration dependencies
   home.packages = with pkgs; [
     imagemagickBig

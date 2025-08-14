@@ -75,10 +75,10 @@ in {
     $endif
   '';
 
-  home.file.".config/bat/config".text = ''
-    --style="numbers,changes,grid"
-    --paging=auto
-  '';
+  # home.file.".config/bat/config".text = ''
+  #   --style="numbers,changes,grid"
+  #   --paging=auto
+  # '';
 
   programs.direnv = {
     enable = true;
