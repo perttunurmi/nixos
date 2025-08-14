@@ -29,14 +29,6 @@
   boot = {
     plymouth = {
       enable = true;
-      # theme = "bgrt";
-      # themePackages = with pkgs; [
-      #   nixos-bgrt-plymouth
-      # By default we would install all themes
-      # (adi1090x-plymouth-themes.override {
-      #   selected_themes = [ "rings" ];
-      # })
-      # ];
     };
 
     # Enable "Silent boot"
@@ -48,7 +40,6 @@
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
-      "mem_sleep_default=deep" # suspend first
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -99,15 +90,8 @@
   services.logind.powerKey = "hibernate";
   services.logind.powerKeyLongPress = "poweroff";
 
-  # services.logind.lidSwitch = "lock";
-  # services.logind.lidSwitchExternalPower = "lock";
-  # services.logind.lidSwitchDocked = "ignore";
-
-  # Define time delay for hibernation
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m
-    SuspendState=mem
-  '';
+  services.logind.lidSwitchExternalPower = "hybrid-sleep";
+  services.logind.lidSwitchDocked = "ignore";
 
   system.stateVersion = "25.05";
 }

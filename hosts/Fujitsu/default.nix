@@ -14,6 +14,7 @@
     ../../system/services/ssh.nix
     # ../../system/services/nginx.nix
     ../../system/services/docker.nix
+    ../../system/services/samba.nix
 
     ../../system/configuration.nix
   ];
@@ -24,6 +25,14 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "Fujitsu"; # Define your hostname.
+
+  boot.kernel.sysctl = {
+    # Enable IPv4 packet forwarding (router functionality)
+    "net.ipv4.ip_forward" = 1;
+
+    # Allow routing for marked packets (required for VPNs like WireGuard)
+    "net.ipv4.conf.all.src_valid_mark" = 1;
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

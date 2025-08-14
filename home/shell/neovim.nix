@@ -44,7 +44,7 @@
     paths = treesitterWithGrammars.dependencies;
   };
 in {
-  stylix.targets.neovim.enable = false;
+  # stylix.targets.neovim.enable = false;
 
   # Neovim configuration dependencies
   home.packages = with pkgs; [
