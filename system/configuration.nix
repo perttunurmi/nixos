@@ -32,6 +32,7 @@
       "kvm"
       "wireshark"
       "adbusers"
+      "samba"
     ];
   };
 
