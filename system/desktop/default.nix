@@ -169,7 +169,7 @@
 
     # https://wiki.nixos.org/wiki/MTP
     # Mount, trash, and other functionalities
-    services.gvfs = {
+    gvfs = {
       enable = true;
       package = lib.mkForce pkgs.gnome.gvfs;
     };
