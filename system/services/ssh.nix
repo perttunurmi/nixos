@@ -2,7 +2,7 @@
   # Enable the OpenSSH daemon.
   # https://wiki.nixos.org/wiki/SSH
   services.openssh = {
-    enable = lib.mkDefault true;
+    enable = true;
     ports = [22];
     settings = {
       PasswordAuthentication = lib.mkDefault false;
@@ -11,6 +11,6 @@
       X11Forwarding = true;
       PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
-    openFirewall = lib.mkDefault true;
+    openFirewall = true;
   };
 }

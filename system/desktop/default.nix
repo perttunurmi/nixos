@@ -63,6 +63,7 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    libreoffice-still
     wg-netmanager
     wireguard-tools
     spotify
