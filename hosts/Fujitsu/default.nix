@@ -17,6 +17,7 @@
     ../../system/services/samba.nix
 
     ../../system/configuration.nix
+    ../../system/desktop/stylix.nix
   ];
 
   # Bootloader.

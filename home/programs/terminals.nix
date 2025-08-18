@@ -4,7 +4,7 @@
   font = jetbrains;
 in {
   programs = {
-    alacritty = lib.mkDefault {
+    alacritty = {
       enable = true;
       settings = {
         #       window.opacity = 0.95;
@@ -15,7 +15,7 @@ in {
         #       };
         #       scrolling.history = 10000;
         #
-        font = {
+        font = lib.mkForce {
           normal.family = font;
           bold.family = font;
           italic.family = font;

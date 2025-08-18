@@ -5,5 +5,6 @@
     ./media.nix
     ./terminals.nix
     ./hyprland.nix
+    ./rofi.nix
   ];
 }

@@ -79,18 +79,18 @@
       CPU_MAX_PERF_ON_BAT = 80;
 
       #Optional helps save long term battery health
-      START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
-      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+      START_CHARGE_THRESH_BAT0 = 0;
+      STOP_CHARGE_THRESH_BAT0 = 85; # 80 and above it stops charging
     };
   };
 
   # Suspend first then hibernate when closing the lid
-  services.logind.lidSwitch = "hibernate";
+  services.logind.lidSwitch = "suspend";
   # Hibernate on power button pressed
   services.logind.powerKey = "hibernate";
   services.logind.powerKeyLongPress = "poweroff";
 
-  services.logind.lidSwitchExternalPower = "hybrid-sleep";
+  services.logind.lidSwitchExternalPower = "suspend";
   services.logind.lidSwitchDocked = "ignore";
 
   system.stateVersion = "25.05";

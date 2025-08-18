@@ -2,6 +2,9 @@
   username,
   wsl,
   server,
+  pkgs,
+  lib,
+  config,
   ...
 }: {
   imports =
@@ -19,6 +22,8 @@
       ./packages.nix
       ./shell
     ];
+
+  stylix.targets.neovim.enable = false;
 
   home = {
     inherit username;
