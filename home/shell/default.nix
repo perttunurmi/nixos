@@ -9,7 +9,6 @@ in {
     ./neovim.nix
     # ./rclone.nix
     ./xorg.nix
-    ./zellij.nix
   ];
 
   # add environment variables
@@ -26,6 +25,7 @@ in {
     # set default applications
     EDITOR = "nvim";
     VISUAL = "nvim";
+    TERMINAL = "alacritty";
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
@@ -64,26 +64,26 @@ in {
   };
 
   home.file.".profile".text = ''
-    # . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
   '';
 
   home.file.".inputrc".text = ''
+    set colored-stats On
+    set colored-completion-prefix On
+
     set completion-ignore-case on
     set show-all-if-ambiguous on
+
     $if Bash
       Space: magic-space
     $endif
-  '';
-
-  home.file.".config/bat/config".text = ''
-    --style="numbers,changes,grid"
-    --paging=auto
   '';
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.btop = {

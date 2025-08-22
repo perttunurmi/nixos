@@ -46,7 +46,6 @@ in {
 
     userDirs = {
       enable = true;
-      # createDirectories = if !wsl then true else false;
       createDirectories = false;
       templates = "${config.home.homeDirectory}/media/templates";
       pictures = "${config.home.homeDirectory}/media/pictures";

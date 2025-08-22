@@ -5,6 +5,8 @@
 }: {
   imports = [
     ../../system/configuration.nix
+    ../../system/desktop/stylix.nix
+    ../../system/services/ssh.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -29,6 +31,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   environment.systemPackages = with pkgs; [
+    pika-backup
     neovim
     git
     wget

@@ -21,7 +21,8 @@
     ../services/xserver.nix
     ../services/keyd.nix
     ../services/ssh.nix
-    # ../services/docker.nix
+    ../services/virtualization.nix
+    ../services/docker.nix
   ];
 
   services.preload.enable = true;
@@ -63,6 +64,7 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    libreoffice-still
     wg-netmanager
     wireguard-tools
     spotify
@@ -104,8 +106,6 @@
     "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../../users/perttu/face}" # you can replace the ${....} with absolute path to face icon
   ];
 
-  security.polkit.enable = true;
-
   # Whether to enable the RealtimeKit system service, which hands out
   # realtime scheduling priority to user processes on demand.
   # For example, PulseAudio and PipeWire use this to acquire realtime priority.
@@ -143,10 +143,6 @@
   services = {
     xserver.enable = true;
 
-    displayManager = {
-      # gdm.enable = true;
-    };
-
     dbus = {
       enable = true;
       packages = [pkgs.gcr];
@@ -154,7 +150,6 @@
     };
 
     geoclue2.enable = true;
-
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -168,10 +163,12 @@
     };
 
     # https://wiki.nixos.org/wiki/MTP
-    gvfs.enable = true; # Mount, trash, and other functionalities
-
+    # Mount, trash, and other functionalities
+    gvfs = {
+      enable = true;
+      package = lib.mkForce pkgs.gnome.gvfs;
+    };
     blueman.enable = true;
-
     udev.packages = with pkgs; [gnome-settings-daemon];
   };
 
@@ -203,6 +200,7 @@
   security.pam.services.login.enableGnomeKeyring = true;
   programs.seahorse.enable = true; # enable the graphical frontend
 
+  security.polkit.enable = true;
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
     wantedBy = ["graphical-session.target"];

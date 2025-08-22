@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   stylix.targets.plymouth.enable = false;
+
   stylix = {
     enable = true;
     #image = ../../users/perttu/wallpaper.jpg;

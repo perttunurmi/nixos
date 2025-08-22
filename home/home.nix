@@ -1,14 +1,21 @@
 {
   username,
   wsl,
+  server,
+  pkgs,
+  lib,
+  config,
   ...
 }: {
   imports =
     (
-      if !wsl
-      then [
-        ./programs
-      ]
+      if !server
+      then
+        if !wsl
+        then [
+          ./programs
+        ]
+        else []
       else []
     )
     ++ [
@@ -31,7 +38,7 @@
     enable = true;
     lfs.enable = true;
     userName = "Perttu Nurmi";
-    userEmail = "perttu.nurmi@gmail.com";
+    userEmail = "perttu.nurmi" + "@" + "gmail.com";
     extraConfig = {
       init.defaultBranch = "master";
     };
@@ -41,6 +48,31 @@
       signByDefault = true;
       key = "/home/${username}/.ssh/id_ed25519.pub";
     };
+
+    ignores = [
+      # C commons
+      ".cache"
+      "compile_commands.json"
+      "*.gc??"
+      "vgcore.*"
+      # Python
+      "venv"
+      # Locked Files
+      "*~"
+      # Mac folder
+      ".DS_Store"
+      # Direnv
+      ".direnv"
+      ".envrc"
+      # Nix buid
+      "result"
+      # IDE Folders
+      ".idea"
+      ".vscode"
+      ".vs"
+      # Dotenv
+      ".env"
+    ];
   };
 
   programs.gh = {

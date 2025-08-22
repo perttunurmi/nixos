@@ -9,6 +9,7 @@
     ./overlays.nix
 
     ../users/perttu/default.nix
+    ../users/root/default.nix
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’!
@@ -31,6 +32,7 @@
       "kvm"
       "wireshark"
       "adbusers"
+      "samba"
     ];
   };
 

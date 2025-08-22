@@ -60,15 +60,18 @@
         hostPath,
         username ? "perttu",
         wsl ? false,
+        server ? false,
         extraSpecialArgs ? {},
       }: let
         specialArgs =
           {
             inherit username;
             inherit wsl;
+            inherit server;
             inherit lanzaboote;
           }
           // extraSpecialArgs;
+        inherit username;
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
@@ -109,6 +112,12 @@
         hostPath = ./hosts/WSL;
         wsl = true;
         extraSpecialArgs = {inherit inputs;};
+      };
+
+      Fujitsu = mkHost {
+        hostPath = ./hosts/Fujitsu;
+        extraSpecialArgs = {inherit inputs;};
+        server = true;
       };
     };
   };
