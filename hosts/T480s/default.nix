@@ -86,6 +86,7 @@
 
   # Suspend first then hibernate when closing the lid
   services.logind.lidSwitch = "suspend";
+  
   # Hibernate on power button pressed
   services.logind.powerKey = "hibernate";
   services.logind.powerKeyLongPress = "poweroff";

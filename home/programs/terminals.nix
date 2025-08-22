@@ -4,7 +4,7 @@
   font = jetbrains;
 in {
   programs = {
-    alacritty = {
+    alacritty = lib.mkDefault {
       enable = true;
       settings = {
         #       window.opacity = 0.95;
