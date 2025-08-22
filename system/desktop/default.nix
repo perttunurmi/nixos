@@ -21,7 +21,8 @@
     ../services/xserver.nix
     ../services/keyd.nix
     ../services/ssh.nix
-    # ../services/docker.nix
+    ../services/virtualization.nix
+    ../services/docker.nix
   ];
 
   services.preload.enable = true;
