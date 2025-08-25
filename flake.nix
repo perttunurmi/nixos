@@ -43,6 +43,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
@@ -110,8 +115,8 @@
 
       nixos = mkHost {
         hostPath = ./hosts/WSL;
-        wsl = true;
         extraSpecialArgs = {inherit inputs;};
+        wsl = true;
       };
 
       Fujitsu = mkHost {

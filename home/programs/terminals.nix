@@ -4,18 +4,18 @@
   font = jetbrains;
 in {
   programs = {
-    alacritty = lib.mkForce {
+    alacritty = lib.mkDefault {
       enable = true;
       settings = {
-        #       window.opacity = 0.95;
-        #       window.dynamic_padding = true;
+        # window.opacity = 0.98;
+        window.dynamic_padding = true;
         #       window.padding = {
         #         x = 5;
         #         y = 5;
         #       };
-        #       scrolling.history = 10000;
+        scrolling.history = 10000;
         #
-        font = lib.mkForce {
+        font = {
           normal.family = font;
           bold.family = font;
           italic.family = font;
