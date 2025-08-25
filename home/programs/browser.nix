@@ -1,4 +1,5 @@
 {
+  username,
   inputs,
   pkgs,
   ...
@@ -14,7 +15,7 @@
 
     firefox = {
       enable = true;
-      # profiles.${username} = {};
+      profiles."work" = {};
     };
   };
 

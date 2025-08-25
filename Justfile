@@ -42,12 +42,12 @@ history:
 repl:
     nix repl -f flake:nixpkgs
 
-[group('utils')]
+[group('cleanup')]
 clean old="30":
     @printf "deleting history older than {{ old }} days...\n"
     sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{old}}d
 
-[group('utils')]
+[group('cleanup')]
 gc old="30":
     @printf "collecting garbage...\n"
     sudo nix-collect-garbage --delete-older-than {{ old }}d

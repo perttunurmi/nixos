@@ -5,24 +5,10 @@
   ...
 }: {
   imports = [
-    ../../system/configuration.nix
-
     ./fonts.nix
-    ./stylix.nix
-
-    # ./gamemode.nix
-    # ./gaming/gamemode.nix
-    # ./gaming/steam.nix
 
     ./environments/hyprland.nix
     # ./environments/i3.nix
-    # ./environments/qtile.nix
-
-    ../services/xserver.nix
-    ../services/keyd.nix
-    ../services/ssh.nix
-    ../services/virtualization.nix
-    ../services/docker.nix
   ];
 
   services.preload.enable = true;
@@ -64,6 +50,12 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    adwaita-icon-theme
+    materia-theme
+    materia-kde-theme
+    papirus-icon-theme
+    dconf
+
     libreoffice-still
     wg-netmanager
     wireguard-tools
@@ -98,12 +90,6 @@
     brave
     android-tools
     scrcpy
-  ];
-
-  # face for the user
-  systemd.tmpfiles.rules = [
-    "f+ /var/lib/AccountsService/users/${username}  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/${username}\\n" # notice the "\\n" we don't want nix to insert a new line in our string, just pass it as \n to systemd
-    "L+ /var/lib/AccountsService/icons/${username}  - - - - ${../../users/perttu/face}" # you can replace the ${....} with absolute path to face icon
   ];
 
   # Whether to enable the RealtimeKit system service, which hands out

@@ -8,16 +8,12 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ../../system/services/ssh.nix
-    # ../../system/services/nginx.nix
     ../../system/services/docker.nix
     ../../system/services/samba.nix
 
     ../../system/configuration.nix
-    ../../system/desktop/stylix.nix
   ];
 
   # Bootloader.
@@ -30,18 +26,10 @@
   services.nfs.server.enable = true;
 
   boot.kernel.sysctl = {
-    # Enable IPv4 packet forwarding (router functionality)
     "net.ipv4.ip_forward" = 1;
-
-    # Allow routing for marked packets (required for VPNs like WireGuard)
     "net.ipv4.conf.all.src_valid_mark" = 1;
   };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = lib.mkForce false;
 
   # Set your time zone.
