@@ -1,8 +1,6 @@
 {
   pkgs,
   inputs,
-  lib,
-  stylix,
   ...
 }: let
   treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
@@ -46,7 +44,6 @@
 in {
   # Neovim configuration dependencies
   home.packages = with pkgs; [
-    imagemagickBig
     # lua
     lua51Packages.lua
     luajitPackages.luarocks_bootstrap
@@ -69,7 +66,6 @@ in {
     actionlint
     yamllint
     gitlint
-    google-java-format
 
     # lsp
     typescript-language-server
@@ -84,6 +80,8 @@ in {
     nixd
     just-lsp
   ];
+
+  stylix.targets.neovim.enable = false;
 
   programs.neovim = {
     enable = true;

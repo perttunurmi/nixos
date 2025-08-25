@@ -1,9 +1,4 @@
-{pkgs, ...}:
-# media - control and enjoy audio/video
-{
-  # imports = [
-  # ];
-
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # audio control
     pavucontrol
@@ -12,7 +7,6 @@
 
     # images
     feh
-    qimgv
   ];
 
   programs = {

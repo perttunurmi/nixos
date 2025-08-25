@@ -53,6 +53,7 @@
         username ? "perttu",
         wsl ? false,
         server ? false,
+        desktop ? false,
         extraSpecialArgs ? {},
       }: let
         specialArgs =
@@ -60,6 +61,7 @@
             inherit username;
             inherit wsl;
             inherit server;
+            inherit desktop;
           }
           // extraSpecialArgs;
         inherit username;
@@ -90,11 +92,13 @@
       T480s = mkHost {
         hostPath = ./hosts/T480s;
         extraSpecialArgs = {inherit inputs;};
+        desktop = true;
       };
 
       NixOS = mkHost {
         hostPath = ./hosts/NixOS;
         extraSpecialArgs = {inherit inputs;};
+        desktop = true;
       };
 
       nixos = mkHost {

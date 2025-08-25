@@ -4,11 +4,9 @@
   cache = config.xdg.cacheHome;
 in {
   imports = [
+    ./packages.nix
     ./starship.nix
-    ./xdg.nix
     ./neovim.nix
-    # ./rclone.nix
-    ./xorg.nix
   ];
 
   # add environment variables
@@ -25,7 +23,6 @@ in {
     # set default applications
     EDITOR = "nvim";
     VISUAL = "nvim";
-    TERMINAL = "alacritty";
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
@@ -56,10 +53,6 @@ in {
       PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
 
       . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
-
-      # if uwsm check may-start && uwsm select; then
-      #     exec uwsm start default
-      # fi
     '';
   };
 
