@@ -38,5 +38,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
 
+  services.openssh.ports = lib.mkForce [2222];
+
   system.stateVersion = "24.11"; # Did you read the comment?
 }
