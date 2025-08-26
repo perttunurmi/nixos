@@ -9,6 +9,9 @@
 
     ./environments/hyprland.nix
     # ./environments/i3.nix
+
+    ./services/keyd.nix
+    ./services/xserver.nix
   ];
 
   services.preload.enable = true;

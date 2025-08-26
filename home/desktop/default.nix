@@ -8,4 +8,8 @@
     ./terminals.nix
     ./xdg.nix
   ];
+
+  home.sessionVariables = {
+    TERMINAL = "ALACRITTY";
+  };
 }

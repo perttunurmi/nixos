@@ -2,7 +2,7 @@
   services.xserver = {
     enable = lib.mkDefault true;
 
-    xkb = {
+    xkb = lib.mkDefault {
       layout = "us";
       variant = "altgr-intl";
     };

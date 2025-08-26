@@ -28,11 +28,10 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.2";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Sops (secret manager)
-    sops-nix.url = "github:mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     mysecrets = {
       url = "git@github.com:perttunurmi/secrets.git";
@@ -45,6 +44,7 @@
     home-manager,
     nixos-wsl,
     stylix,
+    agenix,
     ...
   }: {
     nixosConfigurations = let
@@ -69,6 +69,7 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
+            agenix.nixosModules.default
             stylix.nixosModules.stylix
             nixos-wsl.nixosModules.default
             {

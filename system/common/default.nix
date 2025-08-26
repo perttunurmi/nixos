@@ -8,10 +8,8 @@
     ./packages.nix
     ./overlays.nix
     ./settings.nix
+    ./agenix.nix
 
-    ./services/xserver.nix
-    ./services/keyd.nix
-    ./services/sops.nix
     ./services/ssh.nix
 
     ./theming/stylix.nix

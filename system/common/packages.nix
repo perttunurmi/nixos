@@ -3,7 +3,6 @@
 
   environment.systemPackages = with pkgs; [
     nix
-    sops
     age
     borgbackup
     lldb
