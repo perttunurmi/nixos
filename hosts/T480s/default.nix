@@ -14,8 +14,8 @@
     ./hardware/throttled.nix
     ./hardware/thinkfan.nix
 
-    ./hardware/nvidia.nix
-    # ./hardware/disable_nvidia.nix
+    # ./hardware/nvidia.nix
+    ./hardware/disable_nvidia.nix
 
     ./hardware/secureboot.nix
 
