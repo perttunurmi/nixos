@@ -24,6 +24,7 @@
     extraGroups = [
       "${username}"
       "wheel"
+      "keyd"
     ];
   };
 
