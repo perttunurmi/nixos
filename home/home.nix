@@ -1,22 +1,19 @@
 {
   username,
   wsl,
+  server,
+  desktop,
+  pkgs,
+  lib,
+  config,
   ...
 }: {
   imports =
-    (
-      if !wsl
-      then [
-        ./programs
-      ]
-      else []
-    )
-    ++ [
-      ./packages.nix
-      ./shell
-    ];
-
-  stylix.targets.neovim.enable = false;
+    [
+      ./users/${username}/default.nix
+      ./common/default.nix
+    ]
+    ++ (lib.optionals desktop [./desktop/default.nix]);
 
   home = {
     inherit username;
@@ -26,27 +23,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    userName = "Perttu Nurmi";
-    userEmail = "perttu.nurmi@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "master";
-    };
-
-    signing = {
-      format = "ssh";
-      signByDefault = true;
-      key = "/home/${username}/.ssh/id_ed25519.pub";
-    };
-  };
-
-  programs.gh = {
-    enable = true;
-    gitCredentialHelper = {
-      enable = true;
-    };
-  };
 }
