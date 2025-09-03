@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./common/default.nix
+    ./git.nix
+    ./ssh.nix
   ];
 }

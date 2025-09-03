@@ -12,3 +12,4 @@ This repository is home to my NixOS configuration.
 - [MyNixOS](https://mynixos.com/)
 - [NixOS Wiki](https://nixos.wiki/)
 - [Video tutorial for first setup](https://www.youtube.com/watch?v=lUB2rwDUm5A)
+- [EmergentMind's nix-config](https://github.com/EmergentMind/nix-config)
