@@ -59,6 +59,7 @@
     papirus-icon-theme
     dconf
 
+    racket-minimal
     libreoffice-still
     wg-netmanager
     wireguard-tools
@@ -70,6 +71,7 @@
     flatpak
     preload
     obsidian
+    telegram-desktop
     vscode.fhs
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;

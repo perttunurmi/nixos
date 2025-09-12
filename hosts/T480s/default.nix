@@ -20,6 +20,7 @@
     ./hardware/secureboot.nix
 
     ../../system/desktop/default.nix
+    ../../system/services/virtualization.nix
   ];
 
   boot = {
