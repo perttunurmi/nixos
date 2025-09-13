@@ -19,12 +19,10 @@
   services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [
-    (flameshot.override {enableWlrSupport = true;})
     file-roller # gnome archive manager
     avahi
     hypridle
     xdg-desktop-portal-hyprland
-    clipse
     feh
     acpi
     sysstat
@@ -39,7 +37,6 @@
     kitty
     waybar
     hyprcursor
-    ghostty
     swww
     wl-clipboard
     libnotify

@@ -133,6 +133,7 @@
 
   services = {
     xserver.enable = true;
+    xserver.excludePackages = [ pkgs.xterm ];
 
     dbus = {
       enable = true;
