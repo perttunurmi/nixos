@@ -21,6 +21,9 @@
   environment.systemPackages = with pkgs; [
     file-roller # gnome archive manager
     avahi
+    qimgv
+    cheese
+    kdePackages.kdenlive
     hypridle
     xdg-desktop-portal-hyprland
     feh

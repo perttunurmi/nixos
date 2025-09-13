@@ -34,6 +34,7 @@
       config = {
         common = {
           default = [
+            "hyprland"
             "gtk"
           ];
           "org.freedesktop.impl.portal.Secret" = [
@@ -61,6 +62,7 @@
 
     racket-minimal
     libreoffice-still
+    blender
     wg-netmanager
     wireguard-tools
     spotify
@@ -133,7 +135,7 @@
 
   services = {
     xserver.enable = true;
-    xserver.excludePackages = [ pkgs.xterm ];
+    xserver.excludePackages = [pkgs.xterm];
 
     dbus = {
       enable = true;
@@ -185,8 +187,8 @@
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
-  networking.firewall.allowedTCPPorts = [57621];
-  networking.firewall.allowedUDPPorts = [5353];
+  networking.firewall.allowedTCPPorts = [57621 24800];
+  networking.firewall.allowedUDPPorts = [5353 24800];
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
