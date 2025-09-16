@@ -60,7 +60,11 @@
     papirus-icon-theme
     dconf
 
-    racket-minimal
+    racket
+    python3
+
+    zathura
+    typst
     libreoffice-still
     blender
     wg-netmanager

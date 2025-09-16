@@ -10,7 +10,7 @@
   stylix = {
     enable = true;
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-    base16Scheme = ./colors.yaml;
+    base16Scheme = ./apprentice.yaml;
     polarity = "dark";
 
     fonts = {

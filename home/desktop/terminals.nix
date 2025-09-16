@@ -9,17 +9,16 @@ in {
       settings = {
         # window.opacity = 0.98;
         window.dynamic_padding = true;
-        #       window.padding = {
-        #         x = 5;
-        #         y = 5;
-        #       };
+              window.padding = {
+                y = 0;
+              };
         scrolling.history = 10000;
         #
-        font = {
+        font = lib.mkDefault {
           normal.family = font;
           bold.family = font;
           italic.family = font;
-          size = 16;
+          size = 17;
         };
       };
     };
