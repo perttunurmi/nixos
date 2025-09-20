@@ -12,6 +12,8 @@
 
     ./services/keyd.nix
     ./services/xserver.nix
+
+    ./ld.nix
   ];
 
   services.preload.enable = true;

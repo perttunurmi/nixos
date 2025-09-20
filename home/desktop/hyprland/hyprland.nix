@@ -2,7 +2,7 @@
   services.mako = {
     enable = true;
     settings = {
-      # default-timeout = 6;
+      default-timeout = 6000;
       # ignore-timeout = true;
       actions = true;
       icons = true;

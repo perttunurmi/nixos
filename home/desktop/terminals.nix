@@ -9,9 +9,9 @@ in {
       settings = {
         # window.opacity = 0.98;
         window.dynamic_padding = true;
-              window.padding = {
-                y = 0;
-              };
+        window.padding = {
+          y = 0;
+        };
         scrolling.history = 10000;
         #
         font = lib.mkDefault {
