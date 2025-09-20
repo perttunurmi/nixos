@@ -14,6 +14,7 @@
     ./services/xserver.nix
 
     ./ld.nix
+    ./environments/android.nix
   ];
 
   services.preload.enable = true;
@@ -65,6 +66,7 @@
     racket
     python3
 
+    inkscape-with-extensions
     zathura
     typst
     libreoffice-still
@@ -101,8 +103,6 @@
     })
     discord
     brave
-    android-tools
-    scrcpy
   ];
 
   # Whether to enable the RealtimeKit system service, which hands out

@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  browser = ["brave-browser.desktop"];
+  browser = ["zen-browser.desktop"];
 
   # XDG MIME types
   associations = {

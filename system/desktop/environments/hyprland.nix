@@ -67,9 +67,10 @@
   services.tumbler.enable = true; # Thumbnail support for images
 
   # Optional, hint Electron apps to use Wayland:
-  environment.sessionVariables = {
+  environment.sessionVariables = lib.mkAfter {
     NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORM = "wayland";
+    # QT_QPA_PLATFORM = "wayland";
+    QT_QPA_PLATFORM = "minimal";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
   };

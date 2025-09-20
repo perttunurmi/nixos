@@ -19,7 +19,6 @@
     fd
 
     # projekti
-    jetbrains-toolbox
     kotlin-language-server
     gradle
     kotlin

@@ -40,7 +40,9 @@
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     nixos-wsl,
     stylix,
@@ -87,6 +89,21 @@
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./home/home.nix;
             }
+            ({
+              config,
+              pkgs,
+              ...
+            }: {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  unstable = import nixpkgs-unstable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                    config.android_sdk.accept_license = true;
+                  };
+                })
+              ];
+            })
           ];
         };
     in {

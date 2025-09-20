@@ -48,9 +48,6 @@ in {
     lua51Packages.lua
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
-    ghostscript
-    mermaid-cli
-    lynx
 
     # tools
     tree-sitter
@@ -87,7 +84,8 @@ in {
     enable = true;
     defaultEditor = true;
 
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    # package = pkgs.neovim;
     vimdiffAlias = true;
     vimAlias = true;
     withNodeJs = true;

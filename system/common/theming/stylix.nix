@@ -5,8 +5,6 @@
   config,
   ...
 }: {
-  stylix.targets.plymouth.enable = false;
-
   stylix = {
     enable = true;
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
@@ -39,6 +37,16 @@
         terminal = 16;
         desktop = 11;
       };
+    };
+
+    targets = {
+      plymouth.enable = false;
+      gtk.enable = true;
+      qt.enable = true;
+    };
+
+    iconTheme = {
+      dark = pkgs.papirus-icon-theme;
     };
   };
 }
