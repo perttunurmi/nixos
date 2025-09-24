@@ -18,7 +18,7 @@ in {
           normal.family = font;
           bold.family = font;
           italic.family = font;
-          size = 17;
+          size = 15;
         };
       };
     };

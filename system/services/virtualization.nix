@@ -1,15 +1,27 @@
 {pkgs, ...}: {
-  environment = {
-    systemPackages = [ pkgs.qemu ];
-  };
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
+
 
   programs.virt-manager.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.vhostUserPackages = with pkgs; [virtiofsd];
+  virtualisation = {
+
+    libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = with pkgs; [virtiofsd];
+    };
+
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
+
   };
 
-  boot.extraModprobeConfig = "options kvm_intel nested=1";
+  environment.systemPackages = with pkgs; [ 
+    qemu
+    distrobox
+  ];
 }
+

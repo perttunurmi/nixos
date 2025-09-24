@@ -46,7 +46,7 @@
     };
 
     iconTheme = {
-      dark = pkgs.papirus-icon-theme;
+      dark = "Papirus-Dark";
     };
   };
 }

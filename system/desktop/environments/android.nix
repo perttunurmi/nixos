@@ -25,9 +25,5 @@
     libGL
   ];
 
-  environment.sessionVariables = lib.mkAfter {
-    ANDROID_SDK_HOME = "$XDG_CONFIG_HOME/.android";
-  };
-
   services.udev.packages = with pkgs; [unstable.android-udev-rules];
 }

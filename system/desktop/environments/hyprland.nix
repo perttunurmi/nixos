@@ -69,8 +69,7 @@
   # Optional, hint Electron apps to use Wayland:
   environment.sessionVariables = lib.mkAfter {
     NIXOS_OZONE_WL = "1";
-    # QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORM = "minimal";
+    QT_QPA_PLATFORM = "wayland";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
   };
