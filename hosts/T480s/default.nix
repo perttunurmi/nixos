@@ -16,10 +16,12 @@
 
     # ./hardware/nvidia.nix
     ./hardware/disable_nvidia.nix
+    ./hardware/disable_touchscreen.nix
 
     ./hardware/secureboot.nix
 
     ../../system/desktop/default.nix
+    ../../system/services/virtualization.nix
   ];
 
   boot = {

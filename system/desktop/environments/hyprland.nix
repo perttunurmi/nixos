@@ -19,12 +19,13 @@
   services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [
-    (flameshot.override {enableWlrSupport = true;})
     file-roller # gnome archive manager
     avahi
+    qimgv
+    cheese
+    kdePackages.kdenlive
     hypridle
     xdg-desktop-portal-hyprland
-    clipse
     feh
     acpi
     sysstat
@@ -37,9 +38,9 @@
     grim
     gimp3-with-plugins
     kitty
+
     waybar
     hyprcursor
-    ghostty
     swww
     wl-clipboard
     libnotify
@@ -66,7 +67,7 @@
   services.tumbler.enable = true; # Thumbnail support for images
 
   # Optional, hint Electron apps to use Wayland:
-  environment.sessionVariables = {
+  environment.sessionVariables = lib.mkAfter {
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
     SDL_VIDEODRIVER = "wayland";

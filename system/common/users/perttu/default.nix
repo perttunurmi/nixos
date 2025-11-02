@@ -18,7 +18,6 @@
       "libvirt"
       "kvm"
       "wireshark"
-      "adbusers"
       "samba"
     ];
   };
