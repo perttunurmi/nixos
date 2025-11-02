@@ -21,5 +21,7 @@
       "emoji"
       "calc"
     ];
+
+    font = lib.mkForce "${pkgs.nerd-fonts.fira-mono} 14";
   };
 }

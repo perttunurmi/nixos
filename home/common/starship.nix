@@ -20,6 +20,10 @@
         symbol = " ";
         heuristic = true;
       };
+
+      kotlin = {
+        format = "";
+      };
     };
   };
 }

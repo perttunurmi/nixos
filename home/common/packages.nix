@@ -17,5 +17,10 @@
     bat
     fzf
     fd
+
+    # projekti
+    kotlin-language-server
+    gradle
+    kotlin
   ];
 }
