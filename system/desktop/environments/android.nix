@@ -25,5 +25,5 @@
     libGL
   ];
 
-  services.udev.packages = with pkgs; [unstable.android-udev-rules];
+  # services.udev.packages = with pkgs; [unstable.android-udev-rules];
 }

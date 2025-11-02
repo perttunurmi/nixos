@@ -47,7 +47,7 @@
   networking.networkmanager.enable = true;
 
   # Configure console keymap
-  console.keyMap = lib.mkForce "us-acentos";
+  console.keyMap = lib.mkForce "us";
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;

@@ -65,6 +65,7 @@
 
     racket
     python3
+    wxmaxima
 
     inkscape-with-extensions
     zathura
