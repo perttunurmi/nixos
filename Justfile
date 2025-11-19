@@ -2,22 +2,18 @@ default:
     @just --list
 
 deploy host="$(hostname)":
-    git add .
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
 
 test host="$(hostname)":
-    git add .
     @printf "rebulding {{ host }}\n"
     nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
 
 deploy-impure host="$(hostname)":
-    git add .
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo  --impure
 
 debug host="$(hostname)":
-    git add .
     @printf "rebulding {{ host }} with debug\n"
     nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
 
@@ -64,7 +60,6 @@ list-all-packages:
 
 commit:
     just format
-    git add .
     git commit
 
 [group('utils')]

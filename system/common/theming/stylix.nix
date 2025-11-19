@@ -34,8 +34,8 @@
 
       sizes = {
         applications = 12;
-        terminal = 16;
-        desktop = 11;
+        terminal = 12;
+        desktop = 12;
       };
     };
 
@@ -43,10 +43,6 @@
       plymouth.enable = false;
       gtk.enable = true;
       qt.enable = true;
-    };
-
-    iconTheme = {
-      dark = "Papirus-Dark";
     };
   };
 }
