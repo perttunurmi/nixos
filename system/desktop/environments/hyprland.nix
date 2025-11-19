@@ -12,10 +12,10 @@
     xwayland.enable = true; # Xwayland can be disabled.
   };
 
-  services.xserver.displayManager.lightdm.enable = false;
-  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.lightdm.enable = false;
+  # services.xserver.displayManager.gdm.enable = true;
 
-  services.displayManager.defaultSession = "hyprland";
+  # services.displayManager.defaultSession = "hyprland";
   services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -67,10 +67,10 @@
   services.tumbler.enable = true; # Thumbnail support for images
 
   # Optional, hint Electron apps to use Wayland:
-  environment.sessionVariables = lib.mkAfter {
-    NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORM = "wayland";
-    SDL_VIDEODRIVER = "wayland";
-    XDG_SESSION_TYPE = "wayland";
-  };
+  # environment.sessionVariables = lib.mkAfter {
+  #   NIXOS_OZONE_WL = "1";
+  #   QT_QPA_PLATFORM = "wayland";
+  #   SDL_VIDEODRIVER = "wayland";
+  #   XDG_SESSION_TYPE = "wayland";
+  # };
 }

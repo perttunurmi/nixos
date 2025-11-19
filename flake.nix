@@ -37,6 +37,12 @@
       url = "git@github.com:perttunurmi/secrets.git";
       flake = false;
     };
+
+    dwm-config = {
+      # Use the nixos repo as the dwm package source
+      url = "github:perttunurmi/dwm";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -47,6 +53,7 @@
     nixos-wsl,
     stylix,
     agenix,
+    dwm-config,
     ...
   }: {
     nixosConfigurations = let
@@ -64,6 +71,7 @@
             inherit wsl;
             inherit server;
             inherit desktop;
+            inherit dwm-config;
           }
           // extraSpecialArgs;
         inherit username;

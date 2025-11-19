@@ -9,6 +9,7 @@
 
     ./environments/hyprland.nix
     # ./environments/i3.nix
+    ./environments/suckless.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
@@ -57,11 +58,13 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    pango
     adwaita-icon-theme
     materia-theme
     materia-kde-theme
     papirus-icon-theme
     dconf
+    bitwarden
 
     racket
     python3
@@ -142,6 +145,7 @@
 
   services = {
     xserver.enable = true;
+    xserver.displayManager.startx.enable = true;
     xserver.excludePackages = [pkgs.xterm];
 
     dbus = {
