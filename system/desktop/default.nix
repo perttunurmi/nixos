@@ -8,7 +8,7 @@
     ./fonts.nix
 
     ./environments/hyprland.nix
-    # ./environments/i3.nix
+    ./environments/i3.nix
     ./environments/suckless.nix
 
     ./services/keyd.nix
@@ -142,6 +142,11 @@
   #     # anthy
   #   ];
   # };
+
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
 
   services = {
     xserver.enable = true;

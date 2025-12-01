@@ -1,4 +1,8 @@
-{pkgs, dwm-config, ...}: {
+{
+  pkgs,
+  dwm-config,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     clang-tools
     xorg.libXft

@@ -23,7 +23,11 @@
     qemu
     SDL2
     libGL
+
+    weston
   ];
 
   services.udev.packages = with pkgs; [android-udev-rules];
+
+  virtualisation.waydroid.enable = true;
 }
