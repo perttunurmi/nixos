@@ -24,6 +24,10 @@
       kotlin = {
         format = "";
       };
+
+      scala = {
+        format = "";
+      };
     };
   };
 }
