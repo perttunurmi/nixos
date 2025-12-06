@@ -48,11 +48,9 @@ gc old="30":
     @printf "collecting garbage...\n"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
 
-update-rebuild-clean host="$(hostname)":
+update-rebuild host="$(hostname)":
     sudo just update-all
     sudo just deploy {{ host }}
-    just gc
-    just clean
 
 [group('utils')]
 list-all-packages:

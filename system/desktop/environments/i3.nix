@@ -4,29 +4,24 @@
   ...
 }: {
   environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
-  # services.displayManager.defaultSession = lib.mkDefault "xfce+i3";
   services.displayManager.defaultSession = lib.mkDefault "i3";
   services.xserver = {
     desktopManager = {
       xterm.enable = false;
-      # xfce = {
-      #   enable = true;
-      #   noDesktop = true;
-      #   enableXfwm = false;
-      # };
     };
 
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        autotiling
         file-roller # gnome archive manager
         xsel # copy and paste to clipboard from the terminal
         redshift # automatic night light
         rofi # application launcher, the same as dmenu
-        # dunst # notification daemon
+        dunst # notification daemon
         i3blocks # status bar
-        # i3lock # default i3 screen locker
-        # xautolock # lock screen after some time
+        i3lock # default i3 screen locker
+        xautolock # lock screen after some time
         i3status # provide information to i3bar
         i3-gaps # i3 with gaps
         picom # transparency and shadows

@@ -15,6 +15,12 @@
         user = "root";
         port = 22;
       };
+      "Yoga" = {
+        host = "Yoga";
+        hostname = "nurmilab.xyz";
+        user = "perttu";
+        port = 22;
+      };
     };
   };
 }

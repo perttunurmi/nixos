@@ -29,9 +29,6 @@
     entr
 
     scala
-    scalafmt
-    scalafix
     scala-cli
-    sbt
   ];
 }

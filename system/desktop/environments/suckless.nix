@@ -59,7 +59,7 @@
   services = {
     displayManager.ly.enable = true;
     xserver.windowManager.dwm = {
-      enable = true;
+      enable = false;
       package = pkgs.dwm.overrideAttrs {
         pname = "dwm";
         src = dwm-config;

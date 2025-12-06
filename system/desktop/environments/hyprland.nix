@@ -37,7 +37,6 @@
     hyprsunset
     grim
     gimp3-with-plugins
-    kitty
 
     waybar
     hyprcursor
