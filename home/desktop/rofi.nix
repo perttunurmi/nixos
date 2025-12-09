@@ -8,10 +8,10 @@
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
 
     plugins = with pkgs; [
-      rofi-emoji-wayland
+      rofi-emoji
+      rofi-power-menu
       rofi-calc
     ];
 

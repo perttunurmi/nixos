@@ -14,7 +14,7 @@
     kotlin
     gradle
     maven
-    jdk21
+    javaPackages.compiler.openjdk25
 
     git
 
@@ -26,8 +26,6 @@
 
     weston
   ];
-
-  services.udev.packages = with pkgs; [android-udev-rules];
 
   virtualisation.waydroid.enable = true;
 }

@@ -38,6 +38,11 @@ in {
     g = "git";
     rm = "trash -v";
     zi = "cdi";
+
+    ls = "eza --icons=auto";
+    ll = "eza -l --icons=auto --git --git-repos";
+    la = "eza -a --icons=auto --git";
+    lla = "eza -la --icons=auto --git --git-repos";
   };
 
   programs = {

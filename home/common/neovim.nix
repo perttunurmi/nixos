@@ -63,6 +63,12 @@ in {
     actionlint
     yamllint
     gitlint
+    ghostscript
+    tectonic
+    mermaid-cli
+    sqlite
+    texlivePackages.pdftex
+    imagemagickBig
 
     # lsp
     typescript-language-server

@@ -18,8 +18,6 @@
     ./environments/android.nix
   ];
 
-  services.preload.enable = true;
-
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -58,13 +56,14 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    ghostty
     pango
     adwaita-icon-theme
     materia-theme
     materia-kde-theme
     papirus-icon-theme
     dconf
-    bitwarden
+    bitwarden-desktop
 
     racket
     python3
@@ -83,7 +82,6 @@
     pika-backup
     gnome-software
     flatpak
-    preload
     obsidian
     telegram-desktop
     vscode.fhs

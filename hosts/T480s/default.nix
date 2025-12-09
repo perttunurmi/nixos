@@ -14,9 +14,9 @@
     ./hardware/throttled.nix
     ./hardware/thinkfan.nix
 
-    # ./hardware/nvidia.nix
-    ./hardware/disable_nvidia.nix
-    ./hardware/disable_touchscreen.nix
+    ./hardware/nvidia.nix
+    # ./hardware/disable_nvidia.nix
+    # ./hardware/disable_touchscreen.nix
 
     ./hardware/secureboot.nix
 

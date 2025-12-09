@@ -48,7 +48,6 @@
     udiskie
     networkmanagerapplet # networkmanager tray
     hyprland-qtutils
-    rofi-wayland
     hyprpolkitagent
     hyprsysteminfo
     wlsunset
