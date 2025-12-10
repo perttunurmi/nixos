@@ -12,9 +12,6 @@
     xwayland.enable = true; # Xwayland can be disabled.
   };
 
-  # services.xserver.displayManager.lightdm.enable = false;
-  # services.xserver.displayManager.gdm.enable = true;
-
   # services.displayManager.defaultSession = "hyprland";
   services.avahi.enable = true;
 

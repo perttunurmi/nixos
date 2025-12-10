@@ -18,8 +18,10 @@
   };
 
   home.sessionVariables = {
-    TERMINAL = "ALACRITTY";
+    TERMINAL = "GHOSTTY";
   };
+
+  home.sessionPath = [ "/snap/bin" ];
 
   gtk = {
     enable = true;

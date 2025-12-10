@@ -20,5 +20,6 @@
 
     gradle
     kotlin
+    bear
   ];
 }

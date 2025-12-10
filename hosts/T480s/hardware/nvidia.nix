@@ -16,7 +16,7 @@
   # Rootless
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
-  services.xserver.videoDrivers = ["modesetting" "nvidia"];
+  services.xserver.videoDrivers = [ "intel" "modesetting" "nvidia" ];
   hardware.graphics.enable = lib.mkDefault true;
 
   hardware.nvidia = {
@@ -46,7 +46,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   hardware.nvidia.prime = {

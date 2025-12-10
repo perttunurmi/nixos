@@ -14,8 +14,8 @@
     ./hardware/throttled.nix
     ./hardware/thinkfan.nix
 
-    ./hardware/nvidia.nix
-    # ./hardware/disable_nvidia.nix
+    # ./hardware/nvidia.nix
+    ./hardware/disable_nvidia.nix
     # ./hardware/disable_touchscreen.nix
 
     ./hardware/secureboot.nix
@@ -57,7 +57,7 @@
     powertop
   ];
 
-  powerManagement.enable = true;
+  # powerManagement.enable = true;
   services.thermald.enable = true;
   # powerManagement.powertop.enable = true;
 

@@ -20,6 +20,9 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-snapd.url = "github:nix-community/nix-snapd";
+    nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
+
     # Windows subsystem for linux
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +56,7 @@
     nixos-wsl,
     stylix,
     agenix,
+    nix-snapd,
     dwm-config,
     ...
   }: {
@@ -79,6 +83,10 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
+            nix-snapd.nixosModules.default
+            {
+              services.snap.enable = true;
+            }
             agenix.nixosModules.default
             stylix.nixosModules.stylix
             nixos-wsl.nixosModules.default

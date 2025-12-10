@@ -57,7 +57,7 @@
 
   programs.slock.enable = true;
   services = {
-    displayManager.ly.enable = true;
+    # displayManager.ly.enable = true;
     xserver.windowManager.dwm = {
       enable = false;
       package = pkgs.dwm.overrideAttrs {

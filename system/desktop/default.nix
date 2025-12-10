@@ -9,7 +9,7 @@
 
     ./environments/hyprland.nix
     ./environments/i3.nix
-    ./environments/suckless.nix
+    # ./environments/suckless.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
@@ -63,7 +63,6 @@
     materia-kde-theme
     papirus-icon-theme
     dconf
-    bitwarden-desktop
 
     racket
     python3
