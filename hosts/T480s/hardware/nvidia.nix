@@ -16,7 +16,7 @@
   # Rootless
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
-  services.xserver.videoDrivers = [ "intel" "modesetting" "nvidia" ];
+  services.xserver.videoDrivers = ["intel" "modesetting" "nvidia"];
   hardware.graphics.enable = lib.mkDefault true;
 
   hardware.nvidia = {

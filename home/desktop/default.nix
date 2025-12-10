@@ -21,7 +21,7 @@
     TERMINAL = "GHOSTTY";
   };
 
-  home.sessionPath = [ "/snap/bin" ];
+  home.sessionPath = ["/snap/bin"];
 
   gtk = {
     enable = true;
