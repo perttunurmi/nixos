@@ -87,7 +87,7 @@
       Login = {
         HandleLidSwitch = "hybrid-sleep";
         HandleLidSwitchDocked = "ignore";
-        lidSwitchExternalPower = "hybrid-sleep";
+        LidSwitchExternalPower = "hybrid-sleep";
       };
     };
   };
