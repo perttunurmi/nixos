@@ -3,10 +3,10 @@
   lib,
   ...
 }: {
-  environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
+  environment.pathsToLink = ["/libexec"];
   services.displayManager.defaultSession = lib.mkDefault "none+i3";
-  # services.displayManager.gdm.enable = true;
   services.displayManager.ly.enable = true;
+  programs.slock.enable = true;
 
   services.xserver = {
     desktopManager = {
@@ -16,51 +16,49 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
-        clang-tools
         xorg.libXft
         xorg.libXinerama
         xorg.libX11
-        fontconfig
-        freetype
-        harfbuzz
+
         gcc
+        clang-tools
         gnumake
 
+        qimgv
+        udiskie
         autotiling
-        slock
-        file-roller # gnome archive manager
-        xsel # copy and paste to clipboard from the terminal
-        redshift # automatic night light
-        rofi # application launcher, the same as dmenu
-        dunst # notification daemon
-        i3blocks # status bar
-        i3lock # default i3 screen locker
-        xautolock # lock screen after some time
-        i3status # provide information to i3bar
+        file-roller
+        xsel
+        redshift
+        rofi
+        dunst
+        i3blocks
+        i3lock
+        xautolock
+        i3status
         i3
-        picom # transparency and shadows
-        feh # set wallpaper
-        acpi # battery information
-        arandr # screen layout manager
-        dex # autostart applications
-        xbindkeys # bind keys to commands
-        brightnessctl # control screen brightness
-        xorg.xdpyinfo # get screen information
-        sysstat # get system information
-        networkmanagerapplet # networkmanager tray
-        copyq # clipboard manager
-        gpick # colorpicker
-        flameshot # screenshot tool
+        picom
+        feh
+        acpi
+        arandr
+        dex
+        xbindkeys
+        brightnessctl
+        xorg.xdpyinfo
+        sysstat
+        networkmanagerapplet
+        copyq
+        gpick
+        flameshot
         nitrogen
       ];
     };
   };
 
-  # thunar file manager(part of xfce) related options
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman
   ];
-  services.tumbler.enable = true; # Thumbnail support for images
+  services.tumbler.enable = true;
 }

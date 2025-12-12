@@ -18,8 +18,8 @@
     fzf
     fd
 
-    gradle
-    kotlin
+    scala
+    scala-cli
     bear
   ];
 }

@@ -84,6 +84,7 @@
       python3
       speex
       stdenv.cc.cc
+      stdenv.cc.cc.lib
       tbb
       udev
       vulkan-loader
@@ -118,4 +119,7 @@
       zlib
     ];
   };
+
+  programs.appimage.enable = true;
+  services.envfs.enable = true;
 }

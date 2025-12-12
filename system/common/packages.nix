@@ -26,8 +26,5 @@
     scrot
     gcc
     entr
-
-    scala
-    scala-cli
   ];
 }

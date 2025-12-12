@@ -7,16 +7,16 @@
   ];
 
   programs.hyprland = {
-    enable = true; # enable Hyprland
-    withUWSM = false; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
+    enable = true;
+    withUWSM = false;
+    xwayland.enable = true;
   };
 
   # services.displayManager.defaultSession = "hyprland";
   services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [
-    file-roller # gnome archive manager
+    file-roller
     avahi
     qimgv
     cheese
@@ -29,7 +29,6 @@
     networkmanagerapplet
     copyq
     brightnessctl
-    arandr
     slurp
     hyprsunset
     grim
@@ -43,7 +42,7 @@
     mako
     hyprls
     udiskie
-    networkmanagerapplet # networkmanager tray
+    networkmanagerapplet
     hyprland-qtutils
     hyprpolkitagent
     hyprsysteminfo
@@ -53,7 +52,6 @@
     hyprland-qt-support
   ];
 
-  # thunar file manager(part of xfce) related options
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
@@ -61,7 +59,6 @@
   ];
   services.tumbler.enable = true; # Thumbnail support for images
 
-  # Optional, hint Electron apps to use Wayland:
   # environment.sessionVariables = lib.mkAfter {
   #   NIXOS_OZONE_WL = "1";
   #   QT_QPA_PLATFORM = "wayland";

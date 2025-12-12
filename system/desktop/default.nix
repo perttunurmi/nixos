@@ -6,10 +6,8 @@
 }: {
   imports = [
     ./fonts.nix
-
     ./environments/hyprland.nix
     ./environments/i3.nix
-    # ./environments/suckless.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
