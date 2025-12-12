@@ -86,7 +86,7 @@
     settings = {
       Login = {
         HandleLidSwitch = "hybrid-sleep";
-        HandleLigSwitchDocked = "ignore";
+        HandleLidSwitchDocked = "ignore";
         lidSwitchExternalPower = "hybrid-sleep";
       };
     };
