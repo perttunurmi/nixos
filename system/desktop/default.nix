@@ -140,11 +140,6 @@
   #   ];
   # };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-  };
-
   services = {
     xserver.enable = true;
     xserver.displayManager.startx.enable = true;

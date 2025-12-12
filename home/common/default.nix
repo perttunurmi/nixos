@@ -47,7 +47,6 @@ in {
 
   programs = {
     bash.enable = true;
-    zsh.enable = true;
     fzf.enable = true;
     zoxide = {
       enable = true;
@@ -55,15 +54,6 @@ in {
         "--cmd cd"
       ];
     };
-
-    bash.initExtra = ''
-      stty werase undef
-      bind '\C-w:unix-filename-rubout'
-
-      PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
-
-      . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
-    '';
   };
 
   home.file.".profile".text = ''

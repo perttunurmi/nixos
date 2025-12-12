@@ -4,12 +4,12 @@ default:
 [group('build')]
 rebuild host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
+    nixos-rebuild switch --flake .#{{ host }} --sudo
 
 [group('build')]
 test host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
+    nixos-rebuild test --flake .#{{ host }} --sudo --impure
 
 [group('build')]
 debug host="$(hostname)":
@@ -19,7 +19,7 @@ debug host="$(hostname)":
 [group('build')]
 rebuild-impure host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo  --impure
+    nixos-rebuild switch --flake .#{{ host }} --sudo  --impure
 
 [group('rebuild')]
 update-rebuild host="$(hostname)":

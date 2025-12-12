@@ -16,7 +16,18 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        clang-tools
+        xorg.libXft
+        xorg.libXinerama
+        xorg.libX11
+        fontconfig
+        freetype
+        harfbuzz
+        gcc
+        gnumake
+
         autotiling
+        slock
         file-roller # gnome archive manager
         xsel # copy and paste to clipboard from the terminal
         redshift # automatic night light
@@ -40,6 +51,7 @@
         copyq # clipboard manager
         gpick # colorpicker
         flameshot # screenshot tool
+        nitrogen
       ];
     };
   };

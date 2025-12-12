@@ -2,9 +2,12 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "Perttu Nurmi";
-    userEmail = "perttu.nurmi" + "@" + "gmail.com";
-    extraConfig = {
+
+    settings = {
+      user = {
+        name = "Perttu Nurmi";
+        email = "perttu.nurmi" + "@" + "gmail.com";
+      };
       init.defaultBranch = "master";
     };
 
@@ -15,27 +18,19 @@
     };
 
     ignores = [
-      # C commons
       ".cache"
       "compile_commands.json"
       "*.gc??"
       "vgcore.*"
-      # Python
       "venv"
-      # Locked Files
       "*~"
-      # Mac folder
       ".DS_Store"
-      # Direnv
       ".direnv"
       ".envrc"
-      # Nix buid
       "result"
-      # IDE Folders
       ".idea"
       ".vscode"
       ".vs"
-      # Dotenv
       ".env"
     ];
   };

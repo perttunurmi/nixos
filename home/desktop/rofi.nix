@@ -5,6 +5,7 @@
   ...
 }: {
   # stylix.targets.rofi.enable = false;
+  stylix.targets.fzf.enable = false;
 
   programs.rofi = {
     enable = true;

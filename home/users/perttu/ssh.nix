@@ -1,7 +1,11 @@
 {...}: {
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
+
     matchBlocks = {
+      "*" = {
+      };
       "github" = {
         host = "github.com";
         identitiesOnly = true;
@@ -9,6 +13,7 @@
           "~/.ssh/id_ed25519"
         ];
       };
+
       "Fujitsu" = {
         host = "Fujitsu";
         hostname = "alavus.nurmilab.xyz";

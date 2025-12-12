@@ -9,13 +9,10 @@
       source = ./xinitrc;
       target = ".xinitrc";
     };
-  };
-
-  home.file = {
-    autostart = {
-      source = ./autostart.sh;
-      target = ".local/share/dwm/autostart.sh";
-      executable = true;
-    };
+    # autostart = {
+    #   source = ./autostart.sh;
+    #   target = ".local/share/dwm/autostart.sh";
+    #   executable = true;
+    # };
   };
 }

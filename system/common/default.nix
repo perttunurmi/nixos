@@ -18,6 +18,9 @@
     ./users/root/default.nix
   ];
 
+  programs.bash.enable = true;
+  users.defaultUserShell = pkgs.bash;
+
   users.users.${username} = lib.mkDefault {
     isNormalUser = true;
     description = username;
@@ -49,6 +52,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
 
   networking.firewall.enable = lib.mkDefault true;

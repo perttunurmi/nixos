@@ -2,7 +2,6 @@
   description = "NixOS configuration";
 
   inputs = {
-    # Official nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -12,26 +11,22 @@
 
     stylix.url = "github:nix-community/stylix/release-25.11";
 
-    # Home-manager
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Zen-browser
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Windows subsystem for linux
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Lanzaboote (secure boot)
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +37,6 @@
     };
 
     dwm-config = {
-      # Use the nixos repo as the dwm package source
       url = "github:perttunurmi/dwm";
       flake = false;
     };
@@ -75,7 +69,6 @@
             inherit wsl;
             inherit server;
             inherit desktop;
-            inherit dwm-config;
           }
           // extraSpecialArgs;
         inherit username;

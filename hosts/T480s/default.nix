@@ -16,7 +16,7 @@
 
     # ./hardware/nvidia.nix
     ./hardware/disable_nvidia.nix
-    # ./hardware/disable_touchscreen.nix
+    ./hardware/disable_touchscreen.nix
 
     ./hardware/secureboot.nix
 
@@ -72,7 +72,7 @@
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
       CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 90;
+      CPU_MAX_PERF_ON_AC = 95;
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 85;
 
@@ -83,9 +83,13 @@
   };
 
   services.logind = {
-    lidSwitch = "hybrid-sleep";
-    lidSwitchExternalPower = "hybrid-sleep";
-    lidSwitchDocked = "ignore";
+    settings = {
+      Login = {
+        HandleLidSwitch = "hybrid-sleep";
+        HandleLigSwitchDocked = "ignore";
+        lidSwitchExternalPower = "hybrid-sleep";
+      };
+    };
   };
 
   system.stateVersion = "25.05";
