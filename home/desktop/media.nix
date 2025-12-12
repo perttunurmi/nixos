@@ -1,11 +1,9 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # audio control
     pavucontrol
     playerctl
     pulsemixer
 
-    # images
     feh
   ];
 

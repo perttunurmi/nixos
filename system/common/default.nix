@@ -10,13 +10,14 @@
     ./settings.nix
     ./agenix.nix
 
-    ./services/ssh.nix
-
     ./theming/stylix.nix
 
     ./users/perttu/default.nix
     ./users/root/default.nix
   ];
+
+  programs.bash.enable = true;
+  users.defaultUserShell = pkgs.bash;
 
   users.users.${username} = lib.mkDefault {
     isNormalUser = true;
@@ -28,7 +29,6 @@
     ];
   };
 
-  # Time and locales
   time.timeZone = "Europe/Helsinki";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -43,17 +43,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
 
   networking.firewall.enable = lib.mkDefault true;
   networking.networkmanager.enable = lib.mkDefault true;
-  networking.wireless.enable = lib.mkDefault false; # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = lib.mkDefault false;
 
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
 

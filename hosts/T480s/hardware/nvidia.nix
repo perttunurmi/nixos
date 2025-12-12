@@ -4,7 +4,6 @@
   ...
 }: {
   # https://nixos.wiki/wiki/Nvidia
-  imports = [];
 
   boot.initrd.kernelModules = ["nvidia"];
   boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
@@ -17,7 +16,7 @@
   # Rootless
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
-  services.xserver.videoDrivers = ["intel" "nvidia"];
+  services.xserver.videoDrivers = ["intel" "modesetting" "nvidia"];
   hardware.graphics.enable = lib.mkDefault true;
 
   hardware.nvidia = {
@@ -47,7 +46,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   hardware.nvidia.prime = {

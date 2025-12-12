@@ -2,54 +2,14 @@
   pkgs,
   inputs,
   ...
-}: let
-  treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-    p.bash
-    p.comment
-    p.css
-    p.dockerfile
-    p.fish
-    p.gitattributes
-    p.gitignore
-    p.go
-    p.gomod
-    p.gowork
-    p.hcl
-    p.javascript
-    p.jq
-    p.json5
-    p.json
-    p.lua
-    p.make
-    p.markdown
-    p.nix
-    p.python
-    p.rust
-    p.toml
-    p.typescript
-    p.vue
-    p.yaml
-    p.latex
-    p.html
-    p.scss
-    p.tsx
-    p.typst
-    p.regex
-  ]);
+}: {
+  stylix.targets.neovim.enable = false;
 
-  treesitter-parsers = pkgs.symlinkJoin {
-    name = "treesitter-parsers";
-    paths = treesitterWithGrammars.dependencies;
-  };
-in {
-  # Neovim configuration dependencies
   home.packages = with pkgs; [
-    # lua
     lua51Packages.lua
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
 
-    # tools
     tree-sitter
     ripgrep
     fd
@@ -63,8 +23,8 @@ in {
     actionlint
     yamllint
     gitlint
+    sqlite
 
-    # lsp
     typescript-language-server
     lua-language-server
     vscode-langservers-extracted
@@ -78,14 +38,12 @@ in {
     just-lsp
   ];
 
-  stylix.targets.neovim.enable = false;
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
 
     # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    # package = pkgs.neovim;
     vimdiffAlias = true;
     vimAlias = true;
     withNodeJs = true;

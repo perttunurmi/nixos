@@ -2,7 +2,6 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    bitwarden-cli
     magic-wormhole
     nix
     age

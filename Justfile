@@ -1,22 +1,32 @@
 default:
     @just --list
 
-deploy host="$(hostname)":
+[group('build')]
+rebuild host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo
+    nixos-rebuild switch --flake .#{{ host }} --sudo
 
+[group('build')]
 test host="$(hostname)":
     @printf "rebulding {{ host }}\n"
-    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --impure
+    nixos-rebuild test --flake .#{{ host }} --sudo --impure
 
-deploy-impure host="$(hostname)":
-    @printf "rebulding {{ host }}\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo  --impure
-
+[group('build')]
 debug host="$(hostname)":
     @printf "rebulding {{ host }} with debug\n"
-    nixos-rebuild switch --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
+    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
 
+[group('build')]
+rebuild-impure host="$(hostname)":
+    @printf "rebulding {{ host }}\n"
+    nixos-rebuild switch --flake .#{{ host }} --sudo  --impure
+
+[group('rebuild')]
+update-rebuild host="$(hostname)":
+    sudo just update-all
+    sudo just deploy {{ host }}
+
+[group('setup')]
 generate-hardware-config host="$(hostname)":
     nixos-generate-config --show-hardware-config > ./hosts/{{ host }}/hardware-configuration.nix
 
@@ -24,11 +34,6 @@ generate-hardware-config host="$(hostname)":
 format:
     @printf "formatting files using alejandra"
     alejandra .
-
-update-all:
-    sudo nix-channel --update
-    sudo nix-channel --list
-    nix flake update
 
 [group('utils')]
 history:
@@ -48,23 +53,16 @@ gc old="30":
     @printf "collecting garbage...\n"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
 
-update-rebuild-clean host="$(hostname)":
-    sudo just update-all
-    sudo just deploy {{ host }}
-    just gc
-    just clean
+[group('update')]
+update-all:
+    sudo nix-channel --update
+    sudo nix-channel --list
+    nix flake update
 
 [group('utils')]
 list-all-packages:
     nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq
 
-commit:
-    just format
-    git commit
-
 [group('utils')]
 check url=".":
     nix flake check {{ url }}
-
-update-submodule:
-    git submodule update --remote

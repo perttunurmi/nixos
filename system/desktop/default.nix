@@ -6,10 +6,8 @@
 }: {
   imports = [
     ./fonts.nix
-
     ./environments/hyprland.nix
-    # ./environments/i3.nix
-    ./environments/suckless.nix
+    ./environments/i3.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
@@ -17,8 +15,6 @@
     ./ld.nix
     ./environments/android.nix
   ];
-
-  services.preload.enable = true;
 
   services.fwupd.enable = lib.mkDefault true;
 
@@ -58,13 +54,13 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    ghostty
     pango
     adwaita-icon-theme
     materia-theme
     materia-kde-theme
     papirus-icon-theme
     dconf
-    bitwarden
 
     racket
     python3
@@ -83,7 +79,6 @@
     pika-backup
     gnome-software
     flatpak
-    preload
     obsidian
     telegram-desktop
     vscode.fhs

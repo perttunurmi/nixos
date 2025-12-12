@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   username,
   ...
@@ -10,20 +9,16 @@
   environment.systemPackages = with pkgs.unstable; [
     android-studio
     android-tools
-
     kotlin
     gradle
     maven
-    jdk21
-
+    javaPackages.compiler.openjdk25
     git
-
     scrcpy
-
     qemu
     SDL2
     libGL
   ];
 
-  services.udev.packages = with pkgs; [android-udev-rules];
+  virtualisation.waydroid.enable = true;
 }

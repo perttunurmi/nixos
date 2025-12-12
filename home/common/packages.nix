@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     just
-    emacs
 
     # nix
     alejandra
@@ -19,9 +18,8 @@
     fzf
     fd
 
-    # projekti
-    kotlin-language-server
-    gradle
-    kotlin
+    scala
+    scala-cli
+    bear
   ];
 }

@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   callPackage,
@@ -15,5 +16,5 @@
       };
     };
   };
-  # services.displayManager.defaultSession = lib.mkDefault "xfce";
+  services.displayManager.defaultSession = lib.mkDefault "xfce";
 }

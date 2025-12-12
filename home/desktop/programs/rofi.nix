@@ -5,13 +5,14 @@
   ...
 }: {
   # stylix.targets.rofi.enable = false;
+  stylix.targets.fzf.enable = false;
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
 
     plugins = with pkgs; [
-      rofi-emoji-wayland
+      rofi-emoji
+      rofi-power-menu
       rofi-calc
     ];
 

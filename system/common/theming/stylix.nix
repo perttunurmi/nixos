@@ -8,7 +8,7 @@
   stylix = {
     enable = true;
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-    base16Scheme = ./apprentice.yaml;
+    base16Scheme = ./themes/apprentice.yaml;
     polarity = "dark";
 
     fonts = {
@@ -28,13 +28,13 @@
       };
 
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
 
       sizes = {
         applications = 12;
-        terminal = 12;
+        terminal = 18;
         desktop = 12;
       };
     };

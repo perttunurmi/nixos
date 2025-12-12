@@ -1,7 +1,7 @@
 {...}: {
   xresources.properties = {
     "Xcursor.size" = 16;
-    "Xft.dpi" = 125;
+    "Xft.dpi" = 100;
   };
 
   home.file = {
@@ -9,13 +9,10 @@
       source = ./xinitrc;
       target = ".xinitrc";
     };
-  };
-
-  home.file = {
-    autostart = {
-      source = ./autostart.sh;
-      target = ".local/share/dwm/autostart.sh";
-      executable = true;
-    };
+    # autostart = {
+    #   source = ./autostart.sh;
+    #   target = ".local/share/dwm/autostart.sh";
+    #   executable = true;
+    # };
   };
 }
