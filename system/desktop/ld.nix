@@ -48,7 +48,6 @@
       libcaca
       libcanberra
       libcap
-      libclang.lib
       libdbusmenu
       libdrm
       libgcrypt

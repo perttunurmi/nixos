@@ -10,6 +10,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     stylix.url = "github:nix-community/stylix/release-25.11";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -138,6 +139,13 @@
         hostPath = ./hosts/Fujitsu;
         extraSpecialArgs = {inherit inputs;};
         server = true;
+      };
+
+      Yoga = mkHost {
+        hostPath = ./hosts/Yoga;
+        extraSpecialArgs = {inherit inputs;};
+        server = true;
+	desktop = true;
       };
     };
   };

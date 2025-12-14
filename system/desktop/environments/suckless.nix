@@ -5,7 +5,6 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    clang-tools
     xorg.libXft
     xorg.libXinerama
     xorg.libX11

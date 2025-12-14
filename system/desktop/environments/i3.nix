@@ -21,7 +21,6 @@
         xorg.libX11
 
         gcc
-        clang-tools
         gnumake
 
         qimgv
