@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
   # Define a user account. Don't forget to set a password with ‘passwd’!
   users = {
     users.perttu = {
@@ -6,29 +6,29 @@
       description = "Perttu" + " " + "Nurmi";
       extraGroups = [
         "perttu"
-          "gamemode"
-          "networkmanager"
-          "wheel"
-          "docker"
-          "audio"
-          "video"
-          "plugdev"
-          "input"
-          "lp"
-          "scanner"
-          "libvirt"
-          "kvm"
-          "wireshark"
-          "samba"
+        "gamemode"
+        "networkmanager"
+        "wheel"
+        "docker"
+        "audio"
+        "video"
+        "plugdev"
+        "input"
+        "lp"
+        "scanner"
+        "libvirt"
+        "kvm"
+        "wireshark"
+        "samba"
       ];
 
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPKIPf9KexBLaGjyn6ydyV3opUOA0TsTTXasxlZPyJmF"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG68e/3wA1WONkGrFadHB9NH1ka4uFOTJ4CLYkQc1IKN"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPNACa1uf71iVOkNZmMJwmmaHHmgAemzHos4UtBNSEZA"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHFBWHZJN4SJT+ARrioPZdDNNjNfucFD4/rHQO9T2fzx"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINHDfYPmi1G2NqOYSl4eQMruvYQHVZtfajrMluk4pA5n"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKJPPNtK8bsAF7JnQgV6wS8Va5o5U7FOii5Y18KvAfek"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG68e/3wA1WONkGrFadHB9NH1ka4uFOTJ4CLYkQc1IKN"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPNACa1uf71iVOkNZmMJwmmaHHmgAemzHos4UtBNSEZA"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHFBWHZJN4SJT+ARrioPZdDNNjNfucFD4/rHQO9T2fzx"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINHDfYPmi1G2NqOYSl4eQMruvYQHVZtfajrMluk4pA5n"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKJPPNtK8bsAF7JnQgV6wS8Va5o5U7FOii5Y18KvAfek"
       ];
     };
   };

@@ -3,6 +3,7 @@
     enable = true;
 
     libraries = with pkgs; [
+      libcxx
       SDL
       SDL2
       SDL2_image
@@ -116,6 +117,23 @@
       xorg.xkeyboardconfig
       xz
       zlib
+      fltk
+      libGL
+      libGLU
+      glui
+      faac
+      faad2
+      freeglut
+      glew
+      glfw
+      glm
+      SDL2
+      SDL2_ttf
+      SDL2_net
+      SDL2_gfx
+      SDL2_sound
+      SDL2_mixer
+      SDL2_image
     ];
   };
 

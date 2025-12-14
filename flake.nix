@@ -145,7 +145,7 @@
         hostPath = ./hosts/Yoga;
         extraSpecialArgs = {inherit inputs;};
         server = true;
-	desktop = true;
+        desktop = true;
       };
     };
   };

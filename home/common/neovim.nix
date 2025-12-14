@@ -10,6 +10,11 @@
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
 
+    clang-tools
+
+    zig
+    zls
+
     tree-sitter
     ripgrep
     fd
@@ -37,7 +42,6 @@
     nixd
     just-lsp
   ];
-
 
   programs.neovim = {
     enable = true;

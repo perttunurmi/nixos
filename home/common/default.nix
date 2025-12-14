@@ -43,6 +43,8 @@ in {
     ll = "eza -l --icons=auto --git --git-repos";
     la = "eza -a --icons=auto --git";
     lla = "eza -la --icons=auto --git --git-repos";
+
+    open = "xdg-open";
   };
 
   programs = {

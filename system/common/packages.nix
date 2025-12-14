@@ -10,6 +10,7 @@
     gdb
     tldr
     libsecret
+    pciutils
     gnumake
     unzip
     tmux
@@ -26,7 +27,7 @@
     llvmPackages_latest.libllvm
     llvmPackages_latest.libcxx
     llvmPackages_latest.clang
-    clang-tools 
+    clang-tools
     clang
   ];
 }

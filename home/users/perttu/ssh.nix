@@ -6,6 +6,7 @@
     matchBlocks = {
       "*" = {
       };
+
       "github" = {
         host = "github.com";
         identitiesOnly = true;
@@ -20,6 +21,7 @@
         user = "root";
         port = 22;
       };
+
       "Yoga" = {
         host = "Yoga";
         hostname = "nurmilab.xyz";

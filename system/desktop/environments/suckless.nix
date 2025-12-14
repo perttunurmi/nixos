@@ -27,24 +27,24 @@
     networkmanagerapplet
     copyq
     brightnessctl
-    xsel 
-    redshift 
-    rofi 
-    dunst 
-    xautolock 
-    picom 
-    feh 
-    acpi 
-    arandr 
-    dex 
-    xbindkeys 
-    brightnessctl 
-    xorg.xdpyinfo 
-    sysstat 
-    networkmanagerapplet 
-    copyq 
-    gpick 
-    flameshot 
+    xsel
+    redshift
+    rofi
+    dunst
+    xautolock
+    picom
+    feh
+    acpi
+    arandr
+    dex
+    xbindkeys
+    brightnessctl
+    xorg.xdpyinfo
+    sysstat
+    networkmanagerapplet
+    copyq
+    gpick
+    flameshot
   ];
 
   programs.thunar.enable = true;

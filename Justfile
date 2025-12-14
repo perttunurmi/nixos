@@ -24,7 +24,7 @@ rebuild-impure host="$(hostname)":
 [group('rebuild')]
 update-rebuild host="$(hostname)":
     sudo just update-all
-    sudo just deploy {{ host }}
+    sudo just rebuild {{ host }}
 
 [group('setup')]
 generate-hardware-config host="$(hostname)":

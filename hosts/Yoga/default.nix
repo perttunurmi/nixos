@@ -1,16 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../system/configuration.nix
-      ../../system/desktop/default.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../system/configuration.nix
+    ../../system/desktop/default.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -44,14 +45,14 @@
     #media-session.enable = true;
   };
 
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   users.users.perttu = {
     isNormalUser = true;
     description = "Perttu Nurmi";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -81,7 +82,7 @@
     AllowHibernation=no
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
-    '';
+  '';
 
   system.stateVersion = "25.05";
 }
