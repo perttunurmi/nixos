@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -11,7 +12,30 @@
     ./hardware-configuration.nix
     ../../system/configuration.nix
     ../../system/desktop/default.nix
+
+    ../../system/services/docker.nix
   ];
+
+  services.nfs.server.enable = true;
+
+  time.timeZone = lib.mkDefault "Europe/Helsinki";
+  
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = lib.mkDefault {
+    LC_ADDRESS = "fi_FI.UTF-8";
+    LC_IDENTIFICATION = "fi_FI.UTF-8";
+    LC_MEASUREMENT = "fi_FI.UTF-8";
+    LC_MONETARY = "fi_FI.UTF-8";
+    LC_NAME = "fi_FI.UTF-8";
+    LC_NUMERIC = "fi_FI.UTF-8";
+    LC_PAPER = "fi_FI.UTF-8";
+    LC_TELEPHONE = "fi_FI.UTF-8";
+    LC_TIME = "fi_FI.UTF-8";
+  };
+
+
+  services.openssh.enable = lib.mkDefault true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -20,7 +44,8 @@
   networking.hostName = "Yoga"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = true;
+  networking.networkmanager.enable = lib.mkForce false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -57,7 +82,7 @@
   };
 
   programs.firefox.enable = true;
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -77,12 +102,20 @@
     };
   };
 
+
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv4.conf.all.src_valid_mark" = 1;
+  };
+
   systemd.sleep.extraConfig = ''
     AllowSuspend=no
     AllowHibernation=no
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
   '';
+
+  networking.firewall.enable = lib.mkDefault true;
 
   system.stateVersion = "25.05";
 }
