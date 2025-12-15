@@ -53,6 +53,10 @@ gc old="30":
     @printf "collecting garbage...\n"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
 
+[group('cleanup')]
+optimise:
+    nix-store --optimise
+
 [group('update')]
 update-all:
     sudo nix-channel --update

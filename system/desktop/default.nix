@@ -6,20 +6,22 @@
 }: {
   imports = [
     ./fonts.nix
-    ./environments/hyprland.nix
+
     ./environments/i3.nix
+    ./environments/android.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
 
     ./ld.nix
-    ./environments/android.nix
   ];
 
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = lib.mkDefault true;
+
+  programs.chromium.enable = true;
 
   services.flatpak.enable = true;
   xdg = {
@@ -60,7 +62,6 @@
     materia-theme
     materia-kde-theme
     papirus-icon-theme
-    dconf
 
     racket
     python3
@@ -115,11 +116,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Dconf is a low-level configuration system used in the GNOME
-  # desktop environment to manage user settings,
-  # storing them as keys in a database.
-  programs.dconf.enable = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
 
@@ -150,6 +146,7 @@
     };
 
     geoclue2.enable = true;
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -182,7 +179,6 @@
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
-  programs.kdeconnect.enable = true;
   networking.firewall = rec {
     allowedTCPPortRanges = [
       {

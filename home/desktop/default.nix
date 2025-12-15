@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./hyprland/hyprland.nix
     ./programs/browser.nix
     ./programs/rofi.nix
     ./programs/terminals.nix
@@ -30,6 +29,7 @@
   };
 
   home.packages = with pkgs; [
+    gimp3-with-plugins
     ghostscript
     tectonic
     mermaid-cli

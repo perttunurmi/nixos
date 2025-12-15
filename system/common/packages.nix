@@ -6,7 +6,6 @@
     nix
     age
     borgbackup
-    lldb
     gdb
     tldr
     libsecret
@@ -24,10 +23,11 @@
     scrot
     gcc
     entr
+    llvmPackages_latest.lldb
     llvmPackages_latest.libllvm
     llvmPackages_latest.libcxx
     llvmPackages_latest.clang
-    clang-tools
-    clang
+    llvmPackages_latest.clang-tools
+    # clang
   ];
 }

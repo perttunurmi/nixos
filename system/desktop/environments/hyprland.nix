@@ -12,6 +12,8 @@
     xwayland.enable = true;
   };
 
+  services.displayManager.gdm.enable = true;
+
   # services.displayManager.defaultSession = "hyprland";
   services.avahi.enable = true;
 
@@ -32,7 +34,7 @@
     slurp
     hyprsunset
     grim
-    gimp3-with-plugins
+
 
     waybar
     hyprcursor

@@ -8,7 +8,6 @@
     ./packages.nix
     ./overlays.nix
     ./settings.nix
-    ./agenix.nix
 
     ./theming/stylix.nix
 

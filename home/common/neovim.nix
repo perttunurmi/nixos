@@ -10,8 +10,6 @@
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
 
-    clang-tools
-
     zig
     zls
 

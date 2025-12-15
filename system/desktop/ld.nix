@@ -1,9 +1,11 @@
 {pkgs, ...}: {
   programs.nix-ld = {
-    enable = true;
+    enable = false;
 
     libraries = with pkgs; [
+      clangStdenv
       libcxx
+      clang-tools
       SDL
       SDL2
       SDL2_image
@@ -49,6 +51,7 @@
       libcaca
       libcanberra
       libcap
+      libclang.lib
       libdbusmenu
       libdrm
       libgcrypt

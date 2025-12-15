@@ -1,6 +1,6 @@
 {...}: {
   xresources.properties = {
-    "Xcursor.size" = 16;
+    "Xcursor.size" = 18;
     "Xft.dpi" = 100;
   };
 
