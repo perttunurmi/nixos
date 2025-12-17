@@ -52,6 +52,8 @@ clean old="30":
 gc old="30":
     @printf "collecting garbage...\n"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
+    nix-collect-garbage --delete-older-than {{ old }}d
+
 
 [group('cleanup')]
 optimise:
