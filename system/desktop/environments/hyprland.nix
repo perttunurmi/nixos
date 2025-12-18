@@ -35,7 +35,6 @@
     hyprsunset
     grim
 
-
     waybar
     hyprcursor
     swww

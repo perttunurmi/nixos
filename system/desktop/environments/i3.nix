@@ -8,7 +8,7 @@
 
   services.displayManager.gdm = {
     enable = true;
-    autoSuspend = true;  
+    autoSuspend = true;
     banner = "NixOS";
   };
 

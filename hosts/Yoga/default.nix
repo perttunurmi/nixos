@@ -19,7 +19,7 @@
   services.nfs.server.enable = true;
 
   time.timeZone = lib.mkDefault "Europe/Helsinki";
-  
+
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
   i18n.extraLocaleSettings = lib.mkDefault {
@@ -33,7 +33,6 @@
     LC_TELEPHONE = "fi_FI.UTF-8";
     LC_TIME = "fi_FI.UTF-8";
   };
-
 
   services.openssh.enable = lib.mkDefault true;
 
@@ -101,7 +100,6 @@
       };
     };
   };
-
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;

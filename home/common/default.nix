@@ -62,13 +62,20 @@ in {
       bind '\C-w:unix-filename-rubout'
 
       PS1='\n\[\e[32;1m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\e[0m\] '
-
-      . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
     '';
   };
 
-  home.file.".profile".text = ''
-    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+  programs.bash.profileExtra = ''
+    if [ -d "$HOME/bin" ] ; then
+      PATH="$HOME/bin:$PATH"
+    fi
+
+    if [ -d "$HOME/.local/bin" ] ; then
+      PATH="$HOME/.local/bin:$PATH"
+    fi
+
+    PYTHON_HISTORY=~/.local/share/python/history
+    NODE_REPL_HISTORY=~/.local/share/node/history
   '';
 
   home.file.".inputrc".text = ''
@@ -77,6 +84,9 @@ in {
 
     set completion-ignore-case on
     set show-all-if-ambiguous on
+
+    set menu-complete-display-prefix on
+    set completion-prefix-display-length 5
 
     $if Bash
       Space: magic-space
