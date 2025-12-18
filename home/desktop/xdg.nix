@@ -4,12 +4,17 @@
   lib,
   ...
 }: let
+  homeD = config.home.homeDirectory;
 in {
+  home.preferXdgDirectories = true;
+
   xdg = {
     enable = true;
-    cacheHome = config.home.homeDirectory + "/.local/cache";
-    configHome = config.home.homeDirectory + "/.config";
-    dataHome = config.home.homeDirectory + "/.local/share";
+
+    cacheHome = homeD + "/.local/cache";
+    configHome = homeD + "/.config";
+    dataHome = homeD + "/.local/share";
+    stateHome = homeD + "/.local/state";
     
     mimeApps = {
       enable = false;
@@ -18,14 +23,14 @@ in {
     userDirs = {
       enable = true;
       createDirectories = false;
-      templates = "${config.home.homeDirectory}/media/templates";
-      pictures = "${config.home.homeDirectory}/media/pictures";
-      videos = "${config.home.homeDirectory}/media/videos";
-      music = "${config.home.homeDirectory}/media/music";
-      download = "${config.home.homeDirectory}/downloads";
-      documents = "${config.home.homeDirectory}/documents";
-      publicShare = "${config.home.homeDirectory}/public";
-      desktop = "${config.home.homeDirectory}/desktop";
+      templates = "${homeD}/media/templates";
+      pictures = "${homeD}/media/pictures";
+      videos = "${homeD}/media/videos";
+      music = "${homeD}/media/music";
+      download = "${homeD}/downloads";
+      documents = "${homeD}/documents";
+      publicShare = "${homeD}/public";
+      desktop = "${homeD}/desktop";
 
       extraConfig = {
         XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/screenshots";

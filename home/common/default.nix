@@ -74,8 +74,8 @@ in {
       PATH="$HOME/.local/bin:$PATH"
     fi
 
-    PYTHON_HISTORY=~/.local/share/python/history
-    NODE_REPL_HISTORY=~/.local/share/node/history
+    PYTHON_HISTORY=~/.local/share/python_history
+    NODE_REPL_HISTORY=~/.local/share/node_history
   '';
 
   home.file.".inputrc".text = ''
