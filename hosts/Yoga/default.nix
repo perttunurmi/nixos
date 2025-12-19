@@ -14,7 +14,7 @@
     ../../system/desktop/default.nix
 
     ../../system/services/docker.nix
-    ../../system/services/nginx.nix
+    # ../../system/services/nginx.nix
     ../../system/services/virtualization.nix
     ../../system/services/samba.nix
   ];
