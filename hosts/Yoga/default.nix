@@ -14,81 +14,32 @@
     ../../system/desktop/default.nix
 
     ../../system/services/docker.nix
+    ../../system/services/nginx.nix
+    ../../system/services/virtualization.nix
+    ../../system/services/samba.nix
   ];
 
   services.nfs.server.enable = true;
+  networking.firewall.allowedTCPPorts = [ 2049 ];
 
-  time.timeZone = lib.mkDefault "Europe/Helsinki";
-
-  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = lib.mkDefault {
-    LC_ADDRESS = "fi_FI.UTF-8";
-    LC_IDENTIFICATION = "fi_FI.UTF-8";
-    LC_MEASUREMENT = "fi_FI.UTF-8";
-    LC_MONETARY = "fi_FI.UTF-8";
-    LC_NAME = "fi_FI.UTF-8";
-    LC_NUMERIC = "fi_FI.UTF-8";
-    LC_PAPER = "fi_FI.UTF-8";
-    LC_TELEPHONE = "fi_FI.UTF-8";
-    LC_TIME = "fi_FI.UTF-8";
-  };
-
-  services.openssh.enable = lib.mkDefault true;
-
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "Yoga"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # networking.networkmanager.enable = true;
+  networking.hostName = "Yoga";
   networking.networkmanager.enable = lib.mkForce false;
 
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
   services.libinput.enable = true;
-
-  users.users.perttu = {
-    isNormalUser = true;
-    description = "Perttu Nurmi";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
-  };
-
-  programs.firefox.enable = true;
-  nixpkgs.config.allowUnfree = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [
     vim
     wget
     neovim
     git
-    xournalpp
   ];
 
   services.logind = {

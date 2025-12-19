@@ -51,7 +51,7 @@
     loader.timeout = 0;
   };
 
-  networking.hostName = "T480s"; # Define your hostname.
+  networking.hostName = "T480s";
 
   environment.systemPackages = with pkgs; [
     powertop
@@ -59,7 +59,6 @@
 
   # powerManagement.enable = true;
   services.thermald.enable = true;
-  # powerManagement.powertop.enable = true;
 
   services.power-profiles-daemon.enable = lib.mkForce false;
   services.tlp = {
@@ -76,9 +75,8 @@
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 90;
 
-      #Optional helps save long term battery health
       START_CHARGE_THRESH_BAT0 = 0;
-      STOP_CHARGE_THRESH_BAT0 = 85; # 80 and above it stops charging
+      STOP_CHARGE_THRESH_BAT0 = 95;
     };
   };
 
