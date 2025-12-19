@@ -11,7 +11,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../system/configuration.nix
-    ../../system/desktop/default.nix
+    # ../../system/desktop/default.nix
 
     ../../system/services/docker.nix
     # ../../system/services/nginx.nix
@@ -20,13 +20,14 @@
   ];
 
   services.nfs.server.enable = true;
-  networking.firewall.allowedTCPPorts = [ 2049 ];
+  networking.firewall.allowedTCPPorts = [ 2049 51821 ];
+  networking.firewall.allowedUDPPorts = [ 51820 ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "Yoga";
-  networking.networkmanager.enable = lib.mkForce false;
+  networking.networkmanager.enable = true;
 
   services.xserver.xkb = {
     layout = "us";
