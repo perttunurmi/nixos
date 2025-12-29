@@ -7,8 +7,8 @@
     ./media.nix
     ./xdg.nix
   ];
+
   home.sessionVariables = {
-    TERMINAL = "GHOSTTY";
   };
 
   gtk = {
@@ -29,6 +29,9 @@
   };
 
   home.packages = with pkgs; [
+    tiled
+    ghostty
+    zed-editor
     gimp3-with-plugins
     ghostscript
     tectonic

@@ -27,8 +27,6 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -52,7 +50,6 @@
     stylix,
     agenix,
     nix-snapd,
-    dwm-config,
     ...
   }: {
     nixosConfigurations = let

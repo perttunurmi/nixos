@@ -24,7 +24,7 @@
 
       "Yoga" = {
         host = "Yoga";
-        hostname = "nurmilab.xyz";
+        hostname = "pertz.tplinkdns.com";
         user = "perttu";
         port = 22;
       };

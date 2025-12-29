@@ -84,10 +84,10 @@
       p11-kit
       pango
       pixman
-      python3
       speex
       stdenv.cc.cc
       stdenv.cc.cc.lib
+      libz
       tbb
       udev
       vulkan-loader

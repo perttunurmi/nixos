@@ -1,7 +1,8 @@
 {lib, ...}: let
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
-  font = jetbrains;
+  firacode = "FiraCode Nerd Font";
+  font = "DejaVuSansMono";
 in {
   programs = {
     alacritty = lib.mkForce {
@@ -17,7 +18,7 @@ in {
           normal.family = font;
           bold.family = font;
           italic.family = font;
-          size = 18;
+          size = 14;
         };
       };
     };

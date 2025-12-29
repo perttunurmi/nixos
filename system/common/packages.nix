@@ -2,6 +2,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    jujutsu
     magic-wormhole
     nix
     age

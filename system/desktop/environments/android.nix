@@ -7,18 +7,16 @@
   users.users.${username}.extraGroups = ["adbusers"];
 
   environment.systemPackages = with pkgs.unstable; [
+    javaPackages.compiler.openjdk25
     android-studio
     android-tools
     kotlin
     gradle
     maven
-    javaPackages.compiler.openjdk25
     git
     scrcpy
     qemu
     SDL2
     libGL
   ];
-
-  virtualisation.waydroid.enable = true;
 }

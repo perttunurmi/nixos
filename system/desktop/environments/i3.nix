@@ -6,13 +6,9 @@
   environment.pathsToLink = ["/libexec"];
   services.displayManager.defaultSession = lib.mkDefault "none+i3";
 
-  services.displayManager.gdm = {
-    enable = true;
-    autoSuspend = true;
-    banner = "NixOS";
-  };
-
   programs.dconf.enable = true;
+
+  services.displayManager.ly.enable = true;
 
   services.xserver = {
     desktopManager = {

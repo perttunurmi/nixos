@@ -20,10 +20,13 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = lib.mkDefault true;
+  services.libinput.touchpad.disableWhileTyping = lib.mkDefault true;
+  services.libinput.touchpad.tapping = lib.mkDefault false;
+  # services.libinput.touchpad.clickMethod = "buttonareas";
 
   programs.chromium.enable = true;
 
-  services.flatpak.enable = true;
+  services.flatpak.enable = false;
   xdg = {
     portal = {
       enable = true;
@@ -47,16 +50,16 @@
     };
   };
 
-  systemd.services.flatpak-repo = {
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.flatpak];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
+  # systemd.services.flatpak-repo = {
+  #   wantedBy = ["multi-user.target"];
+  #   path = [pkgs.flatpak];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
 
   users.users.${username}.packages = with pkgs; [
-    ghostty
+    python3
     pango
     adwaita-icon-theme
     materia-theme
@@ -64,7 +67,6 @@
     papirus-icon-theme
 
     racket
-    python3
     wxmaxima
 
     inkscape-with-extensions
@@ -114,7 +116,7 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

@@ -3,8 +3,7 @@
   username,
   lib,
   config,
-  ...
-}: {
+  ... }: {
   stylix = {
     enable = true;
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
@@ -37,6 +36,12 @@
         terminal = 18;
         desktop = 12;
       };
+    };
+
+    cursor = {
+        package = pkgs.apple-cursor;
+        name = "macOS";
+        size = 28;
     };
 
     targets = {

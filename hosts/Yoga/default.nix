@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
   lib,
@@ -11,10 +8,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../system/configuration.nix
-    # ../../system/desktop/default.nix
 
     ../../system/services/docker.nix
-    # ../../system/services/nginx.nix
     ../../system/services/virtualization.nix
     ../../system/services/samba.nix
   ];
