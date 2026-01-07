@@ -41,7 +41,7 @@ history:
 
 [group('utils')]
 repl:
-    nix repl -f flake:nixpkgs
+    nixos-rebuild repl --flake .
 
 [group('cleanup')]
 clean old="30":

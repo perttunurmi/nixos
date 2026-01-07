@@ -86,6 +86,7 @@
               wsl.defaultUser = "${username}";
               wsl.docker-desktop.enable = wsl;
               wsl.startMenuLaunchers = wsl;
+              wsl.interop.register = wsl;
             }
             hostPath
             home-manager.nixosModules.home-manager
