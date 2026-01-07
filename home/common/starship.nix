@@ -1,8 +1,8 @@
-{config, ...}: {
+{config, wsl, ...}: {
   home.sessionVariables.STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
 
   programs.starship = {
-    enable = true;
+    enable = !wsl;
     settings = {
       character = {
         success_symbol = "[を](bold green)";
