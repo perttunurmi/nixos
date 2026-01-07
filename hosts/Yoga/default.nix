@@ -61,6 +61,8 @@
     AllowSuspendThenHibernate=no
   '';
 
+  environment.enableAllTerminfo = true;
+
   networking.firewall.enable = lib.mkDefault true;
 
   system.stateVersion = "25.05";
