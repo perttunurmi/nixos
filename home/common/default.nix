@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  wsl,
   ...
 }: let
   d = config.xdg.dataHome;
@@ -43,8 +44,6 @@ in {
     ll = "eza -l --icons=auto --git --git-repos";
     la = "eza -a --icons=auto --git";
     lla = "eza -la --icons=auto --git --git-repos";
-
-    open = "xdg-open";
   };
 
   programs = {
@@ -85,8 +84,8 @@ in {
     set completion-ignore-case on
     set show-all-if-ambiguous on
 
-    set menu-complete-display-prefix on
-    set completion-prefix-display-length 5
+    # set menu-complete-display-prefix on
+    # set completion-prefix-display-length 5
 
     $if Bash
       Space: magic-space
