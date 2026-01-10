@@ -15,16 +15,16 @@
         ];
       };
 
-      "Fujitsu" = {
+      "fujitsu" = {
         host = "Fujitsu";
         hostname = "alavus.nurmilab.xyz";
         user = "root";
         port = 22;
       };
 
-      "Yoga" = {
+      "yoga" = {
         host = "Yoga";
-        hostname = "pertz.tplinkdns.com";
+        hostname = "100.117.29.124";
         user = "perttu";
         port = 22;
       };
