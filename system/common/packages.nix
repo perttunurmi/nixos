@@ -3,6 +3,8 @@
 
   environment.systemPackages = with pkgs; [
     sshfs
+    jujutsu
+    iptables
     magic-wormhole
     nix
     age

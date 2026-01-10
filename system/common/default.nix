@@ -52,6 +52,7 @@
   };
 
   networking.firewall.enable = lib.mkDefault true;
+  networking.nftables.enable = lib.mkDefault true;
   networking.networkmanager.enable = lib.mkDefault true;
   networking.wireless.enable = lib.mkDefault false;
 
