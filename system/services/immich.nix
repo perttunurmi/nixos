@@ -1,7 +1,14 @@
 {pkgs, ...}: {
-  services.immich.enable = true;
-  services.immich.port = 2283;
-  services.immich.openFirewall = true;
+  # https://wiki.nixos.org/wiki/Immich
+  services.immich = {
+    enable = true;
+    port = 2283;
+    openFirewall = true;
+    host = "0.0.0.0";
+    # sudo -u immich mkdir -p /var/lib/immich/{upload,library,thumbs,encoded-video,profile,backups}
+    # sudo -u immich touch /var/lib/immich/{upload,library,thumbs,encoded-video,profile,backups}/.immich
+    mediaLocation = "/var/lib/immich";
+  };
 
   hardware.graphics = {
     enable = true;
@@ -12,5 +19,6 @@
   };
 
   environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
+
   users.users.immich.extraGroups = ["video" "render"];
 }
