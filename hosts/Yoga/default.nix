@@ -52,6 +52,7 @@
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv4.conf.all.src_valid_mark" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
   };
 
   systemd.sleep.extraConfig = ''
@@ -63,7 +64,7 @@
 
   environment.enableAllTerminfo = true;
 
-  networking.firewall.enable = lib.mkDefault true;
+  networking.firewall.enable = lib.mkForce false;
 
   system.stateVersion = "25.05";
 }
