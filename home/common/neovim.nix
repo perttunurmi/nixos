@@ -17,7 +17,6 @@
     nil
     metals
 
-
     tree-sitter
     ripgrep
     fd

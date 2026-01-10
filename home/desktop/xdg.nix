@@ -15,7 +15,7 @@ in {
     configHome = homeD + "/.config";
     dataHome = homeD + "/.local/share";
     stateHome = homeD + "/.local/state";
-    
+
     mimeApps = {
       enable = false;
     };

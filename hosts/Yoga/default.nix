@@ -15,8 +15,8 @@
   ];
 
   services.nfs.server.enable = true;
-  networking.firewall.allowedTCPPorts = [ 2049 51821 ];
-  networking.firewall.allowedUDPPorts = [ 51820 ];
+  networking.firewall.allowedTCPPorts = [2049 51821];
+  networking.firewall.allowedUDPPorts = [51820];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -44,7 +44,7 @@
         HandleLidSwitch = "ignore";
         HandleLidSwitchDocked = "ignore";
         LidSwitchExternalPower = "ignore";
-        IdleAction= "hybrid-sleep";
+        IdleAction = "hybrid-sleep";
       };
     };
   };

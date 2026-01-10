@@ -36,6 +36,8 @@ in {
         "samba"
       ];
 
+      shell = pkgs.zsh;
+
       openssh.authorizedKeys.keys = systems;
     };
   };
