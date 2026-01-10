@@ -3,6 +3,8 @@
     ./common/default.nix
   ];
 
+  services.tailscale.enable = true;
+
   services.openssh = {
     enable = true;
     ports = [22];

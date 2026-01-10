@@ -2,6 +2,7 @@
   username,
   lib,
   pkgs,
+  wsl,
   ...
 }: {
   imports = [
@@ -47,7 +48,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   networking.firewall.enable = lib.mkDefault true;

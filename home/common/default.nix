@@ -62,7 +62,6 @@ in {
     zsh = {
       enable = true;
       enableCompletion = true;
-      syntaxHighlighting.enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
       defaultKeymap = "emacs";
       setOptions = [
