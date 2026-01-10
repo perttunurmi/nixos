@@ -12,6 +12,7 @@
     ../../system/services/docker.nix
     ../../system/services/virtualization.nix
     ../../system/services/samba.nix
+    ../../system/services/immich.nix
   ];
 
   services.nfs.server.enable = true;
