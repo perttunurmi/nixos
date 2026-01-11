@@ -427,7 +427,7 @@
         "type": "github"
       }
     },
-    "mysecrets": {
+    "nix-secrets": {
       "flake": false,
       "locked": {
         "path": "git@github.com:perttunurmi/secrets.git",
@@ -604,7 +604,7 @@
         "hardware": "hardware",
         "home-manager": "home-manager_2",
         "lanzaboote": "lanzaboote",
-        "mysecrets": "mysecrets",
+        "nix-secrets": "nix-secrets",
         "nix-snapd": "nix-snapd",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",

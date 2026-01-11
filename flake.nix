@@ -30,7 +30,7 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    mysecrets = {
+    nix-secrets = {
       url = "git@github.com:perttunurmi/secrets.git";
       flake = false;
     };

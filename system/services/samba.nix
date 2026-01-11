@@ -7,6 +7,7 @@
   services.samba = {
     package = pkgs.samba4Full;
     enable = true;
+    usershares.enable = true;
     openFirewall = true;
     settings = {
       global = {
@@ -31,6 +32,15 @@
         "directory mask" = "0700";
         "valid users" = "%S";
       };
+
+      "public" = {
+        "path" = "/mnt/ulkoinen/";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
     };
   };
 
@@ -39,10 +49,14 @@
     openFirewall = true;
   };
   services.avahi = {
-    enable = true;
-
     publish.enable = true;
     publish.userServices = true;
     nssmdns4 = true;
+
+    enable = true;
+    openFirewall = true;
   };
+
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
 }

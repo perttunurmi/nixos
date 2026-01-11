@@ -3,7 +3,7 @@
   config,
   ...
 }: let
- hostName = "nextcloud";
+  hostName = "nextcloud";
 in {
   services.nextcloud = {
     enable = true;
@@ -20,7 +20,10 @@ in {
 
   services.nginx.virtualHosts."${hostName}" = {
     listen = [
-      { addr = "0.0.0.0"; port = 8585; }
+      {
+        addr = "0.0.0.0";
+        port = 8585;
+      }
     ];
   };
 

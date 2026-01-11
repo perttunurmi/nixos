@@ -15,6 +15,7 @@
     ../../system/services/immich.nix
     ../../system/services/nginx.nix
     ../../system/services/nextcloud.nix
+    ../../system/services/nfs.nix
   ];
 
   services.nfs.server.enable = true;
