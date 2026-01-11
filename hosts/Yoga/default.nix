@@ -9,11 +9,12 @@
     ./hardware-configuration.nix
     ../../system/configuration.nix
 
-    # ../../system/services/docker.nix
+    ../../system/services/docker.nix
     # ../../system/services/virtualization.nix
     ../../system/services/samba.nix
     ../../system/services/immich.nix
     ../../system/services/nginx.nix
+    ../../system/services/nextcloud.nix
   ];
 
   services.nfs.server.enable = true;
@@ -65,8 +66,6 @@
   '';
 
   environment.enableAllTerminfo = true;
-
-  networking.firewall.enable = false;
 
   system.stateVersion = "25.05";
 }
