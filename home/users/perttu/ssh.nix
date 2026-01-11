@@ -28,6 +28,20 @@
         user = "perttu";
         port = 22;
       };
+
+      "wsl" = {
+        host = "nixos";
+        hostname = "100.116.84.41";
+        user = "perttu";
+        port = 2222;
+      };
+
+      "windows" = {
+        host = "windows";
+        hostname = "100.100.237.1";
+        user = "perttu";
+        port = 22;
+      };
     };
   };
 }
