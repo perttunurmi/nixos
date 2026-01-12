@@ -31,7 +31,7 @@
   home.packages = with pkgs; [
     tiled
     ghostty
-    zed-editor
+    # zed-editor
     gimp3-with-plugins
     ghostscript
     tectonic

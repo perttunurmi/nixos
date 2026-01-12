@@ -15,7 +15,6 @@
   services.displayManager.gdm.enable = true;
 
   # services.displayManager.defaultSession = "hyprland";
-  services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [
     file-roller

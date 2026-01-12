@@ -6,7 +6,7 @@
     statdPort = 4000;
     extraNfsdConfig = '''';
     exports = ''
-          /mnt/ulkoinen/ 192.168.0.0/24(rw,sync,no_subtree_check)
+      /mnt/ulkoinen/ 192.168.0.0/24(rw,sync,no_subtree_check)
     '';
   };
   networking.firewall = {
