@@ -79,14 +79,16 @@ in {
       ];
 
       initContent = ''
-                WORDCHARS=''${WORDCHARS/\/}
-              KEYTIMEOUT=1
+        WORDCHARS=''${WORDCHARS/\/}
+        KEYTIMEOUT=1
 
         # Ctrl+Left/Right for word navigation
-                bindkey "^[[1;5D" backward-word
-                bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;5D" backward-word
+        bindkey "^[[1;5C" forward-word
 
-                bindkey "^[[3;5~" kill-word
+        bindkey "^[[3;5~" kill-word
+
+        bindkey '^M' accept-line
       '';
 
       completionInit = builtins.concatStringsSep "\n" [
