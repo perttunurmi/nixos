@@ -5,6 +5,16 @@
 }: let
   hostName = "nextcloud";
 in {
+  # Nextcloud requires a password file to be created manually before the service can start.
+  # The admin password must be stored in /etc/nextcloud-admin-pass with restrictive permissions.
+  #
+  # To set up the password file:
+  #   sudo mkdir -p /etc
+  #   echo "your-secure-password" | sudo tee /etc/nextcloud-admin-pass
+  #   sudo chmod 600 /etc/nextcloud-admin-pass
+  #   sudo chown nextcloud:nextcloud /etc/nextcloud-admin-pass
+  #
+  # Note: Consider migrating to agenix for proper secrets management in the future.
   services.nextcloud = {
     enable = true;
     configureRedis = true;
