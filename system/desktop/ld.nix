@@ -7,6 +7,10 @@
       libcxx
       clang-tools
       SDL
+      SDL2
+      SDL2_image
+      SDL2_mixer
+      SDL2_ttf
       SDL_image
       SDL_mixer
       SDL_ttf
@@ -25,6 +29,7 @@
       expat
       flac
       fontconfig
+      freeglut
       freetype
       fribidi
       fuse
@@ -40,6 +45,8 @@
       harfbuzz
       icu
       keyutils.lib
+      libGL
+      libGLU
       libappindicator-gtk2
       libcaca
       libcanberra
@@ -114,22 +121,15 @@
       xz
       zlib
       fltk
-      libGL
-      libGLU
       glui
       faac
       faad2
-      freeglut
       glew
       glfw
       glm
-      SDL2
-      SDL2_ttf
       SDL2_net
       SDL2_gfx
       SDL2_sound
-      SDL2_mixer
-      SDL2_image
     ];
   };
 
