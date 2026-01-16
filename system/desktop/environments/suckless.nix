@@ -5,7 +5,6 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    clang-tools
     xorg.libXft
     xorg.libXinerama
     xorg.libX11
@@ -28,24 +27,24 @@
     networkmanagerapplet
     copyq
     brightnessctl
-    xsel 
-    redshift 
-    rofi 
-    dunst 
-    xautolock 
-    picom 
-    feh 
-    acpi 
-    arandr 
-    dex 
-    xbindkeys 
-    brightnessctl 
-    xorg.xdpyinfo 
-    sysstat 
-    networkmanagerapplet 
-    copyq 
-    gpick 
-    flameshot 
+    xsel
+    redshift
+    rofi
+    dunst
+    xautolock
+    picom
+    feh
+    acpi
+    arandr
+    dex
+    xbindkeys
+    brightnessctl
+    xorg.xdpyinfo
+    sysstat
+    networkmanagerapplet
+    copyq
+    gpick
+    flameshot
   ];
 
   programs.thunar.enable = true;
@@ -57,7 +56,7 @@
 
   programs.slock.enable = true;
   services = {
-    displayManager.ly.enable = lib.mkDefault true;
+    # displayManager.ly.enable = lib.mkDefault true;
     xserver.windowManager.dwm = {
       enable = false;
       package = pkgs.dwm.overrideAttrs {

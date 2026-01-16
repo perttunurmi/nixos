@@ -6,22 +6,27 @@
 }: {
   imports = [
     ./fonts.nix
-    ./environments/hyprland.nix
+
     ./environments/i3.nix
+    ./environments/android.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
 
     ./ld.nix
-    ./environments/android.nix
   ];
 
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = lib.mkDefault true;
+  services.libinput.touchpad.disableWhileTyping = lib.mkDefault true;
+  services.libinput.touchpad.tapping = lib.mkDefault false;
+  # services.libinput.touchpad.clickMethod = "buttonareas";
 
-  services.flatpak.enable = true;
+  programs.chromium.enable = true;
+
+  services.flatpak.enable = false;
   xdg = {
     portal = {
       enable = true;
@@ -45,25 +50,23 @@
     };
   };
 
-  systemd.services.flatpak-repo = {
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.flatpak];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
+  # systemd.services.flatpak-repo = {
+  #   wantedBy = ["multi-user.target"];
+  #   path = [pkgs.flatpak];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
 
   users.users.${username}.packages = with pkgs; [
-    ghostty
+    python3
     pango
     adwaita-icon-theme
     materia-theme
     materia-kde-theme
     papirus-icon-theme
-    dconf
 
     racket
-    python3
     wxmaxima
 
     inkscape-with-extensions
@@ -113,12 +116,7 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Dconf is a low-level configuration system used in the GNOME
-  # desktop environment to manage user settings,
-  # storing them as keys in a database.
-  programs.dconf.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -150,6 +148,7 @@
     };
 
     geoclue2.enable = true;
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -182,7 +181,6 @@
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
-  programs.kdeconnect.enable = true;
   networking.firewall = rec {
     allowedTCPPortRanges = [
       {

@@ -2,13 +2,14 @@
   username,
   lib,
   pkgs,
+  wsl,
+  config,
   ...
 }: {
   imports = [
     ./packages.nix
     ./overlays.nix
     ./settings.nix
-    ./agenix.nix
 
     ./theming/stylix.nix
 
@@ -16,7 +17,26 @@
     ./users/root/default.nix
   ];
 
+  services.tailscale.enable = true;
+
+  networking.firewall = {
+    trustedInterfaces = ["tailscale0"];
+    allowedUDPPorts = [config.services.tailscale.port];
+    checkReversePath = "loose";
+  };
+
+  networking.nameservers = ["100.100.100.100" "8.8.8.8" "1.1.1.1"];
+  networking.search = ["tail31079d.ts.net"];
+
+  # services.avahi = {
+  #   enable = true;
+  #   allowPointToPoint = true;
+  # };
+
+  boot.supportedFilesystems = ["nfs"];
+
   programs.bash.enable = true;
+  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.bash;
 
   users.users.${username} = lib.mkDefault {
@@ -47,10 +67,11 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   networking.firewall.enable = lib.mkDefault true;
+  networking.nftables.enable = lib.mkDefault true;
   networking.networkmanager.enable = lib.mkDefault true;
   networking.wireless.enable = lib.mkDefault false;
 

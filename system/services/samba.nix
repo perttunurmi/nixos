@@ -7,6 +7,7 @@
   services.samba = {
     package = pkgs.samba4Full;
     enable = true;
+    usershares.enable = true;
     openFirewall = true;
     settings = {
       global = {
@@ -17,7 +18,7 @@
         #"use sendfile" = "yes";
         #"max protocol" = "smb2";
         # note: localhost is the ipv6 localhost ::1
-        "hosts allow" = "192.168.1. 192.168.0. 127.0.0.1 localhost";
+        "hosts allow" = "192.168.1. 192.168.0. 127.0.0.1 localhost 100.64.";
         "hosts deny" = "0.0.0.0/0";
         "guest account" = "nobody";
         "map to guest" = "bad user";
@@ -31,6 +32,13 @@
         "directory mask" = "0700";
         "valid users" = "%S";
       };
+
+      "public" = {
+        "path" = "/mnt/ulkoinen/";
+        "browseable" = "yes";
+        "read only" = "yes";
+        "guest ok" = "yes";
+      };
     };
   };
 
@@ -39,10 +47,14 @@
     openFirewall = true;
   };
   services.avahi = {
-    enable = true;
-
     publish.enable = true;
     publish.userServices = true;
     nssmdns4 = true;
+
+    enable = true;
+    openFirewall = true;
   };
+
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
 }

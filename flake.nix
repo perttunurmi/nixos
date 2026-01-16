@@ -10,6 +10,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     stylix.url = "github:nix-community/stylix/release-25.11";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -26,12 +27,10 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    mysecrets = {
+    nix-secrets = {
       url = "git@github.com:perttunurmi/secrets.git";
       flake = false;
     };
@@ -51,7 +50,6 @@
     stylix,
     agenix,
     nix-snapd,
-    dwm-config,
     ...
   }: {
     nixosConfigurations = let
@@ -88,6 +86,7 @@
               wsl.defaultUser = "${username}";
               wsl.docker-desktop.enable = wsl;
               wsl.startMenuLaunchers = wsl;
+              wsl.interop.register = wsl;
             }
             hostPath
             home-manager.nixosModules.home-manager
@@ -136,6 +135,12 @@
 
       Fujitsu = mkHost {
         hostPath = ./hosts/Fujitsu;
+        extraSpecialArgs = {inherit inputs;};
+        server = true;
+      };
+
+      Yoga = mkHost {
+        hostPath = ./hosts/Yoga;
         extraSpecialArgs = {inherit inputs;};
         server = true;
       };

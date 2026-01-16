@@ -24,7 +24,7 @@ rebuild-impure host="$(hostname)":
 [group('rebuild')]
 update-rebuild host="$(hostname)":
     sudo just update-all
-    sudo just deploy {{ host }}
+    sudo just rebuild {{ host }}
 
 [group('setup')]
 generate-hardware-config host="$(hostname)":
@@ -41,7 +41,7 @@ history:
 
 [group('utils')]
 repl:
-    nix repl -f flake:nixpkgs
+    nixos-rebuild repl --flake .
 
 [group('cleanup')]
 clean old="30":
@@ -52,6 +52,12 @@ clean old="30":
 gc old="30":
     @printf "collecting garbage...\n"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
+    nix-collect-garbage --delete-older-than {{ old }}d
+
+
+[group('cleanup')]
+optimise:
+    nix-store --optimise
 
 [group('update')]
 update-all:

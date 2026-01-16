@@ -10,11 +10,16 @@
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
 
+    prettierd
+
+    zig
+    zls
+    nil
+    metals
+
     tree-sitter
     ripgrep
     fd
-    black
-    isort
     gh
     git
     cargo
@@ -24,6 +29,7 @@
     yamllint
     gitlint
     sqlite
+    ruff
 
     typescript-language-server
     lua-language-server
@@ -31,13 +37,12 @@
     jdt-language-server
     rust-analyzer
     bash-language-server
-    pyright
-    pylint
+    basedpyright
     yaml-language-server
     nixd
+    nil
     just-lsp
   ];
-
 
   programs.neovim = {
     enable = true;

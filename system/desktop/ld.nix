@@ -3,6 +3,9 @@
     enable = true;
 
     libraries = with pkgs; [
+      clangStdenv
+      libcxx
+      clang-tools
       SDL
       SDL2
       SDL2_image
@@ -81,10 +84,10 @@
       p11-kit
       pango
       pixman
-      python3
       speex
       stdenv.cc.cc
       stdenv.cc.cc.lib
+      libz
       tbb
       udev
       vulkan-loader
@@ -117,6 +120,16 @@
       xorg.xkeyboardconfig
       xz
       zlib
+      fltk
+      glui
+      faac
+      faad2
+      glew
+      glfw
+      glm
+      SDL2_net
+      SDL2_gfx
+      SDL2_sound
     ];
   };
 

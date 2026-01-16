@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./hyprland/hyprland.nix
     ./programs/browser.nix
     ./programs/rofi.nix
     ./programs/terminals.nix
@@ -8,8 +7,8 @@
     ./media.nix
     ./xdg.nix
   ];
+
   home.sessionVariables = {
-    TERMINAL = "GHOSTTY";
   };
 
   gtk = {
@@ -30,6 +29,10 @@
   };
 
   home.packages = with pkgs; [
+    tiled
+    ghostty
+    # zed-editor
+    gimp3-with-plugins
     ghostscript
     tectonic
     mermaid-cli
