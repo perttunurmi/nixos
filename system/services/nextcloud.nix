@@ -12,7 +12,8 @@ in {
     https = true;
     hostName = hostName;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
-    config.dbtype = "sqlite";
+    config.dbtype = "pgsql";
+    database.createLocally = true;
     settings.trusted_domains = [
       "nextcloud.nurmilab.xyz"
     ];
