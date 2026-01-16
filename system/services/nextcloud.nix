@@ -8,9 +8,10 @@ in {
   # Nextcloud requires a password file to be created manually before the service can start.
   # The admin password must be stored in /etc/nextcloud-admin-pass with restrictive permissions.
   #
-  # To set up the password file:
-  #   sudo mkdir -p /etc
-  #   echo "your-secure-password" | sudo tee /etc/nextcloud-admin-pass
+  # To set up the password file securely:
+  #   read -s -p "Enter admin password: " NEXTCLOUD_PASS && echo
+  #   echo "$NEXTCLOUD_PASS" | sudo tee /etc/nextcloud-admin-pass > /dev/null
+  #   unset NEXTCLOUD_PASS
   #   sudo chmod 600 /etc/nextcloud-admin-pass
   #   sudo chown nextcloud:nextcloud /etc/nextcloud-admin-pass
   #
