@@ -48,7 +48,7 @@
         HandleLidSwitch = "ignore";
         HandleLidSwitchDocked = "ignore";
         LidSwitchExternalPower = "ignore";
-        IdleAction = "hybrid-sleep";
+        IdleAction = "ignore";
       };
     };
   };
