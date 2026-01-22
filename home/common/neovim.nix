@@ -40,7 +40,6 @@
     basedpyright
     yaml-language-server
     nixd
-    nil
     just-lsp
   ];
 

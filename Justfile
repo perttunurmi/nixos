@@ -14,17 +14,22 @@ test host="$(hostname)":
 [group('build')]
 debug host="$(hostname)":
     @printf "rebulding {{ host }} with debug\n"
-    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
+    nixos-rebuild test --flake .#{{ host }} --sudo --show-trace --print-build-logs --verbose
 
 [group('build')]
 rebuild-impure host="$(hostname)":
     @printf "rebulding {{ host }}\n"
     nixos-rebuild switch --flake .#{{ host }} --sudo  --impure
 
-[group('rebuild')]
+[group('build')]
 update-rebuild host="$(hostname)":
     sudo just update-all
     sudo just rebuild {{ host }}
+
+[group('build')]
+rebuild-remote config="$(hostname)" host="$(hostname)" user="$(whoami)":
+    @printf "rebuilding {{ host }} with config {{ config }} as {{ user }}\n"
+    nixos-rebuild --target-host {{ user }}@{{ host }} switch --flake .#{{ config }} --sudo --ask-sudo-password
 
 [group('setup')]
 generate-hardware-config host="$(hostname)":
