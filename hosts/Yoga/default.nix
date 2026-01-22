@@ -21,7 +21,7 @@
   services.rustdesk-server = {
     enable = true;
     openFirewall = true;
-    signal.relayHosts = [ "yoga" ];
+    signal.relayHosts = ["yoga"];
   };
 
   services.nfs.server.enable = true;
