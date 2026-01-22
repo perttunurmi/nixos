@@ -74,8 +74,7 @@
     typst
     libreoffice-still
     blender
-    wg-netmanager
-    wireguard-tools
+    rustdesk
     spotify
     testdisk
     gparted

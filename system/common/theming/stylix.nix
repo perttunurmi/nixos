@@ -7,8 +7,8 @@
 }: {
   stylix = {
     enable = true;
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-    base16Scheme = ./themes/custom.yaml;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
+    # base16Scheme = ./themes/custom.yaml;
     polarity = "dark";
 
     fonts = {
