@@ -28,6 +28,11 @@ in {
     settings.trusted_domains = [
       "nextcloud.nurmilab.xyz"
     ];
+
+    extraAppsEnable = true;
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
+    };
   };
 
   services.nginx.virtualHosts."${hostName}" = {
