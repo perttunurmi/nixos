@@ -83,7 +83,7 @@
   services.logind = {
     settings = {
       Login = {
-        HandleLidSwitch = "hybrid-sleep";
+        HandleLidSwitch = "suspend";
         HandleLidSwitchDocked = "ignore";
         HandleLidSwitchExternalPower = "ignore";
       };
