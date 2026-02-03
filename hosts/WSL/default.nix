@@ -12,6 +12,10 @@
 
   programs.nix-ld.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+  };
+
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''
