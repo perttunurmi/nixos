@@ -90,5 +90,8 @@
     };
   };
 
+  # services.ollama.enable = true;
+  # services.open-webui.enable = true;
+
   system.stateVersion = "25.05";
 }

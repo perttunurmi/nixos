@@ -18,6 +18,7 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        polybar
         qimgv
         udiskie
         autotiling

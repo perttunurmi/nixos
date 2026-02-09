@@ -103,7 +103,6 @@
         ];
     })
     discord
-    brave
   ];
 
   # Whether to enable the RealtimeKit system service, which hands out
