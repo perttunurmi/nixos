@@ -74,7 +74,7 @@
     typst
     libreoffice-still
     blender
-    rustdesk
+    # rustdesk
     spotify
     testdisk
     gparted
