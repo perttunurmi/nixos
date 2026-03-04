@@ -1,4 +1,5 @@
-default:
+[group('utils')]
+list:
     @just --list
 
 [group('build')]
