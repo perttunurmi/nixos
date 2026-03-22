@@ -12,6 +12,8 @@
     xwayland.enable = true;
   };
 
+  programs.niri = true;
+
   services.displayManager.gdm.enable = true;
 
   # services.displayManager.defaultSession = "hyprland";

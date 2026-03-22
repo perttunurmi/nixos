@@ -66,11 +66,14 @@
     materia-kde-theme
     papirus-icon-theme
 
+    winboat
+
     racket
     wxmaxima
 
     inkscape-with-extensions
     zathura
+    sioyek
     typst
     libreoffice-still
     blender
@@ -82,7 +85,6 @@
     gnome-software
     flatpak
     obsidian
-    telegram-desktop
     vscode.fhs
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;

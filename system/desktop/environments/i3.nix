@@ -18,6 +18,7 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        xscreensaver
         polybar
         qimgv
         udiskie

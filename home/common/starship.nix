@@ -8,10 +8,13 @@
   programs.starship = {
     enable = !wsl;
     settings = {
-      character = {
-        success_symbol = "[を](bold green)";
-        error_symbol = "[ㄪ](bold red)";
-      };
+      scan_timeout = 50;
+      # character = {
+      #   success_symbol = "[を](bold green)";
+      #   error_symbol = "[ㄪ](bold red)";
+      # };
+
+      format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
 
       git_status = {
         deleted = "✗";

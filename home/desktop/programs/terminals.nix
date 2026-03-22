@@ -2,7 +2,7 @@
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
   firacode = "FiraCode Nerd Font";
-  font = "DejaVuSansMono";
+  font = jetbrains;
 in {
   programs = {
     alacritty = lib.mkForce {
@@ -18,7 +18,7 @@ in {
           normal.family = font;
           bold.family = font;
           italic.family = font;
-          size = 14;
+          size = 16;
         };
       };
     };
