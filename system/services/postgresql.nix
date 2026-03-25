@@ -3,7 +3,9 @@
     enable = true;
 
     enableTCPIP = true;
-    port = 5432;
+    settings = {
+      port = 5432;
+    };
 
     ensureDatabases = ["mydatabase"];
     authentication = pkgs.lib.mkOverride 10 ''

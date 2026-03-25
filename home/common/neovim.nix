@@ -16,6 +16,7 @@
     zls
     nil
     metals
+    taplo
 
     tree-sitter
     ripgrep
