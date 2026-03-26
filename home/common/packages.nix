@@ -21,5 +21,7 @@
     scala
     scala-cli
     bear
+
+    openconnect
   ];
 }

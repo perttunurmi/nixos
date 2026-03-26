@@ -72,8 +72,13 @@
 
   networking.firewall.enable = lib.mkDefault true;
   networking.nftables.enable = lib.mkDefault true;
-  networking.networkmanager.enable = lib.mkDefault true;
   networking.wireless.enable = lib.mkDefault false;
+  networking.networkmanager = lib.mkDefault {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
 
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
 

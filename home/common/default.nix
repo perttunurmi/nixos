@@ -49,6 +49,7 @@ in {
   home.shellAliases = {
     g = "git";
     rm = "trash -v";
+    mv = "mv -i";
     zi = "cdi";
 
     ls = "eza --icons=auto";
