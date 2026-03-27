@@ -28,6 +28,7 @@
   networking.hostName = "nixos";
 
   environment.systemPackages = with pkgs; [
+    python3Minimal
     pika-backup
     neovim
     git
