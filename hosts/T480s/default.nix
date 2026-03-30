@@ -22,7 +22,7 @@
 
     ../../system/desktop/default.nix
     ../../system/services/docker.nix
-    ../../system/services/postgresql.nix
+    # ../../system/services/postgresql.nix
     ../../system/services/virtualization.nix
   ];
 
