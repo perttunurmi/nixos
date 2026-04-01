@@ -18,11 +18,8 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
-        xscreensaver
-        polybar
         qimgv
         udiskie
-        autotiling
         file-roller
         redshift
         rofi
@@ -39,7 +36,6 @@
         sysstat
         networkmanagerapplet
         copyq
-        gpick
         flameshot
       ];
     };

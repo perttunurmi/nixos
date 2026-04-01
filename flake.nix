@@ -15,9 +15,6 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -104,12 +101,6 @@
     in {
       T480s = mkHost {
         hostPath = ./hosts/T480s;
-        extraSpecialArgs = {inherit inputs;};
-        desktop = true;
-      };
-
-      NixOS = mkHost {
-        hostPath = ./hosts/NixOS;
         extraSpecialArgs = {inherit inputs;};
         desktop = true;
       };

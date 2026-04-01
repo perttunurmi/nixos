@@ -12,7 +12,6 @@
 
     prettierd
 
-    zig
     zls
     nil
     metals
@@ -48,7 +47,6 @@
     enable = true;
     defaultEditor = true;
 
-    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     vimdiffAlias = true;
     vimAlias = true;
     withNodeJs = true;

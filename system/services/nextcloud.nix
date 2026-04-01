@@ -21,7 +21,7 @@ in {
     configureRedis = true;
     package = pkgs.nextcloud32;
     https = true;
-    hostName = hostName;
+    inherit hostName;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "pgsql";
     database.createLocally = true;

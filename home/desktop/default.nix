@@ -11,6 +11,17 @@
   home.sessionVariables = {
   };
 
+  stylix = {
+    targets.xresources.enable = true;
+    targets.gtk = {
+      enable = true;
+      extraCss = ''
+        * { border-radius: 0; }
+      '';
+      flatpakSupport.enable = true;
+    };
+  };
+
   gtk = {
     enable = true;
     iconTheme = {
@@ -29,14 +40,7 @@
   };
 
   home.packages = with pkgs; [
-    tiled
     ghostty
-    zed-editor
-    gimp3-with-plugins
-    ghostscript
-    tectonic
-    mermaid-cli
-    texlivePackages.pdftex
-    imagemagickBig
+    imagemagick
   ];
 }

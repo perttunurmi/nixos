@@ -1,4 +1,4 @@
-{...}: {
+_: {
   xresources.properties = {
     "Xft.dpi" = 100;
   };
@@ -8,10 +8,5 @@
       source = ./xinitrc;
       target = ".xinitrc";
     };
-    # autostart = {
-    #   source = ./autostart.sh;
-    #   target = ".local/share/dwm/autostart.sh";
-    #   executable = true;
-    # };
   };
 }

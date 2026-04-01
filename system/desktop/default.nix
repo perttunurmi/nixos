@@ -66,22 +66,14 @@
     materia-kde-theme
     papirus-icon-theme
 
-    racket
-    wxmaxima
-
-    inkscape-with-extensions
-    zathura
     sioyek
     typst
-    libreoffice-still
-    blender
     spotify
     testdisk
     gparted
     pika-backup
     gnome-software
     flatpak
-    obsidian
     vscode.fhs
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;
@@ -102,6 +94,7 @@
         ];
     })
     discord
+    obsidian
   ];
 
   # Whether to enable the RealtimeKit system service, which hands out
