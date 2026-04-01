@@ -26,19 +26,6 @@
 
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-secrets = {
-      url = "git@github.com:perttunurmi/secrets.git";
-      flake = false;
-    };
-
-    dwm-config = {
-      url = "github:perttunurmi/dwm";
-      flake = false;
-    };
   };
 
   outputs = inputs @ {

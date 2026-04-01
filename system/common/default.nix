@@ -36,7 +36,6 @@
   boot.supportedFilesystems = ["nfs"];
 
   programs.bash.enable = true;
-  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.bash;
 
   users.users.${username} = lib.mkDefault {

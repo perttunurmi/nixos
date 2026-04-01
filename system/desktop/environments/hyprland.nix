@@ -12,11 +12,9 @@
     xwayland.enable = true;
   };
 
-  programs.niri = true;
-
   services.displayManager.gdm.enable = true;
 
-  # services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "hyprland";
 
   environment.systemPackages = with pkgs; [
     file-roller
@@ -61,10 +59,10 @@
   ];
   services.tumbler.enable = true; # Thumbnail support for images
 
-  # environment.sessionVariables = lib.mkAfter {
-  #   NIXOS_OZONE_WL = "1";
-  #   QT_QPA_PLATFORM = "wayland";
-  #   SDL_VIDEODRIVER = "wayland";
-  #   XDG_SESSION_TYPE = "wayland";
-  # };
+  environment.sessionVariables = lib.mkAfter {
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+  };
 }

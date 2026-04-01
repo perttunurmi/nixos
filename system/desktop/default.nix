@@ -66,8 +66,6 @@
     materia-kde-theme
     papirus-icon-theme
 
-    winboat
-
     racket
     wxmaxima
 
@@ -77,7 +75,6 @@
     typst
     libreoffice-still
     blender
-    # rustdesk
     spotify
     testdisk
     gparted
