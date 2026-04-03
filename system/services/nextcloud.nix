@@ -21,13 +21,18 @@ in {
     configureRedis = true;
     package = pkgs.nextcloud32;
     https = true;
-    hostName = hostName;
+    inherit hostName;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "pgsql";
     database.createLocally = true;
     settings.trusted_domains = [
       "nextcloud.nurmilab.xyz"
     ];
+
+    extraAppsEnable = true;
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
+    };
   };
 
   services.nginx.virtualHosts."${hostName}" = {

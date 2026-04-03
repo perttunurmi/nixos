@@ -27,9 +27,9 @@ in {
       pictures = "${homeD}/media/pictures";
       videos = "${homeD}/media/videos";
       music = "${homeD}/media/music";
-      download = "${homeD}/downloads";
-      documents = "${homeD}/documents";
-      publicShare = "${homeD}/public";
+      download = "${homeD}/media/downloads";
+      documents = "${homeD}/media/documents";
+      publicShare = "${homeD}/media/public";
       desktop = "${homeD}/desktop";
 
       extraConfig = {

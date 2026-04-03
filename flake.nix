@@ -15,9 +15,6 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-snapd.url = "github:nix-community/nix-snapd";
     nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -26,19 +23,6 @@
 
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-secrets = {
-      url = "git@github.com:perttunurmi/secrets.git";
-      flake = false;
-    };
-
-    dwm-config = {
-      url = "github:perttunurmi/dwm";
-      flake = false;
-    };
   };
 
   outputs = inputs @ {
@@ -117,12 +101,6 @@
     in {
       T480s = mkHost {
         hostPath = ./hosts/T480s;
-        extraSpecialArgs = {inherit inputs;};
-        desktop = true;
-      };
-
-      NixOS = mkHost {
-        hostPath = ./hosts/NixOS;
         extraSpecialArgs = {inherit inputs;};
         desktop = true;
       };

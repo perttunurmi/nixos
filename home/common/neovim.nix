@@ -12,10 +12,10 @@
 
     prettierd
 
-    zig
     zls
     nil
     metals
+    taplo
 
     tree-sitter
     ripgrep
@@ -40,7 +40,6 @@
     basedpyright
     yaml-language-server
     nixd
-    nil
     just-lsp
   ];
 
@@ -48,7 +47,6 @@
     enable = true;
     defaultEditor = true;
 
-    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     vimdiffAlias = true;
     vimAlias = true;
     withNodeJs = true;

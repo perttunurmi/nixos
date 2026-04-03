@@ -21,6 +21,8 @@
     ./hardware/secureboot.nix
 
     ../../system/desktop/default.nix
+    ../../system/services/docker.nix
+    # ../../system/services/postgresql.nix
     ../../system/services/virtualization.nix
   ];
 
@@ -55,6 +57,7 @@
 
   environment.systemPackages = with pkgs; [
     powertop
+    openconnect
   ];
 
   # powerManagement.enable = true;
@@ -83,12 +86,15 @@
   services.logind = {
     settings = {
       Login = {
-        HandleLidSwitch = "hybrid-sleep";
+        HandleLidSwitch = "suspend";
         HandleLidSwitchDocked = "ignore";
         HandleLidSwitchExternalPower = "ignore";
       };
     };
   };
+
+  # services.ollama.enable = true;
+  # services.open-webui.enable = true;
 
   system.stateVersion = "25.05";
 }

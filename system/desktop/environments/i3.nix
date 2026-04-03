@@ -20,7 +20,6 @@
       extraPackages = with pkgs; [
         qimgv
         udiskie
-        autotiling
         file-roller
         redshift
         rofi
@@ -37,7 +36,6 @@
         sysstat
         networkmanagerapplet
         copyq
-        gpick
         flameshot
       ];
     };

@@ -12,6 +12,10 @@
 
   programs.nix-ld.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+  };
+
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''
@@ -24,6 +28,7 @@
   networking.hostName = "nixos";
 
   environment.systemPackages = with pkgs; [
+    python3Minimal
     pika-backup
     neovim
     git

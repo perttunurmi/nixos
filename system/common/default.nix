@@ -36,7 +36,6 @@
   boot.supportedFilesystems = ["nfs"];
 
   programs.bash.enable = true;
-  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.bash;
 
   users.users.${username} = lib.mkDefault {
@@ -72,8 +71,13 @@
 
   networking.firewall.enable = lib.mkDefault true;
   networking.nftables.enable = lib.mkDefault true;
-  networking.networkmanager.enable = lib.mkDefault true;
   networking.wireless.enable = lib.mkDefault false;
+  networking.networkmanager = lib.mkDefault {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openconnect
+    ];
+  };
 
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
 

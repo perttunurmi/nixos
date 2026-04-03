@@ -1,30 +1,36 @@
-default:
+[group('utils')]
+list:
     @just --list
 
 [group('build')]
 rebuild host="$(hostname)":
-    @printf "rebulding {{ host }}\n"
+    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild switch --flake .#{{ host }} --sudo
 
 [group('build')]
 test host="$(hostname)":
-    @printf "rebulding {{ host }}\n"
+    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild test --flake .#{{ host }} --sudo --impure
 
 [group('build')]
 debug host="$(hostname)":
-    @printf "rebulding {{ host }} with debug\n"
-    nixos-rebuild test --flake .#{{ host }} --use-remote-sudo --show-trace --print-build-logs --verbose
+    @printf "{{ BOLD + GREEN }}rebulding {{ host }} with debug:\n\n{{ NORMAL }}"
+    nixos-rebuild test --flake .#{{ host }} --sudo --show-trace --print-build-logs --verbose
 
 [group('build')]
 rebuild-impure host="$(hostname)":
-    @printf "rebulding {{ host }}\n"
+    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild switch --flake .#{{ host }} --sudo  --impure
 
-[group('rebuild')]
+[group('build')]
 update-rebuild host="$(hostname)":
     sudo just update-all
     sudo just rebuild {{ host }}
+
+[group('build')]
+rebuild-remote config="$(hostname)" host="$(hostname)" user="$(whoami)":
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }} with config {{ config }} as {{ user }}:\n\n{{ NORMAL }}"
+    nixos-rebuild --target-host {{ user }}@{{ host }} switch --flake .#{{ config }} --sudo --ask-sudo-password
 
 [group('setup')]
 generate-hardware-config host="$(hostname)":
@@ -32,7 +38,7 @@ generate-hardware-config host="$(hostname)":
 
 [group('utils')]
 format:
-    @printf "formatting files using alejandra"
+    @printf "{{ BOLD + GREEN }}formatting files using alejandra:\n\n{{ NORMAL }}"
     alejandra .
 
 [group('utils')]
@@ -45,12 +51,12 @@ repl:
 
 [group('cleanup')]
 clean old="30":
-    @printf "deleting history older than {{ old }} days...\n"
+    @printf "{{ BOLD + GREEN }}deleting history older than {{ old }} days...\n\n{{ NORMAL }}"
     sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{old}}d
 
 [group('cleanup')]
 gc old="30":
-    @printf "collecting garbage...\n"
+    @printf "{{ BOLD + GREEN }}collecting garbage older than {{ old }} days...\n\n{{ NORMAL }}"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
     nix-collect-garbage --delete-older-than {{ old }}d
 

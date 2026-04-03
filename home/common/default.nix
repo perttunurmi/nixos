@@ -26,8 +26,6 @@ in {
 
   # add environment variables
   home.sessionVariables = {
-    SHELL = "${pkgs.zsh}/bin/zsh";
-
     # clean up ~
     LESSHISTFILE = cache + "/less/history";
     LESSKEY = c + "/less/lesskey";
@@ -49,18 +47,19 @@ in {
   home.shellAliases = {
     g = "git";
     rm = "trash -v";
+    mv = "mv -i";
     zi = "cdi";
 
-    ls = "eza --icons=auto";
-    ll = "eza -l --icons=auto --git --git-repos";
-    la = "eza -a --icons=auto --git";
-    lla = "eza -la --icons=auto --git --git-repos";
+    # ls = "eza --icons=auto";
+    # ll = "eza -l --icons=auto --git --git-repos";
+    # la = "eza -a --icons=auto --git";
+    # lla = "eza -la --icons=auto --git --git-repos";
   };
 
   programs = {
     bash.enable = true;
     zsh = {
-      enable = true;
+      enable = false;
       enableCompletion = true;
       dotDir = "${config.xdg.configHome}/zsh";
       defaultKeymap = "emacs";
@@ -133,7 +132,7 @@ in {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
     enableBashIntegration = true;
   };
 

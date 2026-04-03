@@ -8,7 +8,6 @@
     statix
 
     trash-cli
-    starship
     ripgrep
     zoxide
     tmux
@@ -17,9 +16,5 @@
     bat
     fzf
     fd
-
-    scala
-    scala-cli
-    bear
   ];
 }

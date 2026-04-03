@@ -7,8 +7,8 @@
 }: {
   stylix = {
     enable = true;
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-    base16Scheme = ./themes/custom.yaml;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    # base16Scheme = ./themes/custom.yaml;
     polarity = "dark";
 
     fonts = {
@@ -46,9 +46,10 @@
     };
 
     targets = {
-      plymouth.enable = false;
+      plymouth.enable = true;
       gtk.enable = true;
       qt.enable = true;
+      console.enable = false;
     };
   };
 }
