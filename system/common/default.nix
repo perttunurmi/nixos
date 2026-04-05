@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./packages.nix
+    ./agenix.nix
     ./overlays.nix
     ./settings.nix
 

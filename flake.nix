@@ -23,6 +23,14 @@
 
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    mysecrets = {
+      url = "git@github.com:perttunurmi/secrets.git";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -33,6 +41,7 @@
     nixos-wsl,
     stylix,
     agenix,
+    mysecrets,
     nix-snapd,
     ...
   }: {
@@ -51,6 +60,9 @@
             inherit wsl;
             inherit server;
             inherit desktop;
+            inherit agenix;
+            inherit mysecrets;
+            inherit self;
           }
           // extraSpecialArgs;
         inherit username;
