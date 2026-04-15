@@ -2,8 +2,9 @@
   pkgs,
   lib,
   ...
-}: {
-  environment.pathsToLink = ["/libexec"];
+}:
+{
+  environment.pathsToLink = [ "/libexec" ];
   services.displayManager.defaultSession = lib.mkDefault "none+i3";
 
   programs.dconf.enable = true;

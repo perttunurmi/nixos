@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -21,12 +22,15 @@
   services.rustdesk-server = {
     enable = true;
     openFirewall = true;
-    signal.relayHosts = ["yoga"];
+    signal.relayHosts = [ "yoga" ];
   };
 
   services.nfs.server.enable = true;
-  networking.firewall.allowedTCPPorts = [2049 51821];
-  networking.firewall.allowedUDPPorts = [51820];
+  networking.firewall.allowedTCPPorts = [
+    2049
+    51821
+  ];
+  networking.firewall.allowedUDPPorts = [ 51820 ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

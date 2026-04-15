@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     just
+    jujutsu
+    delta
 
     # nix
-    alejandra
+    nixfmt
+    nixfmt-tree
     deadnix
     statix
 

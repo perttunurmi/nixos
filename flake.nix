@@ -3,11 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    hardware.url = "github:nixos/nixos-hardware";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
-    hardware.url = "github:nixos/nixos-hardware";
 
     stylix.url = "github:nix-community/stylix/release-25.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
@@ -27,113 +29,121 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    mysecrets = {
+    secrets = {
       url = "git@github.com:perttunurmi/secrets.git";
       flake = false;
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    nixos-wsl,
-    stylix,
-    agenix,
-    mysecrets,
-    nix-snapd,
-    ...
-  }: {
-    nixosConfigurations = let
-      mkHost = {
-        hostPath,
-        username ? "perttu",
-        wsl ? false,
-        server ? false,
-        desktop ? false,
-        extraSpecialArgs ? {},
-      }: let
-        specialArgs =
-          {
-            inherit username;
-            inherit wsl;
-            inherit server;
-            inherit desktop;
-            inherit agenix;
-            inherit mysecrets;
-            inherit self;
-          }
-          // extraSpecialArgs;
-        inherit username;
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          modules = [
-            nix-snapd.nixosModules.default
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      nixos-wsl,
+      stylix,
+      agenix,
+      secrets,
+      nix-snapd,
+      ...
+    }:
+    {
+      nixosConfigurations =
+        let
+          mkHost =
             {
-              services.snap.enable = true;
-            }
-            agenix.nixosModules.default
-            stylix.nixosModules.stylix
-            nixos-wsl.nixosModules.default
-            {
-              wsl.enable = wsl;
-              wsl.defaultUser = "${username}";
-              wsl.docker-desktop.enable = wsl;
-              wsl.startMenuLaunchers = wsl;
-              wsl.interop.register = wsl;
-            }
-            hostPath
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./home/home.nix;
-            }
-            ({
-              config,
-              pkgs,
-              ...
-            }: {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  unstable = import nixpkgs-unstable {
-                    system = "x86_64-linux";
-                    config.allowUnfree = true;
-                    config.android_sdk.accept_license = true;
-                  };
-                })
+              hostPath,
+              username ? "perttu",
+              wsl ? false,
+              server ? false,
+              desktop ? false,
+              extraSpecialArgs ? { },
+            }:
+            let
+              specialArgs = {
+                inherit username;
+                inherit wsl;
+                inherit server;
+                inherit desktop;
+                inherit agenix;
+                inherit secrets;
+                inherit self;
+              }
+              // extraSpecialArgs;
+              inherit username;
+            in
+            nixpkgs.lib.nixosSystem {
+              inherit specialArgs;
+              modules = [
+                nix-snapd.nixosModules.default
+                {
+                  services.snap.enable = true;
+                }
+                agenix.nixosModules.default
+                stylix.nixosModules.stylix
+                nixos-wsl.nixosModules.default
+                {
+                  wsl.enable = wsl;
+                  wsl.defaultUser = "${username}";
+                  wsl.docker-desktop.enable = wsl;
+                  wsl.startMenuLaunchers = wsl;
+                  wsl.interop.register = wsl;
+                }
+                hostPath
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.backupFileExtension = "bak";
+                  home-manager.extraSpecialArgs = inputs // specialArgs;
+                  home-manager.users.${username} = import ./home/home.nix;
+                }
+                (
+                  {
+                    config,
+                    pkgs,
+                    ...
+                  }:
+                  {
+                    nixpkgs.overlays = [
+                      (final: prev: {
+                        unstable = import nixpkgs-unstable {
+                          system = "x86_64-linux";
+                          config.allowUnfree = true;
+                          config.android_sdk.accept_license = true;
+                        };
+                      })
+                    ];
+                  }
+                )
               ];
-            })
-          ];
+            };
+        in
+        {
+          T480s = mkHost {
+            hostPath = ./hosts/T480s;
+            extraSpecialArgs = { inherit inputs; };
+            desktop = true;
+          };
+
+          nixos = mkHost {
+            hostPath = ./hosts/WSL;
+            extraSpecialArgs = { inherit inputs; };
+            wsl = true;
+          };
+
+          Fujitsu = mkHost {
+            hostPath = ./hosts/Fujitsu;
+            extraSpecialArgs = { inherit inputs; };
+            server = true;
+          };
+
+          Yoga = mkHost {
+            hostPath = ./hosts/Yoga;
+            extraSpecialArgs = { inherit inputs; };
+            server = true;
+          };
         };
-    in {
-      T480s = mkHost {
-        hostPath = ./hosts/T480s;
-        extraSpecialArgs = {inherit inputs;};
-        desktop = true;
-      };
-
-      nixos = mkHost {
-        hostPath = ./hosts/WSL;
-        extraSpecialArgs = {inherit inputs;};
-        wsl = true;
-      };
-
-      Fujitsu = mkHost {
-        hostPath = ./hosts/Fujitsu;
-        extraSpecialArgs = {inherit inputs;};
-        server = true;
-      };
-
-      Yoga = mkHost {
-        hostPath = ./hosts/Yoga;
-        extraSpecialArgs = {inherit inputs;};
-        server = true;
-      };
     };
-  };
 }

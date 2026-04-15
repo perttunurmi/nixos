@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./programs/browser.nix
     ./programs/rofi.nix
@@ -12,6 +13,8 @@
   };
 
   stylix = {
+    enable = true;
+    targets.neovim.enable = false;
     targets.xresources.enable = true;
     targets.gtk = {
       enable = true;

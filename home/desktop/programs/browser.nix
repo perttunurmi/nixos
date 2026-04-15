@@ -3,12 +3,13 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   programs = {
     chromium = {
       enable = true;
       package = pkgs.google-chrome;
-      commandLineArgs = ["--enable-features=TouchpadOverscrollHistoryNavigation"];
+      commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ];
       extensions = [
         # {id = "";}  // extension id, query from chrome web store
       ];

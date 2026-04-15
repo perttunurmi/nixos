@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   security.acme = {
     acceptTerms = true;
   };
@@ -21,5 +22,8 @@
       };
     };
   };
-  networking.firewall.allowedTCPPorts = [85 445];
+  networking.firewall.allowedTCPPorts = [
+    85
+    445
+  ];
 }

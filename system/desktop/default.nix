@@ -3,7 +3,8 @@
   username,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./fonts.nix
 
@@ -66,6 +67,7 @@
     materia-kde-theme
     papirus-icon-theme
 
+    readest
     sioyek
     typst
     spotify
@@ -76,7 +78,8 @@
     flatpak
     vscode.fhs
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
+      vscodeExtensions =
+        with vscode-extensions;
         [
           bbenoist.nix
           # ms-python.python
@@ -129,11 +132,11 @@
   services = {
     xserver.enable = true;
     xserver.displayManager.startx.enable = true;
-    xserver.excludePackages = [pkgs.xterm];
+    xserver.excludePackages = [ pkgs.xterm ];
 
     dbus = {
       enable = true;
-      packages = [pkgs.gcr];
+      packages = [ pkgs.gcr ];
       # implementation = "broker";
     };
 
@@ -158,7 +161,7 @@
       package = lib.mkForce pkgs.gnome.gvfs;
     };
     blueman.enable = true;
-    udev.packages = with pkgs; [gnome-settings-daemon];
+    udev.packages = with pkgs; [ gnome-settings-daemon ];
   };
 
   systemd.user.services.mpris-proxy = {
@@ -167,10 +170,9 @@
       "network.target"
       "sound.target"
     ];
-    wantedBy = ["default.target"];
+    wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
-
   networking.firewall = rec {
     allowedTCPPortRanges = [
       {
@@ -179,10 +181,16 @@
       }
     ];
     allowedUDPPortRanges = allowedTCPPortRanges;
-  };
 
-  networking.firewall.allowedTCPPorts = [57621 24800];
-  networking.firewall.allowedUDPPorts = [5353 24800];
+    allowedTCPPorts = [
+      57621
+      24800
+    ];
+    allowedUDPPorts = [
+      5353
+      24800
+    ];
+  };
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
@@ -191,9 +199,9 @@
   security.polkit.enable = true;
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
-    wantedBy = ["graphical-session.target"];
-    wants = ["graphical-session.target"];
-    after = ["graphical-session.target"];
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

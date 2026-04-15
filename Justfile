@@ -38,8 +38,8 @@ generate-hardware-config host="$(hostname)":
 
 [group('utils')]
 format:
-    @printf "{{ BOLD + GREEN }}formatting files using alejandra:\n\n{{ NORMAL }}"
-    alejandra .
+    @printf "{{ BOLD + GREEN }}formatting files using nixfmt-tree:\n\n{{ NORMAL }}"
+    treefmt
 
 [group('utils')]
 history:
@@ -52,14 +52,13 @@ repl:
 [group('cleanup')]
 clean old="30":
     @printf "{{ BOLD + GREEN }}deleting history older than {{ old }} days...\n\n{{ NORMAL }}"
-    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{old}}d
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{ old }}d
 
 [group('cleanup')]
 gc old="30":
     @printf "{{ BOLD + GREEN }}collecting garbage older than {{ old }} days...\n\n{{ NORMAL }}"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
     nix-collect-garbage --delete-older-than {{ old }}d
-
 
 [group('cleanup')]
 optimise:

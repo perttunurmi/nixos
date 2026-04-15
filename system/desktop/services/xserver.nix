@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   services.xserver = {
     enable = lib.mkDefault true;
 

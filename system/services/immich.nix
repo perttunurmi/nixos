@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # https://wiki.nixos.org/wiki/Immich
   services.immich = {
     enable = true;
@@ -18,7 +19,12 @@
     ];
   };
 
-  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  }; # Optionally, set the environment variable
 
-  users.users.immich.extraGroups = ["video" "render"];
+  users.users.immich.extraGroups = [
+    "video"
+    "render"
+  ];
 }

@@ -3,9 +3,11 @@
   wsl,
   lib,
   ...
-}: let
+}:
+let
   homeD = config.home.homeDirectory;
-in {
+in
+{
   home.preferXdgDirectories = true;
 
   xdg = {

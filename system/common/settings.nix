@@ -2,9 +2,10 @@
   username,
   lib,
   ...
-}: {
+}:
+{
   nix.settings = {
-    trusted-users = [username];
+    trusted-users = [ username ];
 
     experimental-features = [
       "nix-command"
@@ -35,6 +36,6 @@
 
   nix.optimise = {
     automatic = true;
-    dates = lib.mkDefault ["09:00"];
+    dates = lib.mkDefault [ "09:00" ];
   };
 }

@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   services.samba = {
     package = pkgs.samba4Full;
     enable = true;

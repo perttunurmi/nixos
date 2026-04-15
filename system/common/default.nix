@@ -4,37 +4,50 @@
   pkgs,
   wsl,
   config,
+  desktop,
   ...
-}: {
+}:
+{
   imports = [
     ./packages.nix
     ./agenix.nix
     ./overlays.nix
     ./settings.nix
 
-    ./theming/stylix.nix
-
     ./users/perttu/default.nix
     ./users/root/default.nix
-  ];
+  ]
+  ++ (
+    if desktop then
+      [
+        ./theming/stylix.nix
+      ]
+    else
+      [ ]
+  );
 
   services.tailscale.enable = true;
+  services.tailscale.permitCertUid = "caddy";
+
+  systemd.services.tailscaled.serviceConfig.Environment = [
+    "TS_DEBUG_FIREWALL_MODE=nftables"
+  ];
 
   networking.firewall = {
-    trustedInterfaces = ["tailscale0"];
-    allowedUDPPorts = [config.services.tailscale.port];
+    trustedInterfaces = [ "tailscale0" ];
+    allowedUDPPorts = [ config.services.tailscale.port ];
     checkReversePath = "loose";
   };
 
-  networking.nameservers = ["100.100.100.100" "8.8.8.8" "1.1.1.1"];
-  networking.search = ["tail31079d.ts.net"];
+  # networking.nameservers = ["100.100.100.100" "8.8.8.8" "1.1.1.1"];
+  # networking.search = ["tail31079d.ts.net"];
 
   # services.avahi = {
   #   enable = true;
   #   allowPointToPoint = true;
   # };
 
-  boot.supportedFilesystems = ["nfs"];
+  boot.supportedFilesystems = [ "nfs" ];
 
   programs.bash.enable = true;
   users.defaultUserShell = pkgs.bash;
@@ -80,7 +93,9 @@
     ];
   };
 
-  systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
+  # This improves boot times by telling systemd not to wait for internet connection
+  systemd.network.wait-online.enable = false;
+  boot.initrd.systemd.network.wait-online.enable = false;
 
   hardware.graphics = lib.mkDefault {
     enable = true;
@@ -90,7 +105,7 @@
   console = lib.mkDefault {
     earlySetup = true;
     font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-    packages = with pkgs; [terminus_font];
+    packages = with pkgs; [ terminus_font ];
     keyMap = "us";
   };
 }

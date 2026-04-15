@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -25,6 +26,7 @@
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv4.conf.all.src_valid_mark" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
   };
 
   networking.networkmanager.enable = lib.mkForce false;
@@ -57,7 +59,10 @@
   users.users.perttu = lib.mkDefault {
     isNormalUser = true;
     description = "Perttu Nurmi";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # Allow unfree packages

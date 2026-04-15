@@ -1,11 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    sqlite
+    file
+    ethtool
     typst
     sshfs
-    jujutsu
-    iptables
     magic-wormhole
     nix
     age
@@ -32,6 +34,5 @@
     llvmPackages_latest.libcxx
     llvmPackages_latest.clang
     llvmPackages_latest.clang-tools
-    # clang
   ];
 }

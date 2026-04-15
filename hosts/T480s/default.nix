@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-cpu-intel
@@ -18,7 +19,7 @@
     ./hardware/disable_nvidia.nix
     ./hardware/disable_touchscreen.nix
 
-    ./hardware/secureboot.nix
+    # ./hardware/secureboot.nix
 
     ../../system/desktop/default.nix
     ../../system/services/docker.nix
@@ -28,7 +29,8 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    initrd.luks.devices."luks-3a99b308-6f51-4953-b4e0-68d4dc1e6af4".device = "/dev/disk/by-uuid/3a99b308-6f51-4953-b4e0-68d4dc1e6af4";
+    initrd.luks.devices."luks-3a99b308-6f51-4953-b4e0-68d4dc1e6af4".device =
+      "/dev/disk/by-uuid/3a99b308-6f51-4953-b4e0-68d4dc1e6af4";
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;

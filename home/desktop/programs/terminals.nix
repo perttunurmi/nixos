@@ -1,10 +1,12 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   iosevka = "Iosevka NerdFont";
   jetbrains = "JetBrainsMono Nerd Font";
   firacode = "FiraCode Nerd Font";
   ubuntu = "UbuntuMono Nerd Font";
   font = jetbrains;
-in {
+in
+{
   programs = {
     alacritty = lib.mkForce {
       enable = true;

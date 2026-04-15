@@ -2,9 +2,11 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   hostName = "nextcloud";
-in {
+in
+{
   # Nextcloud requires a password file to be created manually before the service can start.
   # The admin password must be stored in /etc/nextcloud-admin-pass with restrictive permissions.
   #
@@ -31,7 +33,12 @@ in {
 
     extraAppsEnable = true;
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
+      inherit (config.services.nextcloud.package.packages.apps)
+        news
+        contacts
+        calendar
+        tasks
+        ;
     };
   };
 
@@ -44,5 +51,5 @@ in {
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [8585];
+  networking.firewall.allowedTCPPorts = [ 8585 ];
 }

@@ -1,4 +1,5 @@
-{username, ...}: {
+{ username, ... }:
+{
   programs.git = {
     enable = true;
     lfs.enable = true;

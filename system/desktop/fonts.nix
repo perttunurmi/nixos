@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     packages = with pkgs; [
       material-design-icons
@@ -56,7 +57,7 @@
         "Liberation Mono"
         "Noto Color Emoji"
       ];
-      emoji = ["Noto Color Emoji"];
+      emoji = [ "Noto Color Emoji" ];
     };
 
     fontDir.enable = true;

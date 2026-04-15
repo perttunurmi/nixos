@@ -1,4 +1,5 @@
-{user, ...}: {
+{ username, ... }:
+{
   virtualisation = {
     containers.enable = true;
     podman = {

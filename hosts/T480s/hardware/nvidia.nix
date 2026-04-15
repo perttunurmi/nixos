@@ -2,11 +2,12 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   # https://nixos.wiki/wiki/Nvidia
 
-  boot.initrd.kernelModules = ["nvidia"];
-  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
+  boot.initrd.kernelModules = [ "nvidia" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   # https://mynixos.com/nixpkgs/option/hardware.nvidia-container-toolkit.enable
   hardware.nvidia-container-toolkit.enable = true;
@@ -16,7 +17,11 @@
   # Rootless
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
-  services.xserver.videoDrivers = ["intel" "modesetting" "nvidia"];
+  services.xserver.videoDrivers = [
+    "intel"
+    "modesetting"
+    "nvidia"
+  ];
   hardware.graphics.enable = lib.mkDefault true;
 
   hardware.nvidia = {

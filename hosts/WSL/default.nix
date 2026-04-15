@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ../../system/configuration.nix
   ];
@@ -37,7 +38,7 @@
     just
   ];
 
-  services.openssh.ports = lib.mkForce [2222];
+  services.openssh.ports = lib.mkForce [ 2222 ];
 
   system.stateVersion = "25.05";
 }

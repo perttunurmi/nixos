@@ -3,16 +3,18 @@
   lib,
   config,
   agenix,
-  mysecrets,
+  secrets,
   username,
   ...
-}: let
+}:
+let
   hostName = config.networking.hostName;
-  commonSecretFile = "${mysecrets}/nixos/common/passwords.age";
-  hostSecretFile = "${mysecrets}/nixos/hosts/${hostName}/passwords.age";
-in {
+  commonSecretFile = "${secrets}/nixos/common/passwords.age";
+  hostSecretFile = "${secrets}/nixos/hosts/${hostName}/passwords.age";
+in
+{
   environment.systemPackages = [
-    agenix.packages.${pkgs.system}.default
+    agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   age.identityPaths = [
@@ -29,6 +31,7 @@ in {
         mode = "0400";
       };
     })
+
     (lib.mkIf (builtins.pathExists hostSecretFile) {
       host-passwords = {
         file = hostSecretFile;

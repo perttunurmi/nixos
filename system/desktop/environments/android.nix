@@ -2,13 +2,14 @@
   pkgs,
   username,
   ...
-}: {
+}:
+{
   programs.adb.enable = true;
-  users.users.${username}.extraGroups = ["adbusers"];
+  users.users.${username}.extraGroups = [ "adbusers" ];
 
   programs.java.enable = true;
 
-  environment.systemPackages = with pkgs.unstable; [
+  environment.systemPackages = with pkgs; [
     javaPackages.compiler.openjdk25
     android-studio
     android-tools

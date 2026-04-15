@@ -2,9 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
-  stylix.targets.neovim.enable = false;
-
+}:
+{
   home.packages = with pkgs; [
     lua51Packages.lua
     luajitPackages.luarocks_bootstrap
@@ -17,6 +16,8 @@
     metals
     taplo
 
+    asm-lsp
+
     tree-sitter
     ripgrep
     fd
@@ -24,28 +25,21 @@
     git
     cargo
     nodejs_24
-    html-tidy
-    actionlint
-    yamllint
-    gitlint
-    sqlite
     ruff
 
-    typescript-language-server
-    lua-language-server
-    vscode-langservers-extracted
-    jdt-language-server
-    rust-analyzer
-    bash-language-server
     basedpyright
-    yaml-language-server
+    bash-language-server
+    gopls
+    lua-language-server
+    typescript-language-server
+    rust-analyzer
     nixd
-    just-lsp
   ];
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 
     vimdiffAlias = true;
     vimAlias = true;
