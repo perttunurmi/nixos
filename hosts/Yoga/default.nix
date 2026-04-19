@@ -69,13 +69,6 @@
     "net.ipv6.conf.all.forwarding" = 1;
   };
 
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
-
   environment.enableAllTerminfo = true;
 
   system.stateVersion = "25.05";

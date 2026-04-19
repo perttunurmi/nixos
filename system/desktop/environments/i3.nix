@@ -8,8 +8,23 @@
   services.displayManager.defaultSession = lib.mkDefault "none+i3";
 
   programs.dconf.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
-  services.displayManager.ly.enable = true;
+  # services.displayManager.ly = {
+  #   enable = true;
+  #   x11Support = true;
+  # };
+
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  services.gnome.core-apps.enable = false;
+  services.gnome.core-developer-tools.enable = false;
+  services.gnome.games.enable = false;
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-tour
+    gnome-user-docs
+  ];
 
   services.xserver = {
     desktopManager = {
@@ -19,6 +34,13 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+        nautilus
+        snixembed
+        kitty
+        bc
+        libgnome-keyring
+        xss-lock
+        libsecret
         qimgv
         udiskie
         file-roller
@@ -38,6 +60,7 @@
         networkmanagerapplet
         copyq
         flameshot
+        xdg-utils
       ];
     };
   };

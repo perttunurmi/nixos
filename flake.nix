@@ -2,19 +2,13 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     hardware.url = "github:nixos/nixos-hardware";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
-    stylix.url = "github:nix-community/stylix/release-25.11";
+    stylix.url = "github:nix-community/stylix/";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-snapd.url = "github:nix-community/nix-snapd";
@@ -39,7 +33,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       nixos-wsl,
       stylix,
@@ -99,24 +92,6 @@
                   home-manager.extraSpecialArgs = inputs // specialArgs;
                   home-manager.users.${username} = import ./home/home.nix;
                 }
-                (
-                  {
-                    config,
-                    pkgs,
-                    ...
-                  }:
-                  {
-                    nixpkgs.overlays = [
-                      (final: prev: {
-                        unstable = import nixpkgs-unstable {
-                          system = "x86_64-linux";
-                          config.allowUnfree = true;
-                          config.android_sdk.accept_license = true;
-                        };
-                      })
-                    ];
-                  }
-                )
               ];
             };
         in

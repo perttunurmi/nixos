@@ -1,8 +1,4 @@
 {
-  pkgs,
-  config,
-  lib,
-  agenix,
   ...
 }:
 let
@@ -22,17 +18,14 @@ in
       description = "Perttu" + " " + "Nurmi";
       extraGroups = [
         "perttu"
-        "gamemode"
-        "networkmanager"
         "wheel"
+        "networkmanager"
         "audio"
-        "video"
-        "plugdev"
-        "input"
-        "lp"
-        "scanner"
         "kvm"
-        "wireshark"
+        "optical"
+        "scanner"
+        "video"
+        "storage"
         "samba"
       ];
 

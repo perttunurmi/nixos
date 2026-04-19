@@ -4,22 +4,22 @@ list:
 
 [group('build')]
 rebuild host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild switch --flake .#{{ host }} --sudo
 
 [group('build')]
 test host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild test --flake .#{{ host }} --sudo --impure
 
 [group('build')]
 debug host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }} with debug:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }} with debug:\n\n{{ NORMAL }}"
     nixos-rebuild test --flake .#{{ host }} --sudo --show-trace --print-build-logs --verbose
 
 [group('build')]
 rebuild-impure host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild switch --flake .#{{ host }} --sudo  --impure
 
 [group('build')]

@@ -67,7 +67,6 @@
     materia-kde-theme
     papirus-icon-theme
 
-    readest
     sioyek
     typst
     spotify
@@ -158,7 +157,7 @@
     # Mount, trash, and other functionalities
     gvfs = {
       enable = true;
-      package = lib.mkForce pkgs.gnome.gvfs;
+      # package = lib.mkForce pkgs.gnome.gvfs;
     };
     blueman.enable = true;
     udev.packages = with pkgs; [ gnome-settings-daemon ];

@@ -4,7 +4,6 @@
   ...
 }:
 {
-  programs.adb.enable = true;
   users.users.${username}.extraGroups = [ "adbusers" ];
 
   programs.java.enable = true;

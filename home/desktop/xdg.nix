@@ -24,6 +24,7 @@ in
 
     userDirs = {
       enable = true;
+      setSessionVariables = true;
       createDirectories = false;
       templates = "${homeD}/media/templates";
       pictures = "${homeD}/media/pictures";

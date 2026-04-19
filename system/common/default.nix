@@ -2,7 +2,6 @@
   username,
   lib,
   pkgs,
-  wsl,
   config,
   desktop,
   ...
@@ -27,7 +26,6 @@
   );
 
   services.tailscale.enable = true;
-  services.tailscale.permitCertUid = "caddy";
 
   systemd.services.tailscaled.serviceConfig.Environment = [
     "TS_DEBUG_FIREWALL_MODE=nftables"
@@ -42,10 +40,17 @@
   # networking.nameservers = ["100.100.100.100" "8.8.8.8" "1.1.1.1"];
   # networking.search = ["tail31079d.ts.net"];
 
-  # services.avahi = {
-  #   enable = true;
-  #   allowPointToPoint = true;
-  # };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      userServices = true;
+      addresses = true;
+    };
+
+    openFirewall = true;
+  };
 
   boot.supportedFilesystems = [ "nfs" ];
 

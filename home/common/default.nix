@@ -44,6 +44,8 @@ in
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
     MANPAGER = "nvim +Man!";
+
+    CHROME_EXECUTABLE = "${pkgs.google-chrome}";
   };
 
   home.shellAliases = {

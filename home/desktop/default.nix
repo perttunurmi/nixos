@@ -4,6 +4,7 @@
     ./programs/browser.nix
     ./programs/rofi.nix
     ./programs/terminals.nix
+    ./programs/sioyek.nix
     ./xorg/xorg.nix
     ./media.nix
     ./xdg.nix
@@ -26,10 +27,11 @@
   };
 
   gtk = {
+    gtk4.theme = null;
     enable = true;
     iconTheme = {
-      name = "Papirus-Dark"; # Or "Papirus", "Papirus-Light"
-      package = pkgs.papirus-icon-theme;
+      name = "MoreWaita"; # Or "Papirus", "Papirus-Light"
+      package = pkgs.morewaita-icon-theme;
     };
   };
 
@@ -37,13 +39,12 @@
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
-        icon-theme = "Papirus-Dark";
+        icon-theme = "MoreWaita";
       };
     };
   };
 
   home.packages = with pkgs; [
-    ghostty
-    imagemagick
+
   ];
 }

@@ -14,13 +14,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    xorg.libXft
-    xorg.libXinerama
-    xorg.libX11
+    libXft
+    libXinerama
+    libX11
     xsel
     xbindkeys
     xorg.xdpyinfo
     arandr
-    xautolock
   ];
 }

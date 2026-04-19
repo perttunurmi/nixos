@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -9,14 +8,24 @@
     luajitPackages.luarocks_bootstrap
     luajitPackages.tiktoken_core
 
-    prettierd
-
     zls
     nil
     metals
     taplo
-
     asm-lsp
+    codespell
+    gotools
+    prettier
+    prettierd
+    rustfmt
+    stylua
+    ruff
+    pyright
+    bash-language-server
+    lua-language-server
+    typescript-language-server
+    rust-analyzer
+    nixd
 
     tree-sitter
     ripgrep
@@ -25,24 +34,17 @@
     git
     cargo
     nodejs_24
-    ruff
-
-    basedpyright
-    bash-language-server
-    gopls
-    lua-language-server
-    typescript-language-server
-    rust-analyzer
-    nixd
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-
-    vimdiffAlias = true;
-    vimAlias = true;
-    withNodeJs = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #
+  #   vimdiffAlias = true;
+  #   vimAlias = true;
+  #
+  #   # withRuby = true;
+  #   # withPython3 = true;
+  #   # withNodeJs = true;
+  # };
 }

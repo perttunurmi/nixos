@@ -3,6 +3,11 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    lsof
+    cmake
+    ninja
+    pkg-config
+    jq
     sqlite
     file
     ethtool
@@ -29,6 +34,8 @@
     scrot
     gcc
     entr
+    cargo
+    go
     llvmPackages_latest.lldb
     llvmPackages_latest.libllvm
     llvmPackages_latest.libcxx
