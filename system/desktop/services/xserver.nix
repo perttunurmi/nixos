@@ -14,12 +14,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    libXft
-    libXinerama
-    libX11
     xsel
-    xbindkeys
-    xorg.xdpyinfo
     arandr
   ];
 }

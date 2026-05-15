@@ -4,7 +4,6 @@
     pavucontrol
     playerctl
     pulsemixer
-
     feh
   ];
 
@@ -14,7 +13,6 @@
       defaultProfiles = [ "gpu-hq" ];
       scripts = [ pkgs.mpvScripts.mpris ];
     };
-
     obs-studio.enable = true;
   };
 

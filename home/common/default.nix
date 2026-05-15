@@ -1,8 +1,6 @@
 {
   config,
   pkgs,
-  lib,
-  wsl,
   ...
 }:
 let
@@ -45,7 +43,6 @@ in
     DELTA_PAGER = "less -R";
     MANPAGER = "nvim +Man!";
 
-    CHROME_EXECUTABLE = "${pkgs.google-chrome}";
   };
 
   home.shellAliases = {
@@ -54,10 +51,10 @@ in
     mv = "mv -i";
     zi = "cdi";
 
-    # ls = "eza --icons=auto";
-    # ll = "eza -l --icons=auto --git --git-repos";
-    # la = "eza -a --icons=auto --git";
-    # lla = "eza -la --icons=auto --git --git-repos";
+    ls = "eza --icons=auto";
+    ll = "eza -l --icons=auto --git --git-repos";
+    la = "eza -a --icons=auto --git";
+    lla = "eza -la --icons=auto --git --git-repos";
   };
 
   programs = {
@@ -73,6 +70,8 @@ in
     bash.initExtra = ''
       stty werase undef
       bind '\C-w:unix-filename-rubout'
+
+      PS1='\[\e[32m\][\W]\[\e[0m\] \[\e[32m\]\$\[\e[0m\] '
     '';
   };
 

@@ -12,7 +12,6 @@ in
 
   xdg = {
     enable = true;
-
     cacheHome = homeD + "/.local/cache";
     configHome = homeD + "/.config";
     dataHome = homeD + "/.local/share";

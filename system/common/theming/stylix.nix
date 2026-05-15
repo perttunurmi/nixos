@@ -1,16 +1,12 @@
 {
   pkgs,
-  username,
   lib,
-  config,
   ...
 }:
 {
   stylix = {
     enable = lib.mkDefault true;
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    # base16Scheme = ./themes/custom.yaml;
     polarity = "dark";
 
     fonts = {

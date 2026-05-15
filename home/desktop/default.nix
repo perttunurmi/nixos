@@ -1,11 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./programs/browser.nix
     ./programs/rofi.nix
-    ./programs/terminals.nix
     ./programs/sioyek.nix
-    ./xorg/xorg.nix
     ./media.nix
     ./xdg.nix
   ];
@@ -45,6 +42,8 @@
   };
 
   home.packages = with pkgs; [
-
+    brave
+    firefox
+    google-chrome
   ];
 }

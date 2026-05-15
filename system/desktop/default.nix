@@ -9,12 +9,11 @@
     ./fonts.nix
 
     ./environments/i3.nix
-    ./environments/android.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
 
-    ./ld.nix
+    # ./ld.nix
   ];
 
   services.fwupd.enable = lib.mkDefault true;
@@ -34,13 +33,13 @@
 
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
+        # pkgs.xdg-desktop-portal-hyprland
       ];
 
       config = {
         common = {
           default = [
-            "hyprland"
+            # "hyprland"
             "gtk"
           ];
           "org.freedesktop.impl.portal.Secret" = [
@@ -61,41 +60,15 @@
 
   users.users.${username}.packages = with pkgs; [
     python3
-    pango
-    adwaita-icon-theme
-    materia-theme
-    materia-kde-theme
-    papirus-icon-theme
 
     sioyek
-    typst
-    spotify
     testdisk
     gparted
     pika-backup
     gnome-software
     flatpak
+    zed-editor-fhs
     vscode.fhs
-    (vscode-with-extensions.override {
-      vscodeExtensions =
-        with vscode-extensions;
-        [
-          bbenoist.nix
-          # ms-python.python
-          # ms-azuretools.vscode-docker
-          # ms-vscode-remote.remote-ssh
-          # ms-toolsai.jupyter
-        ]
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "remote-ssh-edit";
-            publisher = "ms-vscode-remote";
-            version = "0.47.2";
-            sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-          }
-        ];
-    })
-    discord
     obsidian
   ];
 
@@ -188,6 +161,8 @@
     allowedUDPPorts = [
       5353
       24800
+      53
+      67
     ];
   };
 

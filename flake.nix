@@ -17,9 +17,6 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
-    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 

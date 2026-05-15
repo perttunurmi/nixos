@@ -1,11 +1,7 @@
 {
   username,
-  wsl,
-  server,
   desktop,
-  pkgs,
   lib,
-  config,
   ...
 }:
 {

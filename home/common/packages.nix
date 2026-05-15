@@ -1,16 +1,15 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
+    alacritty
     neovim
     just
     jujutsu
     delta
 
-    # nix
     nixfmt
     nixfmt-tree
     deadnix
-    statix
 
     trash-cli
     ripgrep

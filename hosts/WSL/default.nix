@@ -35,10 +35,10 @@
     git
     wget
     stow
-    just
+    curl
   ];
 
   services.openssh.ports = lib.mkForce [ 2222 ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }

@@ -17,15 +17,13 @@
 
     # ./hardware/nvidia.nix
     ./hardware/disable_nvidia.nix
-    ./hardware/disable_touchscreen.nix
-
-    # ./hardware/secureboot.nix
+    # ./hardware/disable_touchscreen.nix
 
     ../../system/desktop/default.nix
     ../../system/services/docker.nix
-    # ../../system/services/postgresql.nix
-    ../../system/services/virtualization.nix
   ];
+
+  services.touchegg.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -62,7 +60,6 @@
     openconnect
   ];
 
-  # powerManagement.enable = true;
   services.thermald.enable = true;
 
   services.power-profiles-daemon.enable = lib.mkForce false;
@@ -94,9 +91,6 @@
       };
     };
   };
-
-  # services.ollama.enable = true;
-  # services.open-webui.enable = true;
 
   system.stateVersion = "25.05";
 }

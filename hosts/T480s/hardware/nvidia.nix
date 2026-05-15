@@ -10,12 +10,12 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   # https://mynixos.com/nixpkgs/option/hardware.nvidia-container-toolkit.enable
-  hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
 
   # Regular Docker
-  virtualisation.docker.daemon.settings.features.cdi = true;
+  # virtualisation.docker.daemon.settings.features.cdi = true;
   # Rootless
-  virtualisation.docker.rootless.daemon.settings.features.cdi = true;
+  # virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
   services.xserver.videoDrivers = [
     "intel"
