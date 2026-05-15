@@ -11,7 +11,6 @@ in
 {
   imports = [
     ./packages.nix
-    ./starship.nix
     ./neovim.nix
   ];
 

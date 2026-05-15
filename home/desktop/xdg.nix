@@ -1,7 +1,5 @@
 {
   config,
-  wsl,
-  lib,
   ...
 }:
 let
@@ -35,7 +33,7 @@ in
       desktop = "${homeD}/desktop";
 
       extraConfig = {
-        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/screenshots";
+        SCREENSHOTS = "${config.xdg.userDirs.pictures}/screenshots";
       };
     };
   };

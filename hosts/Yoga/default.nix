@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -11,20 +9,10 @@
     ../../system/configuration.nix
 
     ../../system/services/docker.nix
-    # ../../system/services/virtualization.nix
-    ../../system/services/samba.nix
-    ../../system/services/immich.nix
-    ../../system/services/nginx.nix
-    ../../system/services/nfs.nix
   ];
 
-  services.rustdesk-server = {
-    enable = true;
-    openFirewall = true;
-    signal.relayHosts = [ "yoga" ];
-  };
-
   services.nfs.server.enable = true;
+
   networking.firewall.allowedTCPPorts = [
     2049
     51821

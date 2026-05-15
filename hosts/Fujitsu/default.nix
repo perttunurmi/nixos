@@ -9,7 +9,6 @@
     ./hardware-configuration.nix
 
     ../../system/services/docker.nix
-    ../../system/services/samba.nix
 
     ../../system/configuration.nix
   ];
