@@ -31,6 +31,7 @@ in
       documents = "${homeD}/media/documents";
       publicShare = "${homeD}/media/public";
       desktop = "${homeD}/desktop";
+      projects = "${homeD}/projects";
 
       extraConfig = {
         SCREENSHOTS = "${config.xdg.userDirs.pictures}/screenshots";

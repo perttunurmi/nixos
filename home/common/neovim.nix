@@ -18,6 +18,11 @@
     typescript-language-server
     rust-analyzer
     nixd
+    clang
+    clang-uml
+    clang-manpages
+    clang-tools
+    tree-sitter
 
     gh
     git

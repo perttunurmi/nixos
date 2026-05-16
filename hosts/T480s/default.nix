@@ -17,7 +17,7 @@
 
     # ./hardware/nvidia.nix
     ./hardware/disable_nvidia.nix
-    # ./hardware/disable_touchscreen.nix
+    ./hardware/disable_touchscreen.nix
 
     ../../system/desktop/default.nix
     ../../system/services/docker.nix
