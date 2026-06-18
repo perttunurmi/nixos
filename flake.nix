@@ -2,7 +2,7 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     hardware.url = "github:nixos/nixos-hardware";
 
     stylix.url = "github:nix-community/stylix/";
@@ -10,9 +10,6 @@
 
     home-manager.url = "github:nix-community/home-manager/";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-snapd.url = "github:nix-community/nix-snapd";
-    nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +32,6 @@
       stylix,
       agenix,
       secrets,
-      nix-snapd,
       ...
     }:
     {
@@ -66,10 +62,6 @@
             nixpkgs.lib.nixosSystem {
               inherit specialArgs;
               modules = [
-                nix-snapd.nixosModules.default
-                {
-                  services.snap.enable = true;
-                }
                 agenix.nixosModules.default
                 stylix.nixosModules.stylix
                 nixos-wsl.nixosModules.default

@@ -16,14 +16,7 @@
     ./users/perttu/default.nix
     ./users/root/default.nix
   ]
-  ++ (
-    if desktop then
-      [
-        ./theming/stylix.nix
-      ]
-    else
-      [ ]
-  );
+  ++ (if desktop then [ ./theming/stylix.nix ] else [ ]);
 
   services.tailscale.enable = true;
 

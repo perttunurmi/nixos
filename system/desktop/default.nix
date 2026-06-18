@@ -70,6 +70,7 @@
     zed-editor-fhs
     vscode.fhs
     obsidian
+    discord
   ];
 
   # Whether to enable the RealtimeKit system service, which hands out

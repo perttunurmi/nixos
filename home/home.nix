@@ -17,7 +17,7 @@
     stateVersion = "25.05";
   };
 
-  home.sessionPath = [ "/snap/bin" ];
+  home.sessionPath = [ ];
 
   programs.home-manager.enable = true;
 }

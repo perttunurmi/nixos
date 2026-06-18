@@ -10,6 +10,7 @@
     codespell
     gotools
     prettierd
+    prettier
     stylua
     ruff
     pyright
