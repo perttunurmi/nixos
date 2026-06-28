@@ -24,7 +24,7 @@
   };
 
   gtk = {
-    gtk4.theme = null;
+    # gtk4.theme = null;
     enable = true;
     iconTheme = {
       name = "MoreWaita"; # Or "Papirus", "Papirus-Light"
