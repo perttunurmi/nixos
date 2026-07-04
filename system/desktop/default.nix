@@ -68,10 +68,14 @@
     gnome-software
     flatpak
     zed-editor-fhs
+    opencode
+    opencode-desktop
     vscode.fhs
     obsidian
     discord
   ];
+
+  programs.steam.enable = true;
 
   # Whether to enable the RealtimeKit system service, which hands out
   # realtime scheduling priority to user processes on demand.

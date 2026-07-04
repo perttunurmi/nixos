@@ -34,7 +34,7 @@
       efi.canTouchEfiVariables = true;
     };
 
-    bootspec.enable = true;
+    # bootspec.enable = true;
     plymouth = {
       enable = true;
     };
