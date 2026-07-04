@@ -8,6 +8,11 @@ rebuild host="$(hostname)":
     nixos-rebuild switch --flake .#{{ host }} --sudo
 
 [group('build')]
+boot host="$(hostname)":
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
+    nixos-rebuild boot --flake .#{{ host }} --sudo
+
+[group('build')]
 test host="$(hostname)":
     @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild test --flake .#{{ host }} --sudo --impure
