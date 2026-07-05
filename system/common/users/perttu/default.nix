@@ -32,9 +32,4 @@ in
       openssh.authorizedKeys.keys = systems;
     };
   };
-
-  systemd.tmpfiles.rules = [
-    "f+ /var/lib/AccountsService/users/perttu  0600 root root - [User]\\nIcon=/var/lib/AccountsService/icons/perttu\\n"
-    "L+ /var/lib/AccountsService/icons/perttu  - - - - ${./face}"
-  ];
 }
