@@ -12,8 +12,6 @@
       "flakes"
     ];
 
-    auto-optimise-store = false;
-
     substituters = [
       "https://cache.nixos.org"
     ];
@@ -23,12 +21,15 @@
     ];
 
     builders-use-substitutes = true;
+
+    auto-optimise-store = true;
+
   };
 
   nix.gc = {
     automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 90d";
+    dates = lib.mkDefault "daily";
+    options = lib.mkDefault "--delete-older-than 30d";
   };
 
   nix.optimise = {

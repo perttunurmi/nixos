@@ -131,7 +131,7 @@
       SDL2_net
       SDL2_gfx
       SDL2_sound
-      jdk
+      jdk25
     ];
   };
 

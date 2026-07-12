@@ -5,7 +5,6 @@
 {
   home.packages = with pkgs; [
     lua
-    nil
     asm-lsp
     codespell
     gotools
@@ -19,6 +18,7 @@
     typescript-language-server
     rust-analyzer
     nixd
+    nil
     clang
     clang-uml
     clang-manpages

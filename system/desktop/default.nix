@@ -13,16 +13,18 @@
     ./services/keyd.nix
     ./services/xserver.nix
 
-    # ./ld.nix
+    ./ld.nix
   ];
 
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = lib.mkDefault true;
-  services.libinput.touchpad.disableWhileTyping = lib.mkDefault true;
-  services.libinput.touchpad.tapping = lib.mkDefault false;
-  # services.libinput.touchpad.clickMethod = "buttonareas";
+  services.libinput = {
+    enable = lib.mkDefault true;
+    touchpad.disableWhileTyping = lib.mkDefault true;
+    touchpad.tapping = lib.mkDefault false;
+    # services.libinput.touchpad.clickMethod = "buttonareas";
+  };
 
   programs.chromium.enable = true;
 
@@ -33,13 +35,11 @@
 
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        # pkgs.xdg-desktop-portal-hyprland
       ];
 
       config = {
         common = {
           default = [
-            # "hyprland"
             "gtk"
           ];
           "org.freedesktop.impl.portal.Secret" = [
@@ -50,17 +50,16 @@
     };
   };
 
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = ["multi-user.target"];
-  #   path = [pkgs.flatpak];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
 
   users.users.${username}.packages = with pkgs; [
     python3
-
     sioyek
     testdisk
     gparted
@@ -114,7 +113,7 @@
     dbus = {
       enable = true;
       packages = [ pkgs.gcr ];
-      # implementation = "broker";
+      implementation = "broker";
     };
 
     geoclue2.enable = true;

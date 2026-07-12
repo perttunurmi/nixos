@@ -29,13 +29,7 @@
   networking.hostName = "nixos";
 
   environment.systemPackages = with pkgs; [
-    python3Minimal
-    pika-backup
     neovim
-    git
-    wget
-    stow
-    curl
   ];
 
   services.openssh.ports = lib.mkForce [ 2222 ];

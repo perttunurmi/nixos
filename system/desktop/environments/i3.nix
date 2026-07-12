@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  username,
   ...
 }:
 {
@@ -10,12 +11,18 @@
   programs.dconf.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
-  services.displayManager.ly = {
-    enable = true;
-    x11Support = true;
-  };
+  security.pam.services.i3lock.enable = true;
 
   services.xserver = {
+
+    displayManager.lightdm = {
+      enable = true;
+      greeters.mini = {
+        enable = true;
+        user = "${username}";
+      };
+    };
+
     desktopManager = {
       xterm.enable = false;
     };
@@ -36,11 +43,11 @@
         i3blocks
         i3lock-fancy-rapid
         i3status
+        brightnessctl
         i3
         picom
         feh
         dex
-        brightnessctl
         networkmanagerapplet
         copyq
         flameshot

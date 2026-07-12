@@ -7,10 +7,12 @@
     tldr
     libsecret
     unzip
+    gnutar
     tmux
     btop
     vim
     wget
+    stow
     curl
     git
     lm_sensors

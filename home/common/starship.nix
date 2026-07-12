@@ -6,7 +6,7 @@
   home.sessionVariables.STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
 
   programs.starship = {
-    enable = true;
+    enable = false;
     settings = {
       # scan_timeout = 50;
       # command_timeout = 500;

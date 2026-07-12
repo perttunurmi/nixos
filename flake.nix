@@ -1,6 +1,4 @@
 {
-  description = "NixOS configuration";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     hardware.url = "github:nixos/nixos-hardware";
@@ -22,7 +20,6 @@
       flake = false;
     };
   };
-
   outputs =
     inputs@{
       self,
@@ -71,7 +68,7 @@
                   wsl.docker-desktop.enable = wsl;
                   wsl.startMenuLaunchers = false;
                   wsl.interop.register = wsl;
-		  wsl.ssh-agent.enable = wsl;
+                  wsl.ssh-agent.enable = wsl;
                 }
                 hostPath
                 home-manager.nixosModules.home-manager

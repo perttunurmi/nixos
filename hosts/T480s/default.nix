@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -15,15 +14,13 @@
     ./hardware/throttled.nix
     ./hardware/thinkfan.nix
 
-    # ./hardware/nvidia.nix
-    ./hardware/disable_nvidia.nix
+    ./hardware/nvidia.nix
+    # ./hardware/disable_nvidia.nix
     ./hardware/disable_touchscreen.nix
 
     ../../system/desktop/default.nix
     ../../system/services/docker.nix
   ];
-
-  services.touchegg.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -34,7 +31,6 @@
       efi.canTouchEfiVariables = true;
     };
 
-    # bootspec.enable = true;
     plymouth = {
       enable = true;
     };
@@ -63,9 +59,10 @@
 
   services.thermald.enable = true;
 
-  services.auto-cpufreq.enable = true;
-
-  services.power-profiles-daemon.enable = lib.mkForce false;
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10; # Reduce swapping to disk
+    "vm.vfs_cache_pressure" = 50; # Keep inode/dentry caches longer
+  };
 
   services.logind = {
     settings = {

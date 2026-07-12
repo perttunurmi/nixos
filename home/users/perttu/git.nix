@@ -15,9 +15,7 @@
     signing = {
       format = "openpgp";
       signByDefault = true;
-      # key = "/home/${username}/.ssh/id_ed25519.pub";
       key = "perttu" + "." + "nurmi" + "@" + "gmail.com";
-      # gpgsign = "true";
     };
 
     ignores = [

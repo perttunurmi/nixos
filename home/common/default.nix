@@ -12,6 +12,7 @@ in
   imports = [
     ./packages.nix
     ./neovim.nix
+    ./starship.nix
   ];
 
   home.packages = with pkgs; [ coreutils ];

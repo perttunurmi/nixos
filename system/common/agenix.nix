@@ -9,8 +9,8 @@
 }:
 let
   hostName = config.networking.hostName;
-  commonSecretFile = "${secrets}/nixos/common/passwords.age";
-  hostSecretFile = "${secrets}/nixos/hosts/${hostName}/passwords.age";
+  commonSecretFile = "${secrets}/nixos/common/secrets.age";
+  hostSecretFile = "${secrets}/nixos/hosts/${hostName}/secrets.age";
 in
 {
   environment.systemPackages = [

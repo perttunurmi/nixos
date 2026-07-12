@@ -12,6 +12,7 @@
     ./agenix.nix
     ./overlays.nix
     ./settings.nix
+    ./wooting-udev.nix
 
     ./users/perttu/default.nix
     ./users/root/default.nix
@@ -91,4 +92,6 @@
     packages = with pkgs; [ terminus_font ];
     keyMap = "us";
   };
+
+  environment.enableAllTerminfo = true;
 }
