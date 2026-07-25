@@ -28,7 +28,8 @@
 
   programs.chromium.enable = true;
 
-  services.flatpak.enable = false;
+  services.flatpak.enable = true;
+
   xdg = {
     portal = {
       enable = true;

@@ -4,6 +4,7 @@
 }:
 {
   home.packages = with pkgs; [
+    devenv
     lua
     asm-lsp
     codespell

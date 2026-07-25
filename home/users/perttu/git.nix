@@ -9,7 +9,7 @@
         name = "Perttu Nurmi";
         email = "perttu.nurmi" + "@" + "gmail.com";
       };
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
     };
 
     signing = {
@@ -28,7 +28,6 @@
       "*~"
       ".DS_Store"
       ".direnv"
-      ".envrc"
       "result"
       ".idea"
       ".zed"
