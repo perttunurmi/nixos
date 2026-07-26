@@ -13,7 +13,6 @@
       KbdInteractiveAuthentication = lib.mkForce false;
       AllowUsers = null;
       UseDns = true;
-      X11Forwarding = true;
       PermitRootLogin = "prohibit-password";
     };
   };

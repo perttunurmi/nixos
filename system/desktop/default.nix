@@ -13,7 +13,7 @@
     ./services/keyd.nix
     ./services/xserver.nix
 
-    ./wooting-udev.nix
+    ./udev/wooting.nix
 
     ./ld.nix
   ];
@@ -70,9 +70,6 @@
     gnome-software
     flatpak
     zed-editor-fhs
-    opencode
-    opencode-desktop
-    vscode.fhs
     obsidian
     discord
   ];
@@ -109,10 +106,6 @@
   # };
 
   services = {
-    xserver.enable = true;
-    xserver.displayManager.startx.enable = true;
-    xserver.excludePackages = [ pkgs.xterm ];
-
     dbus = {
       enable = true;
       packages = [ pkgs.gcr ];
