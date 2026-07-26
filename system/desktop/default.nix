@@ -13,6 +13,8 @@
     ./services/keyd.nix
     ./services/xserver.nix
 
+    ./wooting-udev.nix
+
     ./ld.nix
   ];
 

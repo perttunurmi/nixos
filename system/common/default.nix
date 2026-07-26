@@ -12,7 +12,6 @@
     ./agenix.nix
     ./overlays.nix
     ./settings.nix
-    ./wooting-udev.nix
 
     ./users/perttu/default.nix
     ./users/root/default.nix

@@ -1,24 +1,33 @@
 {
-  config,
   pkgs,
   lib,
+  username,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
-
-    ../../system/services/docker.nix
-
     ../../system/configuration.nix
   ];
 
-  # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "Fujitsu";
+
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
+    user = "${username}";
+    configDir = "/home/${username}/.config/syncthing";
+    dataDir = "/home/${username}/share";
+  };
 
   services.nfs.server.enable = true;
 
@@ -30,12 +39,8 @@
 
   networking.networkmanager.enable = lib.mkForce false;
 
-  # Set your time zone.
   time.timeZone = lib.mkDefault "Europe/Helsinki";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-
   i18n.extraLocaleSettings = lib.mkDefault {
     LC_ADDRESS = "fi_FI.UTF-8";
     LC_IDENTIFICATION = "fi_FI.UTF-8";
@@ -48,35 +53,31 @@
     LC_TIME = "fi_FI.UTF-8";
   };
 
-  # Configure keymap in X11
   services.xserver.xkb = lib.mkDefault {
     layout = "us";
     variant = "";
   };
 
-  # Define a user account. Don't forget to set a password with `passwd'.
-  users.users.perttu = lib.mkDefault {
+  users.users.${username} = lib.mkDefault {
     isNormalUser = true;
     description = "Perttu Nurmi";
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = lib.mkDefault true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
+    cargo
+    neovim
     vim
     wget
     git
   ];
 
   services.openssh.enable = lib.mkDefault true;
-
   networking.firewall.enable = lib.mkDefault true;
 
   system.stateVersion = "25.05";
