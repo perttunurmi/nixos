@@ -62,6 +62,7 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    speedcrunch
     python3
     sioyek
     testdisk
