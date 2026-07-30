@@ -14,7 +14,6 @@
   security.pam.services.i3lock.enable = true;
 
   services.xserver = {
-
     displayManager.lightdm = {
       enable = true;
       greeters.mini = {
