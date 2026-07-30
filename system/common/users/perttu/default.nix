@@ -26,7 +26,6 @@ in
         "scanner"
         "video"
         "storage"
-        "samba"
       ];
 
       openssh.authorizedKeys.keys = systems;
