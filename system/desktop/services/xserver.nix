@@ -2,9 +2,12 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   services.xserver = {
     enable = lib.mkDefault true;
+    displayManager.startx.enable = lib.mkDefault true;
+    excludePackages = lib.mkDefault [ pkgs.xterm ];
 
     xkb = lib.mkDefault {
       layout = "us";
@@ -13,13 +16,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    xorg.libXft
-    xorg.libXinerama
-    xorg.libX11
     xsel
-    xbindkeys
-    xorg.xdpyinfo
     arandr
-    xautolock
+    xdo
   ];
 }

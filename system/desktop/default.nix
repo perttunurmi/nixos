@@ -3,15 +3,17 @@
   username,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./fonts.nix
 
     ./environments/i3.nix
-    ./environments/android.nix
 
     ./services/keyd.nix
     ./services/xserver.nix
+
+    ./udev/wooting.nix
 
     ./ld.nix
   ];
@@ -19,27 +21,28 @@
   services.fwupd.enable = lib.mkDefault true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = lib.mkDefault true;
-  services.libinput.touchpad.disableWhileTyping = lib.mkDefault true;
-  services.libinput.touchpad.tapping = lib.mkDefault false;
-  # services.libinput.touchpad.clickMethod = "buttonareas";
+  services.libinput = {
+    enable = lib.mkDefault true;
+    touchpad.disableWhileTyping = lib.mkDefault true;
+    touchpad.tapping = lib.mkDefault false;
+    # services.libinput.touchpad.clickMethod = "buttonareas";
+  };
 
   programs.chromium.enable = true;
 
-  services.flatpak.enable = false;
+  services.flatpak.enable = true;
+
   xdg = {
     portal = {
       enable = true;
 
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
       ];
 
       config = {
         common = {
           default = [
-            "hyprland"
             "gtk"
           ];
           "org.freedesktop.impl.portal.Secret" = [
@@ -50,52 +53,29 @@
     };
   };
 
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = ["multi-user.target"];
-  #   path = [pkgs.flatpak];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
 
   users.users.${username}.packages = with pkgs; [
+    speedcrunch
     python3
-    pango
-    adwaita-icon-theme
-    materia-theme
-    materia-kde-theme
-    papirus-icon-theme
-
     sioyek
-    typst
-    spotify
     testdisk
     gparted
     pika-backup
     gnome-software
     flatpak
-    vscode.fhs
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
-        [
-          bbenoist.nix
-          # ms-python.python
-          # ms-azuretools.vscode-docker
-          # ms-vscode-remote.remote-ssh
-          # ms-toolsai.jupyter
-        ]
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "remote-ssh-edit";
-            publisher = "ms-vscode-remote";
-            version = "0.47.2";
-            sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-          }
-        ];
-    })
-    discord
+    zed-editor-fhs
     obsidian
+    discord
   ];
+
+  programs.steam.enable = true;
 
   # Whether to enable the RealtimeKit system service, which hands out
   # realtime scheduling priority to user processes on demand.
@@ -106,7 +86,7 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -127,14 +107,10 @@
   # };
 
   services = {
-    xserver.enable = true;
-    xserver.displayManager.startx.enable = true;
-    xserver.excludePackages = [pkgs.xterm];
-
     dbus = {
       enable = true;
-      packages = [pkgs.gcr];
-      # implementation = "broker";
+      packages = [ pkgs.gcr ];
+      implementation = "broker";
     };
 
     geoclue2.enable = true;
@@ -155,10 +131,10 @@
     # Mount, trash, and other functionalities
     gvfs = {
       enable = true;
-      package = lib.mkForce pkgs.gnome.gvfs;
+      # package = lib.mkForce pkgs.gnome.gvfs;
     };
     blueman.enable = true;
-    udev.packages = with pkgs; [gnome-settings-daemon];
+    udev.packages = with pkgs; [ gnome-settings-daemon ];
   };
 
   systemd.user.services.mpris-proxy = {
@@ -167,10 +143,9 @@
       "network.target"
       "sound.target"
     ];
-    wantedBy = ["default.target"];
+    wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
-
   networking.firewall = rec {
     allowedTCPPortRanges = [
       {
@@ -179,10 +154,18 @@
       }
     ];
     allowedUDPPortRanges = allowedTCPPortRanges;
-  };
 
-  networking.firewall.allowedTCPPorts = [57621 24800];
-  networking.firewall.allowedUDPPorts = [5353 24800];
+    allowedTCPPorts = [
+      57621
+      24800
+    ];
+    allowedUDPPorts = [
+      5353
+      24800
+      53
+      67
+    ];
+  };
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
@@ -191,9 +174,9 @@
   security.polkit.enable = true;
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
-    wantedBy = ["graphical-session.target"];
-    wants = ["graphical-session.target"];
-    after = ["graphical-session.target"];
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ../../system/configuration.nix
   ];
@@ -28,16 +29,10 @@
   networking.hostName = "nixos";
 
   environment.systemPackages = with pkgs; [
-    python3Minimal
-    pika-backup
     neovim
-    git
-    wget
-    stow
-    just
   ];
 
-  services.openssh.ports = lib.mkForce [2222];
+  services.openssh.ports = lib.mkForce [ 2222 ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

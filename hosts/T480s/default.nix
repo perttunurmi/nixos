@@ -1,9 +1,9 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-cpu-intel
@@ -14,27 +14,23 @@
     ./hardware/throttled.nix
     ./hardware/thinkfan.nix
 
-    # ./hardware/nvidia.nix
-    ./hardware/disable_nvidia.nix
+    ./hardware/nvidia.nix
+    # ./hardware/disable_nvidia.nix
     ./hardware/disable_touchscreen.nix
-
-    ./hardware/secureboot.nix
 
     ../../system/desktop/default.nix
     ../../system/services/docker.nix
-    # ../../system/services/postgresql.nix
-    ../../system/services/virtualization.nix
   ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    initrd.luks.devices."luks-3a99b308-6f51-4953-b4e0-68d4dc1e6af4".device = "/dev/disk/by-uuid/3a99b308-6f51-4953-b4e0-68d4dc1e6af4";
+    initrd.luks.devices."luks-3a99b308-6f51-4953-b4e0-68d4dc1e6af4".device =
+      "/dev/disk/by-uuid/3a99b308-6f51-4953-b4e0-68d4dc1e6af4";
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
-    bootspec.enable = true;
     plymouth = {
       enable = true;
     };
@@ -56,31 +52,16 @@
   networking.hostName = "T480s";
 
   environment.systemPackages = with pkgs; [
+    scrcpy
     powertop
     openconnect
   ];
 
-  # powerManagement.enable = true;
   services.thermald.enable = true;
 
-  services.power-profiles-daemon.enable = lib.mkForce false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "balanced";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balanced";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 95;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 90;
-
-      START_CHARGE_THRESH_BAT0 = 85;
-      STOP_CHARGE_THRESH_BAT0 = 95;
-    };
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10; # Reduce swapping to disk
+    "vm.vfs_cache_pressure" = 50; # Keep inode/dentry caches longer
   };
 
   services.logind = {
@@ -92,9 +73,6 @@
       };
     };
   };
-
-  # services.ollama.enable = true;
-  # services.open-webui.enable = true;
 
   system.stateVersion = "25.05";
 }

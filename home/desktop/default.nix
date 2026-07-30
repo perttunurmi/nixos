@@ -1,9 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
-    ./programs/browser.nix
     ./programs/rofi.nix
-    ./programs/terminals.nix
-    ./xorg/xorg.nix
+    ./programs/sioyek.nix
     ./media.nix
     ./xdg.nix
   ];
@@ -12,6 +11,8 @@
   };
 
   stylix = {
+    enable = true;
+    targets.neovim.enable = false;
     targets.xresources.enable = true;
     targets.gtk = {
       enable = true;
@@ -23,10 +24,11 @@
   };
 
   gtk = {
+    # gtk4.theme = null;
     enable = true;
     iconTheme = {
-      name = "Papirus-Dark"; # Or "Papirus", "Papirus-Light"
-      package = pkgs.papirus-icon-theme;
+      name = "MoreWaita"; # Or "Papirus", "Papirus-Light"
+      package = pkgs.morewaita-icon-theme;
     };
   };
 
@@ -34,13 +36,14 @@
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
-        icon-theme = "Papirus-Dark";
+        icon-theme = "MoreWaita";
       };
     };
   };
 
   home.packages = with pkgs; [
-    ghostty
-    imagemagick
+    brave
+    firefox
+    google-chrome
   ];
 }

@@ -1,21 +1,21 @@
 {
   config,
   pkgs,
-  lib,
-  wsl,
   ...
-}: let
+}:
+let
   d = config.xdg.dataHome;
   c = config.xdg.configHome;
   cache = config.xdg.cacheHome;
-in {
+in
+{
   imports = [
     ./packages.nix
-    ./starship.nix
     ./neovim.nix
+    ./starship.nix
   ];
 
-  home.packages = with pkgs; [coreutils];
+  home.packages = with pkgs; [ coreutils ];
 
   home.sessionPath = [
     "$HOME/.local/bin"
@@ -42,6 +42,7 @@ in {
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
     MANPAGER = "nvim +Man!";
+
   };
 
   home.shellAliases = {
@@ -50,56 +51,14 @@ in {
     mv = "mv -i";
     zi = "cdi";
 
-    # ls = "eza --icons=auto";
-    # ll = "eza -l --icons=auto --git --git-repos";
-    # la = "eza -a --icons=auto --git";
-    # lla = "eza -la --icons=auto --git --git-repos";
+    ls = "eza --icons=auto";
+    ll = "eza -l --icons=auto --git --git-repos";
+    la = "eza -a --icons=auto --git";
+    lla = "eza -la --icons=auto --git --git-repos";
   };
 
   programs = {
     bash.enable = true;
-    zsh = {
-      enable = false;
-      enableCompletion = true;
-      dotDir = "${config.xdg.configHome}/zsh";
-      defaultKeymap = "emacs";
-      setOptions = [
-        "autocd"
-        "autopushd"
-        "extendedhistory"
-        "histignorealldups"
-        "histignorespace"
-        "incappendhistory"
-        "interactivecomments"
-        "nobeep"
-        "nomatch"
-        "notify"
-        "sharehistory"
-      ];
-
-      initContent = ''
-        WORDCHARS=''${WORDCHARS/\/}
-        KEYTIMEOUT=1
-
-        # Ctrl+Left/Right for word navigation
-        bindkey "^[[1;5D" backward-word
-        bindkey "^[[1;5C" forward-word
-
-        bindkey "^[[3;5~" kill-word
-
-        bindkey '^M' accept-line
-      '';
-
-      completionInit = builtins.concatStringsSep "\n" [
-        "zstyle ':completion:*' list-colors \"''\${(s.:.)LS_COLORS:-di=34:ln=35:so=32:pi=33:ex=31}\""
-        "zstyle ':completion:*' group-name ''"
-        "zstyle ':completion:*' format '%F{yellow}%d%f'"
-        "zstyle ':completion:*' menu select=2"
-        "zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|[._-]=* r:|=*'"
-        "zstyle ':completion:*' use-cache yes"
-      ];
-    };
-
     fzf.enable = true;
     zoxide = {
       enable = true;
@@ -111,6 +70,8 @@ in {
     bash.initExtra = ''
       stty werase undef
       bind '\C-w:unix-filename-rubout'
+
+      PS1='\[\e[32m\][\W]\[\e[0m\] \[\e[32m\]\$\[\e[0m\] '
     '';
   };
 
@@ -132,7 +93,7 @@ in {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    enableZshIntegration = false;
+    enableZshIntegration = true;
     enableBashIntegration = true;
   };
 
@@ -146,7 +107,7 @@ in {
 
   programs.atuin = {
     enable = true;
-    flags = ["--disable-up-arrow"];
+    flags = [ "--disable-up-arrow" ];
     settings = {
       auto_sync = true;
       sync_frequency = "5m";

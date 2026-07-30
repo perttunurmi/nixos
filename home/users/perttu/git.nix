@@ -1,4 +1,5 @@
-{username, ...}: {
+{ ... }:
+{
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -8,15 +9,13 @@
         name = "Perttu Nurmi";
         email = "perttu.nurmi" + "@" + "gmail.com";
       };
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
     };
 
     signing = {
       format = "openpgp";
       signByDefault = true;
-      # key = "/home/${username}/.ssh/id_ed25519.pub";
       key = "perttu" + "." + "nurmi" + "@" + "gmail.com";
-      # gpgsign = "true";
     };
 
     ignores = [
@@ -25,12 +24,13 @@
       "*.gc??"
       "vgcore.*"
       "venv"
+      ".venv"
       "*~"
       ".DS_Store"
       ".direnv"
-      ".envrc"
       "result"
       ".idea"
+      ".zed"
       ".vscode"
       ".vs"
       ".env"

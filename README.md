@@ -2,7 +2,7 @@
 
 This repository is home to my NixOS configuration.
 
-> [!WARNING]  
+> [!WARNING]
 > **DO NOT** attempt deploy this on your machine if you don't know what you are doing!
 
 ## Helpful Resources

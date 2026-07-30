@@ -1,11 +1,15 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
+    alacritty
+    neovim
     just
+    jujutsu
+    delta
 
-    # nix
-    alejandra
+    nixfmt
+    nixfmt-tree
     deadnix
-    statix
 
     trash-cli
     ripgrep

@@ -1,16 +1,15 @@
 {
   config,
-  wsl,
-  lib,
   ...
-}: let
+}:
+let
   homeD = config.home.homeDirectory;
-in {
+in
+{
   home.preferXdgDirectories = true;
 
   xdg = {
     enable = true;
-
     cacheHome = homeD + "/.local/cache";
     configHome = homeD + "/.config";
     dataHome = homeD + "/.local/share";
@@ -22,6 +21,7 @@ in {
 
     userDirs = {
       enable = true;
+      setSessionVariables = true;
       createDirectories = false;
       templates = "${homeD}/media/templates";
       pictures = "${homeD}/media/pictures";
@@ -31,9 +31,10 @@ in {
       documents = "${homeD}/media/documents";
       publicShare = "${homeD}/media/public";
       desktop = "${homeD}/desktop";
+      projects = "${homeD}/projects";
 
       extraConfig = {
-        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/screenshots";
+        SCREENSHOTS = "${config.xdg.userDirs.pictures}/screenshots";
       };
     };
   };

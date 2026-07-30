@@ -4,22 +4,27 @@ list:
 
 [group('build')]
 rebuild host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild switch --flake .#{{ host }} --sudo
 
 [group('build')]
+boot host="$(hostname)":
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
+    nixos-rebuild boot --flake .#{{ host }} --sudo
+
+[group('build')]
 test host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild test --flake .#{{ host }} --sudo --impure
 
 [group('build')]
 debug host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }} with debug:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }} with debug:\n\n{{ NORMAL }}"
     nixos-rebuild test --flake .#{{ host }} --sudo --show-trace --print-build-logs --verbose
 
 [group('build')]
 rebuild-impure host="$(hostname)":
-    @printf "{{ BOLD + GREEN }}rebulding {{ host }}:\n\n{{ NORMAL }}"
+    @printf "{{ BOLD + GREEN }}rebuilding {{ host }}:\n\n{{ NORMAL }}"
     nixos-rebuild switch --flake .#{{ host }} --sudo  --impure
 
 [group('build')]
@@ -38,8 +43,8 @@ generate-hardware-config host="$(hostname)":
 
 [group('utils')]
 format:
-    @printf "{{ BOLD + GREEN }}formatting files using alejandra:\n\n{{ NORMAL }}"
-    alejandra .
+    @printf "{{ BOLD + GREEN }}formatting files using nixfmt-tree:\n\n{{ NORMAL }}"
+    treefmt
 
 [group('utils')]
 history:
@@ -52,14 +57,13 @@ repl:
 [group('cleanup')]
 clean old="30":
     @printf "{{ BOLD + GREEN }}deleting history older than {{ old }} days...\n\n{{ NORMAL }}"
-    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{old}}d
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than {{ old }}d
 
 [group('cleanup')]
 gc old="30":
     @printf "{{ BOLD + GREEN }}collecting garbage older than {{ old }} days...\n\n{{ NORMAL }}"
     sudo nix-collect-garbage --delete-older-than {{ old }}d
     nix-collect-garbage --delete-older-than {{ old }}d
-
 
 [group('cleanup')]
 optimise:

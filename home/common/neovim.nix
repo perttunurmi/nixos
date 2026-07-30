@@ -1,54 +1,34 @@
 {
   pkgs,
-  inputs,
   ...
-}: {
-  stylix.targets.neovim.enable = false;
-
+}:
+{
   home.packages = with pkgs; [
-    lua51Packages.lua
-    luajitPackages.luarocks_bootstrap
-    luajitPackages.tiktoken_core
-
+    devenv
+    lua
+    asm-lsp
+    codespell
+    gotools
     prettierd
-
-    zls
+    prettier
+    stylua
+    ruff
+    pyright
+    bash-language-server
+    lua-language-server
+    typescript-language-server
+    rust-analyzer
+    nixd
     nil
-    metals
-    taplo
-
+    clang
+    clang-uml
+    clang-manpages
+    clang-tools
     tree-sitter
-    ripgrep
-    fd
+
     gh
     git
     cargo
     nodejs_24
-    html-tidy
-    actionlint
-    yamllint
-    gitlint
-    sqlite
-    ruff
-
-    typescript-language-server
-    lua-language-server
-    vscode-langservers-extracted
-    jdt-language-server
-    rust-analyzer
-    bash-language-server
-    basedpyright
-    yaml-language-server
-    nixd
-    just-lsp
   ];
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-
-    vimdiffAlias = true;
-    vimAlias = true;
-    withNodeJs = true;
-  };
 }

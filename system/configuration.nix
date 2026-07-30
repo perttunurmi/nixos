@@ -1,18 +1,19 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   imports = [
     ./common/default.nix
+    ./services/syncthing.nix
   ];
 
   services.openssh = {
     enable = true;
-    ports = [22];
+    ports = [ 22 ];
     settings = {
-      PasswordAuthentication = lib.mkDefault false;
+      PasswordAuthentication = lib.mkForce false;
+      KbdInteractiveAuthentication = lib.mkForce false;
       AllowUsers = null;
       UseDns = true;
-      X11Forwarding = true;
       PermitRootLogin = "prohibit-password";
     };
-    openFirewall = true;
   };
 }
