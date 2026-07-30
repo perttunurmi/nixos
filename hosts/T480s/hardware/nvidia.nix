@@ -9,6 +9,15 @@
   boot.initrd.kernelModules = [ "nvidia" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos-cuda.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+    ];
+  };
+
   # https://mynixos.com/nixpkgs/option/hardware.nvidia-container-toolkit.enable
   # hardware.nvidia-container-toolkit.enable = true;
 
@@ -22,6 +31,7 @@
     "modesetting"
     "nvidia"
   ];
+
   hardware.graphics.enable = lib.mkDefault true;
 
   hardware.nvidia = {
@@ -51,7 +61,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
   hardware.nvidia.prime = {
