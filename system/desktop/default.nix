@@ -14,8 +14,6 @@
     ./services/xserver.nix
 
     ./udev/wooting.nix
-
-    ./ld.nix
   ];
 
   services.fwupd.enable = lib.mkDefault true;

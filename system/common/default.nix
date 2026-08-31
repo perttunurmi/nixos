@@ -8,6 +8,8 @@
 }:
 {
   imports = [
+    ./ld.nix
+
     ./packages.nix
     ./agenix.nix
     ./overlays.nix

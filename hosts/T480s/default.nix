@@ -23,7 +23,6 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
     initrd.luks.devices."luks-3a99b308-6f51-4953-b4e0-68d4dc1e6af4".device =
       "/dev/disk/by-uuid/3a99b308-6f51-4953-b4e0-68d4dc1e6af4";
     loader = {
