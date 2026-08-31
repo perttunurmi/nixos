@@ -16,4 +16,6 @@
       PermitRootLogin = "prohibit-password";
     };
   };
+
+  environment.enableAllTerminfo = true;
 }
