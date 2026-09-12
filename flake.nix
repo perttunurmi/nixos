@@ -100,12 +100,6 @@
             extraSpecialArgs = { inherit inputs; };
             server = true;
           };
-
-          Yoga = mkHost {
-            hostPath = ./hosts/Yoga;
-            extraSpecialArgs = { inherit inputs; };
-            server = true;
-          };
         };
     };
 }
