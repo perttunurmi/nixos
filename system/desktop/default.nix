@@ -10,6 +10,8 @@
 
     ./environments/i3.nix
 
+    ./environments/dev.nix
+
     ./services/keyd.nix
     ./services/xserver.nix
 
