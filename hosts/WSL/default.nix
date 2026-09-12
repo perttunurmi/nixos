@@ -29,6 +29,8 @@
   networking.hostName = "nixos";
 
   environment.systemPackages = with pkgs; [
+    python3
+    pika-backup
     neovim
   ];
 
