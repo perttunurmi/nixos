@@ -62,6 +62,7 @@
   };
 
   users.users.${username}.packages = with pkgs; [
+    zotero
     speedcrunch
     python3
     sioyek
